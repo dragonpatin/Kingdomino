@@ -1,7 +1,15 @@
+from ListCreator import *
+
 circleSize = 93
 circleOver = False
+
+circleOve= False
  
 def setup():
+    LC = ListCreator()
+    LT = LC.createList()
+    for tile in LT :
+        print("la tuile {a} est : {b} {c} {d} {e}".format(a=tile.numero,b=tile.tuile_1,c=tile.couronne_1,d=tile.tuile_2,e=tile.couronne_2))
     size(888, 900)
     # The image file must be in the data folder of the current sketch
     # to load successfully
@@ -13,8 +21,8 @@ def setup():
     i = 0
     ellipseMode(CENTER)
 
-def draw():
-    # Displays the image at its actual size at point (0,0)
+def draw() :
+   # Displays the image at its actual size at point (0,0)
     image(img, 0, 0)
     ellipse(circleX, circleY, circleSize, circleSize)
 
@@ -27,14 +35,14 @@ def mousePressed():
         
         
         
-def update(x, y):
-    global circleOver, rectOver
-    circleOver = overCircle(circleX, circleY, circleSize)
+#def update(x, y):
+#    global circleOver, rectOver
+#    circleOver = overCircle(circleX, circleY, circleSize)
     
-def overRect(x, y, width, height):
-    return x <= mouseX <= x + width and y <= mouseY <= y + height
+#def overRect(x, y, width, height):
+#    return x <= mouseX <= x + width and y <= mouseY <= y + height
 
 
-def overCircle(x, y, diameter):
-    distance = dist(x, y, mouseX, mouseY)
-    return distance < diameter / 2
+#def overCircle(x, y, diameter):
+#    distance = dist(x, y, mouseX, mouseY)
+#    return distance < diameter / 2
