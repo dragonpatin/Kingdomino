@@ -1,4 +1,4 @@
-<<<<<<< HEAD
+#from ListCreator import *
 rectSize = 90
 jouerOver = regleOver = quitterOver = Joueur1Over = Joueur2Over = Joueur4Over = False
 regleColor = color(255)
@@ -9,6 +9,7 @@ boolQuitter = boolRegle = boolJouer = bool2Joueur = bool3Joueur = bool4Joueur = 
 boolMenu = True
 boolResize = True
 regleInt = 0
+
 def Regle():
     global boolResize
     if regleInt == 0:
@@ -83,20 +84,13 @@ def Jouer():
     text("3 Joueurs", 355, 444) 
     text("4 Joueurs", 355, 544)
 
-=======
-from ListCreator import *
 
-circleSize = 93
-circleOver = False
 
-circleOve= False
- 
->>>>>>> c0f429bf9b08a59ce3cc95ee398837797739a2e2
 def setup():
-    LC = ListCreator()
-    LT = LC.createList()
-    for tile in LT :
-        print("la tuile {a} est : {b} {c} {d} {e}".format(a=tile.numero,b=tile.tuile_1,c=tile.couronne_1,d=tile.tuile_2,e=tile.couronne_2))
+    #LC = ListCreator()
+    #LT = LC.createList()
+    #for tile in LT :
+        #print("la tuile {a} est : {b} {c} {d} {e}".format(a=tile.numero,b=tile.tuile_1,c=tile.couronne_1,d=tile.tuile_2,e=tile.couronne_2))
     size(888, 900)
     # The image file must be in the data folder of the current sketch
     # to load successfully
@@ -117,7 +111,6 @@ def setup():
     frameRate(fps)
     this.surface.setResizable(True);
 
-<<<<<<< HEAD
 def draw():
     if boolRegle:
         Regle()
@@ -140,7 +133,7 @@ def updateRegle(x, y):
     regleSuivOver = overRect(regleX, regleY, 200, 50)
     regleMenuOver = overRect(quitterX, quitterY, 200, 50)
     
-def mousePressed():ra
+def mousePressed():
     global currentColor, boolQuitter, boolRegle, boolJouer, boolMenu, bool2Joueur, bool3Joueur, bool4Joueur
     if boolJouer:
         if Joueur2Over:
@@ -171,30 +164,3 @@ def mousePressed():ra
 
 def overRect(x, y, width, height):
     return x <= mouseX <= x + width and y <= mouseY <= y + height
-=======
-def draw() :
-   # Displays the image at its actual size at point (0,0)
-    image(img, 0, 0)
-    ellipse(circleX, circleY, circleSize, circleSize)
-
-
-def mousePressed():
-    print(i)
-    global currentColor
-    if circleOver: 
-        currentColor = circleColor
-        
-        
-        
-#def update(x, y):
-#    global circleOver, rectOver
-#    circleOver = overCircle(circleX, circleY, circleSize)
-    
-#def overRect(x, y, width, height):
-#    return x <= mouseX <= x + width and y <= mouseY <= y + height
-
-
-#def overCircle(x, y, diameter):
-#    distance = dist(x, y, mouseX, mouseY)
-#    return distance < diameter / 2
->>>>>>> c0f429bf9b08a59ce3cc95ee398837797739a2e2
