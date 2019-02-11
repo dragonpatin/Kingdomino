@@ -1,6 +1,7 @@
 from test.ListCreator import *
 rectSize = 90
 jouerOver = regleOver = quitterOver = Joueur1Over = Joueur2Over = Joueur4Over = False
+reglePrecOver = regleSuivOver = regleMenuOver = False
 regleColor = color(255)
 jouerColor = color(255)
 quitterColor = color(255)
@@ -11,26 +12,37 @@ boolResize = True
 regleInt = 0
 
 def Regle():
+    updateRegle(mouseX, mouseY)
     global boolResize
     if regleInt == 0:
         image(ImgRegle1, 0, 0)
+        image(fleche1,600, 629)
+        image(croix,335,665)
         if boolResize :
             this.surface.setSize(ImgRegle1.width, ImgRegle1.height)
             boolResize = False
             rect(regleX,regleY,200,50,20)  
             #rect(regleX,regleY,200,50,20)  
-    if regleInt == 2:
+    if regleInt == 1:
         image(ImgRegle2, 0, 0)
+        image(fleche1,600, 629)
+        image(fleche2,0, 629)
+        image(croix,335,665)
         if boolResize :
             this.surface.setSize(ImgRegle2.width, ImgRegle2.height)
             boolResize = False
-    if regleInt == 3:
+    if regleInt == 2:
         image(ImgRegle3, 0, 0)
+        image(fleche1,600, 629)
+        image(fleche2,0, 629)
+        image(croix,335,665)
         if boolResize :
             this.surface.setSize(ImgRegle3.width, ImgRegle3.height)
             boolResize = False
-    if regleInt == 4:
+    if regleInt == 3:
         image(ImgRegle4, 0, 0)
+        image(fleche2,0, 629)
+        image(croix,335,665)
         if boolResize :
             this.surface.setSize(ImgRegle4.width, ImgRegle4.height)
             boolResize = False
@@ -96,7 +108,7 @@ def setup():
     # The image file must be in the data folder of the current sketch
     # to load successfully
     size(700, 700)
-    global imgMenue,ImgRegle1,ImgRegle2,ImgRegle3,ImgRegle4
+    global imgMenue,ImgRegle1,ImgRegle2,ImgRegle3,ImgRegle4,fleche1,fleche2,croix
     imgMenue = loadImage("data/Kingdomino.png")    # Load the image into the program
     imgMenue.resize( 700 , 700 )
     ImgRegle1 = loadImage("data/Help1.PNG")
@@ -107,6 +119,12 @@ def setup():
     ImgRegle3.resize( 700 , 700 )
     ImgRegle4 = loadImage("data/Help4.PNG")
     ImgRegle4.resize( 700 , 700 )
+    fleche1 = loadImage("data/flechedroite.png")
+    fleche1.resize(100,100)
+    fleche2 = loadImage("data/flechegauche.png")
+    fleche2.resize(100,100)
+    croix = loadImage("data/multiply.png")
+    croix.resize(25,25)
     global jouerX, jouerY, regleX, regleY, quitterX, quitterY 
     jouerX = width / 2 - rectSize - 10
     jouerY = (height - 200 )/ 2 - rectSize / 2
@@ -136,12 +154,12 @@ def update(x, y):
 
 def updateRegle(x, y):
     global reglePrecOver, regleSuivOver,regleMenuOver
-    reglePrecOver = overRect(jouerX, jouerY, 200, 50)
-    regleSuivOver = overRect(regleX, regleY, 200, 50)
-    regleMenuOver = overRect(quitterX, quitterY, 200, 50)
+    reglePrecOver = overRect(0, 629, 100, 100)
+    regleSuivOver = overRect(600, 629, 100, 100)
+    regleMenuOver = overRect(335, 665, 25, 25)
     
 def mousePressed():
-    global currentColor, boolQuitter, boolRegle, boolJouer, boolMenu, bool2Joueur, bool3Joueur, bool4Joueur
+    global currentColor, boolQuitter, boolRegle, boolJouer, boolMenu, bool2Joueur, bool3Joueur, bool4Joueur,reglePrecOver, regleSuivOver,regleMenuOver,regleInt
     if boolJouer:
         if Joueur2Over:
             currentColor = regleColor
@@ -168,6 +186,16 @@ def mousePressed():
         if quitterOver:
             currentColor = regleColor
             boolQuitter = True
+            
+    if boolRegle:
+        if regleSuivOver:
+            regleInt+=1
+        if reglePrecOver:
+            regleInt-=1
+        if regleMenuOver:
+            boolMenu = True
+            boolRegle = False
+            
 
 def overRect(x, y, width, height):
     return x <= mouseX <= x + width and y <= mouseY <= y + height
