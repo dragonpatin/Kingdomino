@@ -1,4 +1,4 @@
-#from ListCreator import *
+from test.ListCreator import *
 rectSize = 90
 jouerOver = regleOver = quitterOver = Joueur1Over = Joueur2Over = Joueur4Over = False
 regleColor = color(255)
@@ -17,6 +17,8 @@ def Regle():
         if boolResize :
             this.surface.setSize(ImgRegle1.width, ImgRegle1.height)
             boolResize = False
+            rect(regleX,regleY,200,50,20)  
+            #rect(regleX,regleY,200,50,20)  
     if regleInt == 2:
         image(ImgRegle2, 0, 0)
         if boolResize :
@@ -52,12 +54,12 @@ def Acceuil():
         fill(color(204))
     else:
         fill(color(255))
-    rect(quitterX,quitterY,200,50,20)      
+    rect(quitterX,quitterY,200,50,20)    
     fill(color(255,0,0))
     textSize(40)
-    text("Jouer", 400, 342) 
-    text("Regle", 390, 442) 
-    text("Quitter", 380, 542)
+    text("Jouer", 300, 242) 
+    text("Regle", 300, 342) 
+    text("Quitter", 280, 442)
     
 def Jouer():
     image(imgMenue, 0, 0)
@@ -80,26 +82,31 @@ def Jouer():
     rect(quitterX,quitterY,200,50,20)      
     fill(color(255,0,0))
     textSize(40)
-    text("2 Joueurs", 355, 344) 
-    text("3 Joueurs", 355, 444) 
-    text("4 Joueurs", 355, 544)
+    text("2 Joueurs", 255, 244) 
+    text("3 Joueurs", 255, 344) 
+    text("4 Joueurs", 255, 444)
 
 
 
 def setup():
-    #LC = ListCreator()
-    #LT = LC.createList()
-    #for tile in LT :
-        #print("la tuile {a} est : {b} {c} {d} {e}".format(a=tile.numero,b=tile.tuile_1,c=tile.couronne_1,d=tile.tuile_2,e=tile.couronne_2))
-    size(888, 900)
+    LC = ListCreator()
+    LT = LC.createList()
+    for tile in LT :
+        print("la tuile {a} est : {b} {c} {d} {e}".format(a=tile.numero,b=tile.tuile_1,c=tile.couronne_1,d=tile.tuile_2,e=tile.couronne_2))
     # The image file must be in the data folder of the current sketch
     # to load successfully
+    size(700, 700)
     global imgMenue,ImgRegle1,ImgRegle2,ImgRegle3,ImgRegle4
     imgMenue = loadImage("data/Kingdomino.png")    # Load the image into the program
+    imgMenue.resize( 700 , 700 )
     ImgRegle1 = loadImage("data/Help1.PNG")
+    ImgRegle1.resize( 700 , 700 )
     ImgRegle2 = loadImage("data/Help2.PNG")
+    ImgRegle2.resize( 700 , 700 )
     ImgRegle3 = loadImage("data/Help3.PNG")
+    ImgRegle3.resize( 700 , 700 )
     ImgRegle4 = loadImage("data/Help4.PNG")
+    ImgRegle4.resize( 700 , 700 )
     global jouerX, jouerY, regleX, regleY, quitterX, quitterY 
     jouerX = width / 2 - rectSize - 10
     jouerY = (height - 200 )/ 2 - rectSize / 2
