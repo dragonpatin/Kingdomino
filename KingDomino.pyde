@@ -1,4 +1,7 @@
 from test.ListCreator import *
+from test.Game import *
+from test.RandomTileGenerator import *
+
 rectSize = 90
 jouerOver = regleOver = quitterOver = Joueur1Over = Joueur2Over = Joueur4Over = False
 regleColor = color(255)
@@ -9,6 +12,8 @@ boolQuitter = boolRegle = boolJouer = bool2Joueur = bool3Joueur = bool4Joueur = 
 boolMenu = True
 boolResize = True
 regleInt = 0
+LT = None
+LJ = None
 
 def Regle():
     global boolResize
@@ -86,15 +91,39 @@ def Jouer():
     text("3 Joueurs", 255, 344) 
     text("4 Joueurs", 255, 444)
 
+def Jeu2Joueurs():
+    clear()
+    background(255,255,255)
+    global boolJouer, LT, LJ
+    boolJouer = False
+    LC = Game(2)
+    LJ = LC.createListJoueurs()
+    fill(color(0,0,0))
+    textSize(20)
+    for player in LJ :
+        print("Joueur {a}".format(a = player.nom))
+        textAlign(CENTER, CENTER)
+        text("Joueur {a}".format(a = player.nom), 350, 400 + player.nom * 30)
+    fill(color(0,0,0))
+    textSize(20)
+    textAlign(CENTER, CENTER)
+    text("Vous jouez actuellement a 2 joueurs", 350, 60)
+    text("la tuile {a} est : {b} {c} {d} {e}".format(a=LT[0].numero,b=LT[0].tuile_1,c=LT[0].couronne_1,d=LT[0].tuile_2,e=LT[0].couronne_2), 350, 350)
+    
+    
 
 
 def setup():
     LC = ListCreator()
+    global LT
     LT = LC.createList()
     for tile in LT :
         print("la tuile {a} est : {b} {c} {d} {e}".format(a=tile.numero,b=tile.tuile_1,c=tile.couronne_1,d=tile.tuile_2,e=tile.couronne_2))
     # The image file must be in the data folder of the current sketch
     # to load successfully
+    RTG = RandomTileGenerator()
+    T = RTG.generate()
+    print("la tuile {a} est : {b} {c} {d} {e}".format(a=T.numero,b=T.tuile_1,c=T.couronne_1,d=T.tuile_2,e=T.couronne_2))
     size(700, 700)
     global imgMenue,ImgRegle1,ImgRegle2,ImgRegle3,ImgRegle4
     imgMenue = loadImage("data/Kingdomino.png")    # Load the image into the program
@@ -125,6 +154,8 @@ def draw():
         Acceuil()
     if boolJouer:
         Jouer()
+    if bool2Joueur and boolJouer:
+        Jeu2Joueurs()
     if boolQuitter:
         exit()
           
