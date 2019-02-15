@@ -1,4 +1,7 @@
 from test.ListCreator import *
+from test.Game import *
+from test.RandomTileGenerator import *
+
 rectSize = 90
 jouerOver = regleOver = quitterOver = Joueur1Over = Joueur2Over = Joueur4Over = False
 reglePrecOver = regleSuivOver = regleMenuOver = False
@@ -10,6 +13,8 @@ boolQuitter = boolRegle = boolJouer = bool2Joueur = bool3Joueur = bool4Joueur = 
 boolMenu = True
 boolResize = True
 regleInt = 0
+LT = None
+LJ = None
 
 def Regle():
     updateRegle(mouseX, mouseY)
@@ -98,10 +103,35 @@ def Jouer():
     text("3 Joueurs", 255, 344) 
     text("4 Joueurs", 255, 444)
 
+def Jeu2Joueurs():
+    clear()
+    background(255,255,255)
+    global boolJouer, LT, LJ
+    boolJouer = False
+    LC = Game(2)
+    LJ = LC.createListJoueurs()
+    RTG = RandomTileGenerator()
+    for i in range(0, RTG.taille):
+        T = RTG.generate()
+        print("la tuile {a} est : {b} {c} {d} {e}".format(a=T.numero,b=T.tuile_1,c=T.couronne_1,d=T.tuile_2,e=T.couronne_2))
+    fill(color(0,0,0))
+    textSize(20)
+    for player in LJ :
+        print("Joueur {a}".format(a = player.nom))
+        textAlign(CENTER, CENTER)
+        text("Joueur {a}".format(a = player.nom), 350, 400 + player.nom * 30)
+    fill(color(0,0,0))
+    textSize(20)
+    textAlign(CENTER, CENTER)
+    text("Vous jouez actuellement a 2 joueurs", 350, 60)
+    text("la tuile {a} est : {b} {c} {d} {e}".format(a=T.numero,b=T.tuile_1,c=T.couronne_1,d=T.tuile_2,e=T.couronne_2), 350, 350)
+    
+    
 
 
 def setup():
     LC = ListCreator()
+    global LT
     LT = LC.createList()
     for tile in LT :
         print("la tuile {a} est : {b} {c} {d} {e}".format(a=tile.numero,b=tile.tuile_1,c=tile.couronne_1,d=tile.tuile_2,e=tile.couronne_2))
@@ -143,6 +173,8 @@ def draw():
         Acceuil()
     if boolJouer:
         Jouer()
+    if bool2Joueur and boolJouer:
+        Jeu2Joueurs()
     if boolQuitter:
         exit()
           
