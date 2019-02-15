@@ -98,6 +98,10 @@ def Jeu2Joueurs():
     boolJouer = False
     LC = Game(2)
     LJ = LC.createListJoueurs()
+    RTG = RandomTileGenerator()
+    for i in range(0, RTG.taille):
+        T = RTG.generate()
+        print("la tuile {a} est : {b} {c} {d} {e}".format(a=T.numero,b=T.tuile_1,c=T.couronne_1,d=T.tuile_2,e=T.couronne_2))
     fill(color(0,0,0))
     textSize(20)
     for player in LJ :
@@ -108,7 +112,7 @@ def Jeu2Joueurs():
     textSize(20)
     textAlign(CENTER, CENTER)
     text("Vous jouez actuellement a 2 joueurs", 350, 60)
-    text("la tuile {a} est : {b} {c} {d} {e}".format(a=LT[0].numero,b=LT[0].tuile_1,c=LT[0].couronne_1,d=LT[0].tuile_2,e=LT[0].couronne_2), 350, 350)
+    text("la tuile {a} est : {b} {c} {d} {e}".format(a=T.numero,b=T.tuile_1,c=T.couronne_1,d=T.tuile_2,e=T.couronne_2), 350, 350)
     
     
 
@@ -121,9 +125,6 @@ def setup():
         print("la tuile {a} est : {b} {c} {d} {e}".format(a=tile.numero,b=tile.tuile_1,c=tile.couronne_1,d=tile.tuile_2,e=tile.couronne_2))
     # The image file must be in the data folder of the current sketch
     # to load successfully
-    RTG = RandomTileGenerator()
-    T = RTG.generate()
-    print("la tuile {a} est : {b} {c} {d} {e}".format(a=T.numero,b=T.tuile_1,c=T.couronne_1,d=T.tuile_2,e=T.couronne_2))
     size(700, 700)
     global imgMenue,ImgRegle1,ImgRegle2,ImgRegle3,ImgRegle4
     imgMenue = loadImage("data/Kingdomino.png")    # Load the image into the program
