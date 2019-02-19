@@ -111,6 +111,7 @@ def Jeu2Joueurs():
     LC = Game(2)
     LJ = LC.createListJoueurs()
     RTG = RandomTileGenerator()
+    fill(color(255,0,0))
     for i in range(0, RTG.taille):
         T = RTG.generate()
         print("la tuile {a} est : {b} {c} {d} {e}".format(a=T.numero,b=T.tuile_1,c=T.couronne_1,d=T.tuile_2,e=T.couronne_2))
