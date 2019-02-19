@@ -9,12 +9,13 @@ regleColor = color(255)
 jouerColor = color(255)
 quitterColor = color(255)
 fps = 30
-boolQuitter = boolRegle = boolJouer = bool2Joueur = bool3Joueur = bool4Joueur = bool2Joueur = bool3Joueur = bool4Joueur = False
+boolQuitter = boolRegle = boolJouer = bool2Joueur = bool3Joueur = bool4Joueur = bool3Joueur = bool4Joueur =  boolrelance = False
 boolMenu = True
 boolResize = True
 regleInt = 0
 LT = None
 LJ = None
+i = 0
 
 def Regle():
     updateRegle(mouseX, mouseY)
@@ -102,18 +103,116 @@ def Jouer():
     text("2 Joueurs", 255, 244) 
     text("3 Joueurs", 255, 344) 
     text("4 Joueurs", 255, 444)
-
+    
 def Jeu2Joueurs():
+    global i
     clear()
+    if i == 0:
+        this.surface.setSize(1200, 400)
+        i+=1
     background(255,255,255)
     global boolJouer, LT, LJ
     boolJouer = False
     LC = Game(2)
     LJ = LC.createListJoueurs()
     RTG = RandomTileGenerator()
+    pos1x = 100
+    pos1y = 100
+    pos2x = 200
+    pos2y = 100
     for i in range(0, RTG.taille):
         T = RTG.generate()
         print("la tuile {a} est : {b} {c} {d} {e}".format(a=T.numero,b=T.tuile_1,c=T.couronne_1,d=T.tuile_2,e=T.couronne_2))
+        
+    # #Champs
+    if T.tuile_1 == 1: 
+        if T.couronne_1 == 1:
+            image(champ1,pos1x,pos1y)
+        else:
+            image(champ0,pos1x,pos1y)
+    #plaines
+    if T.tuile_1 == 2:
+        if T.couronne_1 == 1:
+            image(plaine1,pos1x,pos1y)
+        elif T.couronne_1 == 2:
+            image(plaine2,pos1x,pos1y)
+        else :
+            image(plaine0,pos1x,pos1y)
+    #oceans
+    if T.tuile_1 == 3:
+        if T.couronne_1 == 1:
+            image(ocean1,pos1x,pos1y)
+        else:
+            image(ocean0,pos1x,pos1y)
+    #marais
+    if T.tuile_1 == 4:
+        if T.couronne_1 == 1:
+            image(plaine1,pos1x,pos1y)
+        elif T.couronne_1 == 2:
+            image(plaine2,pos1x,pos1y)
+        else :
+            image(plaine0,pos1x,pos1y)
+    #Forets
+    if T.tuile_1 == 5:
+        if T.couronne_1 == 1:
+            image(foret1,pos1x,pos1y)
+        else :
+            image(foret0,pos1x,pos1y)
+    #Mines
+    if T.tuile_1 == 6:
+        if T.couronne_1 == 1:
+            image(mine1,pos1x,pos1y)
+        elif T.couronne_1 == 2:
+            image(mine2,pos1x,pos1y)
+        elif T.couronne_1 == 3:
+            image(mine3,pos1x,pos1y)
+        else :
+            image(mine0,pos1x,pos1y)
+    #--------------------------- Tuile 2 -------------------
+    #Champs
+    if T.tuile_2 == 1: 
+        if T.couronne_2 == 1:
+            image(champ1,pos2x,pos2y)
+        else:
+            image(champ0,pos2x,pos2y)
+    #plaines
+    if T.tuile_2 == 2:
+        if T.couronne_2 == 1:
+            image(plaine1,pos2x,pos2y)
+        elif T.couronne_2 == 2:
+            image(plaine2,pos2x,pos2y)
+        else :
+            image(plaine0,pos2x,pos2y)
+    #oceans
+    if T.tuile_2 == 3:
+        if T.couronne_2 == 1:
+            image(ocean1,pos2x,pos2y)
+        else:
+            image(ocean0,pos2x,pos2y)
+    #marais
+    if T.tuile_2 == 4:
+        if T.couronne_2 == 1:
+            image(marai1,pos2x,pos2y)
+        elif T.couronne_2 == 2:
+            image(marai2,pos2x,pos2y)
+        else :
+            image(marai0,pos2x,pos2y)
+    #Forets
+    if T.tuile_2 == 5:
+        if T.couronne_2 == 1:
+            image(foret1,pos2x,pos2y)
+        else :
+            image(foret0,pos2x,pos2y)
+    #Mines
+    if T.tuile_2 == 6:
+        if T.couronne_2 == 1:
+            image(mine1,pos2x,pos2y)
+        elif T.couronne_2 == 2:
+            image(mine2,pos2x,pos2y)
+        elif T.couronne_2 == 3:
+            image(mine3,pos2x,pos2y)
+        else :
+            image(mine0,pos2x,pos2y)
     fill(color(0,0,0))
     textSize(20)
     for player in LJ :
@@ -125,7 +224,7 @@ def Jeu2Joueurs():
     textAlign(CENTER, CENTER)
     text("Vous jouez actuellement a 2 joueurs", 350, 60)
     text("la tuile {a} est : {b} {c} {d} {e}".format(a=T.numero,b=T.tuile_1,c=T.couronne_1,d=T.tuile_2,e=T.couronne_2), 350, 350)
-    
+
     
 
 
@@ -138,7 +237,7 @@ def setup():
     # The image file must be in the data folder of the current sketch
     # to load successfully
     size(700, 700)
-    global imgMenue,ImgRegle1,ImgRegle2,ImgRegle3,ImgRegle4,fleche1,fleche2,croix
+    global imgMenue,ImgRegle1,ImgRegle2,ImgRegle3,ImgRegle4,fleche1,fleche2,croix,champ0,champ1,plaine0,plaine1,plaine2,ocean0,ocean1,mine0,mine1,mine2,mine3,marai0,marai1,marai2,foret0,foret1
     imgMenue = loadImage("data/Kingdomino.png")    # Load the image into the program
     imgMenue.resize( 700 , 700 )
     ImgRegle1 = loadImage("data/Help1.PNG")
@@ -155,6 +254,36 @@ def setup():
     fleche2.resize(100,100)
     croix = loadImage("data/multiply.png")
     croix.resize(25,25)
+    
+    #-------------------------------------- Load img tuile --------------------------------------
+    #Champs
+    champ0 = loadImage("data/Champ.PNG")
+    champ0.resize(40,40)
+    champ1 = loadImage("data/Champcouronne.PNG")
+    champ1.resize(40,40)
+    #Plaines
+    plaine0 = loadImage("data/Plaine.PNG")
+    plaine0.resize(40,40)
+    plaine1 = loadImage("data/Plaine1couronne.PNG")
+    plaine1.resize(40,40)
+    plaine2 = loadImage("data/Plaine2couronne.PNG")
+    plaine2.resize(40,40)
+    #Océan
+    ocean0 = loadImage("data/Ocean.PNG")
+    ocean1 = loadImage("data/Ocean1couronne.PNG")
+    #Mines
+    mine0 = loadImage("data/Mine.PNG")
+    mine1 = loadImage("data/Mine1couronne.PNG")
+    mine2 = loadImage("data/Mine2couronne.PNG")
+    mine3 = loadImage("data/Mine3couronne.PNG")
+    #Marais
+    marai0 = loadImage("data/Marai.PNG")
+    marai1 = loadImage("data/Marai1couronne.PNG")
+    marai2 = loadImage("data/Marai2couronne.PNG")
+    #Forets
+    foret0 = loadImage("data/Foret.PNG")
+    foret1 = loadImage("data/Foret1couronne.PNG")
+    
     global jouerX, jouerY, regleX, regleY, quitterX, quitterY 
     jouerX = width / 2 - rectSize - 10
     jouerY = (height - 200 )/ 2 - rectSize / 2
@@ -167,6 +296,7 @@ def setup():
     this.surface.setResizable(True);
 
 def draw():
+    global boolrelance
     if boolRegle:
         Regle()
     if boolMenu:
@@ -175,8 +305,13 @@ def draw():
         Jouer()
     if bool2Joueur and boolJouer:
         Jeu2Joueurs()
+    if boolrelance :
+        print(67)
+        Jeu2Joueurs()
+        boolrelance = False
     if boolQuitter:
         exit()
+    
           
 def update(x, y):
     global jouerOver, regleOver, quitterOver, Joueur2Over, Joueur3Over, Joueur4Over
@@ -191,7 +326,7 @@ def updateRegle(x, y):
     regleMenuOver = overRect(335, 665, 25, 25)
     
 def mousePressed():
-    global currentColor, boolQuitter, boolRegle, boolJouer, boolMenu, bool2Joueur, bool3Joueur, bool4Joueur,reglePrecOver, regleSuivOver,regleMenuOver,regleInt
+    global currentColor, boolQuitter, boolRegle, boolJouer, boolMenu, bool2Joueur, bool3Joueur, bool4Joueur,reglePrecOver, regleSuivOver,regleMenuOver,regleInt,boolrelance
     if boolJouer:
         if Joueur2Over:
             currentColor = regleColor
@@ -227,7 +362,14 @@ def mousePressed():
         if regleMenuOver:
             boolMenu = True
             boolRegle = False
-            
+
+def keyPressed():
+    global boolrelance
+    if key == 'a':
+        print(6)
+        boolrelance = True
+        print(boolrelance)
+        
 
 def overRect(x, y, width, height):
     return x <= mouseX <= x + width and y <= mouseY <= y + height
