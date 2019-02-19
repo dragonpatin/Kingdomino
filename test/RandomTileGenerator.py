@@ -12,5 +12,5 @@ class RandomTileGenerator:
         r = randint(0,self.taille-1)
         t = self.l[r]
         del self.l[r]
-        self.taille -= 1
+        self.taille = self.taille - 1
         return t
