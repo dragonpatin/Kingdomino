@@ -1,0 +1,5 @@
+/test/*.class
+*.autosave
+*.class
+Tile.pyde
+Tileboard.pyde
