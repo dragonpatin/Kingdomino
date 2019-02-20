@@ -105,40 +105,11 @@ def Jouer():
     text("3 Joueurs", 255, 344) 
     text("4 Joueurs", 255, 444)
     
-def DeroulementTour():
-    clear()
-    background(255,255,255)
-    global boolJouer, LJ, j
-    boolJouer = False
-    if bool2Joueur:
-        nb_generation = 4
-        j = j % 2
-    elif bool3Joueur:
-        nb_generation = 3
-        j = j % 3
-    elif bool4Joueur:
-        nb_generation = 4
-        j = j % 4
-    fill(color(0,0,0))
-    textSize(20)
-    textAlign(CENTER, CENTER)
-    text("Joueur {a}".format(a = LJ[j].nom), 350, 25)
-    List_Plateau = list()
+def affiche_tuile(numero,List_Plateau):
     pos1x = 50
-    pos1y = 50
-    pos2x = 150
-    pos2y = 50
-    #Prend une tuile aleatoire
-    for i in range(1, nb_generation+1):
-        T = RTG.generate()
-        List_Plateau.append(T)
-        print("la tuile {a} est : {b} {c} {d} {e}".format(a=T.numero,b=T.tuile_1,c=T.couronne_1,d=T.tuile_2,e=T.couronne_2))
-    if RTG.taille - 1 < 0 or nb_tour == 0:
-        fill(color(255,0,0))
-        textSize(20)
-        textAlign(CENTER, CENTER)
-        text("Fin du Game", 300, 300)
-    print("taille : {a}".format(a=len(List_Plateau)))
+    pos1y = 70*numero
+    pos2x = 110
+    pos2y = 70*numero
     for T in List_Plateau:
         # #Champs
         if T.tuile_1 == 1: 
@@ -229,6 +200,39 @@ def DeroulementTour():
                 image(mine3,pos2x,pos2y)
             else :
                 image(mine0,pos2x,pos2y)
+    
+def DeroulementTour():
+    clear()
+    background(255,255,255)
+    global boolJouer, LJ, j
+    boolJouer = False
+    if bool2Joueur:
+        nb_generation = 4
+        j = j % 2
+    elif bool3Joueur:
+        nb_generation = 3
+        j = j % 3
+    elif bool4Joueur:
+        nb_generation = 4
+        j = j % 4
+    fill(color(0,0,0))
+    textSize(20)
+    textAlign(CENTER, CENTER)
+    text("Joueur {a}".format(a = LJ[j].nom), 350, 25)
+    List_Plateau = list()
+    #Prend une tuile aleatoire
+    for i in range(1, nb_generation+1):
+        T = RTG.generate()
+        List_Plateau.append(T)
+        affiche_tuile(i,List_Plateau)
+        print("la tuile {a} est : {b} {c} {d} {e}".format(a=T.numero,b=T.tuile_1,c=T.couronne_1,d=T.tuile_2,e=T.couronne_2))
+    if RTG.taille - 1 < 0 or nb_tour == 0:
+        fill(color(255,0,0))
+        textSize(20)
+        textAlign(CENTER, CENTER)
+        text("Fin du Game", 300, 300)
+    print("taille : {a}".format(a=len(List_Plateau)))
+    
     print("taille : {a}".format(a=len(List_Plateau)))
     fill(color(0,0,0))
     textSize(20)
@@ -273,31 +277,42 @@ def setup():
     #-------------------------------------- Load img tuile --------------------------------------
     #Champs
     champ0 = loadImage("data/Champ.PNG")
-    champ0.resize(40,40)
+    champ0.resize(60,60)
     champ1 = loadImage("data/Champcouronne.PNG")
-    champ1.resize(40,40)
+    champ1.resize(60,60)
     #Plaines
     plaine0 = loadImage("data/Plaine.PNG")
-    plaine0.resize(40,40)
+    plaine0.resize(60,60)
     plaine1 = loadImage("data/Plaine1couronne.PNG")
-    plaine1.resize(40,40)
+    plaine1.resize(60,60)
     plaine2 = loadImage("data/Plaine2couronne.PNG")
-    plaine2.resize(40,40)
+    plaine2.resize(60,60)
     #Océan
     ocean0 = loadImage("data/Ocean.PNG")
+    ocean0.resize(60,60)
     ocean1 = loadImage("data/Ocean1couronne.PNG")
+    ocean1.resize(60,60)
     #Mines
     mine0 = loadImage("data/Mine.PNG")
+    mine0.resize(60,60)
     mine1 = loadImage("data/Mine1couronne.PNG")
+    mine1.resize(60,60)
     mine2 = loadImage("data/Mine2couronne.PNG")
+    mine2.resize(60,60)
     mine3 = loadImage("data/Mine3couronne.PNG")
+    mine3.resize(60,60)
     #Marais
     marai0 = loadImage("data/Marai.PNG")
+    marai0.resize(60,60)
     marai1 = loadImage("data/Marai1couronne.PNG")
+    marai1.resize(60,60)
     marai2 = loadImage("data/Marai2couronne.PNG")
+    marai2.resize(60,60)
     #Forets
     foret0 = loadImage("data/Foret.PNG")
+    foret0.resize(60,60)
     foret1 = loadImage("data/Foret1couronne.PNG")
+    foret1.resize(60,60)
     
     global jouerX, jouerY, regleX, regleY, quitterX, quitterY 
     jouerX = width / 2 - rectSize - 10
