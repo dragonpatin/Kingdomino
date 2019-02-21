@@ -217,7 +217,6 @@ def inserer(T, L):
 
 # Fonction pour le deroulement d'un tour
 def DeroulementTour():
-    clear()
     background(255, 255, 255)
     global boolJouer, LJ, j
     boolJouer = False
@@ -259,8 +258,7 @@ def DeroulementTour():
         print("Joueur {a}".format(a=player.nom))
         textAlign(CENTER, CENTER)
         text("Joueur {a}".format(a=player.nom), 350, 400 + player.nom * 30)
-
-
+        
 def setup():
     LC = ListCreator()
     global LT, RTG
@@ -374,7 +372,7 @@ def draw():
 
 
 def update(x, y):
-    global jouerOver, regleOver, quitterOver, Joueur2Over, Joueur3Over, Joueur4Over
+    global jouerOver, regleOver, quitterOver, Joueur2Over, Joueur3Over, Joueur4Over, tuile1Over, tuile2Over, tuile3Over, tuile4Over
     jouerOver = Joueur2Over = overRect(jouerX, jouerY, 200, 50)
     regleOver = Joueur3Over = overRect(regleX, regleY, 200, 50)
     quitterOver = Joueur4Over = overRect(quitterX, quitterY, 200, 50)
