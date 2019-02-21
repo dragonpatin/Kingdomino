@@ -9,15 +9,15 @@ regleColor = color(255)
 jouerColor = color(255)
 quitterColor = color(255)
 fps = 30
-boolQuitter = boolRegle = boolJouer = bool2Joueur = bool3Joueur = bool4Joueur = bool3Joueur = bool4Joueur =  boolrelance = False
-boolMenu = True
+boolQuitter = boolRegle = boolJouer = bool2Joueur = bool3Joueur = bool4Joueur = bool3Joueur = bool4Joueur =  boolrelance = Tuile1 = Tuile2 = Tuile3 = Tuile4 = test  = False
+boolMenu = initialisation = True
 boolResize = True
 regleInt = 0
 LT = None
 LJ = None
 i = 0
 j = 0
-
+L = list()
 def Regle():
     updateRegle(mouseX, mouseY)
     global boolResize
@@ -105,12 +105,13 @@ def Jouer():
     text("3 Joueurs", 255, 344) 
     text("4 Joueurs", 255, 444)
     
-def affiche_tuile(numero,List_Plateau):
+def affiche_tuile(List_Plateau):
+    i=1
     pos1x = 50
-    pos1y = 70*numero
     pos2x = 110
-    pos2y = 70*numero
     for T in List_Plateau:
+        pos1y = 70*i
+        pos2y = 70*i
         # #Champs
         if T.tuile_1 == 1: 
             if T.couronne_1 == 1:
@@ -200,12 +201,12 @@ def affiche_tuile(numero,List_Plateau):
                 image(mine3,pos2x,pos2y)
             else :
                 image(mine0,pos2x,pos2y)
+        i = i+1
     
 def DeroulementTour():
     clear()
     background(255,255,255)
-    global boolJouer, LJ, j
-    boolJouer = False
+    global LJ, j
     if bool2Joueur:
         nb_generation = 4
         j = j % 2
@@ -224,7 +225,6 @@ def DeroulementTour():
     for i in range(1, nb_generation+1):
         T = RTG.generate()
         List_Plateau.append(T)
-        affiche_tuile(i,List_Plateau)
         print("la tuile {a} est : {b} {c} {d} {e}".format(a=T.numero,b=T.tuile_1,c=T.couronne_1,d=T.tuile_2,e=T.couronne_2))
     if RTG.taille - 1 < 0 or nb_tour == 0:
         fill(color(255,0,0))
@@ -232,19 +232,18 @@ def DeroulementTour():
         textAlign(CENTER, CENTER)
         text("Fin du Game", 300, 300)
     print("taille : {a}".format(a=len(List_Plateau)))
-    
     print("taille : {a}".format(a=len(List_Plateau)))
     fill(color(0,0,0))
     textSize(20)
-    for player in LJ :
-        print("Joueur {a}".format(a = player.nom))
-        textAlign(CENTER, CENTER)
-        text("Joueur {a}".format(a = player.nom), 350, 400 + player.nom * 30)
     fill(color(0,0,0))
     textSize(20)
     textAlign(CENTER, CENTER)
     text("la tuile {a} est : {b} {c} {d} {e}".format(a=T.numero,b=T.tuile_1,c=T.couronne_1,d=T.tuile_2,e=T.couronne_2), 350, 350)
-
+    for player in LJ :
+        print("Joueur {a}".format(a = player.nom))
+        textAlign(CENTER, CENTER)
+        text("Joueur {a}".format(a = player.nom), 350, 400 + player.nom * 30)
+    return List_Plateau
 
 def setup():
     LC = ListCreator()
@@ -326,31 +325,42 @@ def setup():
     this.surface.setResizable(True);
 
 def draw():
-    global boolrelance, nb_tour, LJ
+    global boolrelance, nb_tour, LJ,test,L,initialisation
     if boolRegle:
         Regle()
     if boolMenu:
         Acceuil()
     if boolJouer:
-        Jouer()
-    if bool2Joueur and boolJouer:
-        nb_tour = 5
-        LC = Game(2)
-        LJ = LC.createListJoueurs()
-        DeroulementTour()
-    if bool3Joueur and boolJouer:
-        nb_tour = 11
-        LC = Game(3)
-        LJ = LC.createListJoueurs()
-        DeroulementTour()
-    if bool4Joueur and boolJouer:
-        nb_tour = 11
-        LC = Game(4)
-        LJ = LC.createListJoueurs()
-        DeroulementTour()
+        if bool2Joueur:
+            if initialisation:
+                nb_tour = 5
+                LC = Game(2)
+                LJ = LC.createListJoueurs()
+                L = DeroulementTour()
+                initialisation=False
+            affiche_tuile(L)
+        elif bool3Joueur:
+            if initialisation:
+                nb_tour = 11
+                LC = Game(3)
+                LJ = LC.createListJoueurs()
+                L = DeroulementTour()
+                initialisation=False
+
+            affiche_tuile(L)
+        elif bool4Joueur:
+            if initialisation:
+                nb_tour = 11
+                LC = Game(4)
+                LJ = LC.createListJoueurs()
+                L = DeroulementTour()
+                initialisation=False
+            affiche_tuile(L)
+        else : 
+            Jouer()
     if boolrelance :
         nb_tour = nb_tour - 1
-        DeroulementTour()
+        L = DeroulementTour()
         boolrelance = False
     if boolQuitter:
         exit()
@@ -368,21 +378,54 @@ def updateRegle(x, y):
     regleSuivOver = overRect(600, 629, 100, 100)
     regleMenuOver = overRect(335, 665, 25, 25)
     
+def updateJouer2_4(x, y):
+    global Tuile1, Tuile2,Tuile3,Tuile4
+    Tuile1 = overRect(50, 70, 120, 60)
+    Tuile2 = overRect(50, 70*2, 120, 60)
+    Tuile3 = overRect(50, 70*3, 120, 60)
+    Tuile4 = overRect(50, 70*4, 120, 60)
+  
+def updateJouer3(x, y):
+    global Tuile1, Tuile2,Tuile3
+    Tuile1 = overRect(50, 70, 120, 60)
+    Tuile2 = overRect(50, 70*2, 120, 60)
+    Tuile3 = overRect(50, 70*3, 120, 60)
+  
 def mousePressed():
     global currentColor, boolQuitter, boolRegle, boolJouer, boolMenu, bool2Joueur, bool3Joueur, bool4Joueur,reglePrecOver, regleSuivOver,regleMenuOver,regleInt,boolrelance
+    ###Faire Fonction chaque if.
     if boolJouer:
         if Joueur2Over:
             currentColor = regleColor
             bool2Joueur = True
-            print(2)
+            if Tuile1:
+                print(3)
+            if Tuile2:
+                print(3)
+            if Tuile3:
+                print(3)
+            if Tuile4:
+                print(3)
         if Joueur3Over:
             currentColor = regleColor
             bool3Joueur = True
-            print(3)
+            if Tuile1:
+                print(3)
+            if Tuile2:
+                print(3)
+            if Tuile3:
+                print(3)
         if Joueur4Over:
             currentColor = regleColor
             bool4Joueur = True
-            print(4)
+            if Tuile1:
+                print(3)
+            if Tuile2:
+                print(3)
+            if Tuile3:
+                print(3)
+            if Tuile4:
+                print(3)
             
     if boolMenu:
         if jouerOver:
@@ -407,11 +450,11 @@ def mousePressed():
             boolRegle = False
 
 def keyPressed():
-    global boolrelance, j
+    global boolrelance, j, test
     if key == 'a' and RTG.taille > 0 and nb_tour != 0:
+        test = True
         j = j + 1
-        boolrelance = True
-        print(boolrelance)       
+        boolrelance = True     
 
 def overRect(x, y, width, height):
     return x <= mouseX <= x + width and y <= mouseY <= y + height
