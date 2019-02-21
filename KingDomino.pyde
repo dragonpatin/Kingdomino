@@ -106,10 +106,10 @@ def Jouer():
     text("4 Joueurs", 255, 444)
     
 def affiche_tuile(numero,List_Plateau):
-    pos1x = 50
-    pos1y = 70*numero
-    pos2x = 110
-    pos2y = 70*numero
+    pos1x = 70*numero + 80*(numero-1)
+    pos1y = 70   #*numero
+    pos2x = 130*numero + 20*(numero-1)
+    pos2y = 70   #*numero
     for T in List_Plateau:
         # #Champs
         if T.tuile_1 == 1: 
@@ -225,25 +225,19 @@ def DeroulementTour():
         T = RTG.generate()
         List_Plateau.append(T)
         affiche_tuile(i,List_Plateau)
-        print("la tuile {a} est : {b} {c} {d} {e}".format(a=T.numero,b=T.tuile_1,c=T.couronne_1,d=T.tuile_2,e=T.couronne_2))
+        #print("la tuile {a} est : {b} {c} {d} {e}".format(a=T.numero,b=T.tuile_1,c=T.couronne_1,d=T.tuile_2,e=T.couronne_2))
     if RTG.taille - 1 < 0 or nb_tour == 0:
         fill(color(255,0,0))
         textSize(20)
         textAlign(CENTER, CENTER)
         text("Fin du Game", 300, 300)
-    print("taille : {a}".format(a=len(List_Plateau)))
     
-    print("taille : {a}".format(a=len(List_Plateau)))
     fill(color(0,0,0))
     textSize(20)
     for player in LJ :
         print("Joueur {a}".format(a = player.nom))
         textAlign(CENTER, CENTER)
         text("Joueur {a}".format(a = player.nom), 350, 400 + player.nom * 30)
-    fill(color(0,0,0))
-    textSize(20)
-    textAlign(CENTER, CENTER)
-    text("la tuile {a} est : {b} {c} {d} {e}".format(a=T.numero,b=T.tuile_1,c=T.couronne_1,d=T.tuile_2,e=T.couronne_2), 350, 350)
 
 
 def setup():
