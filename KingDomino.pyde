@@ -200,7 +200,18 @@ def affiche_tuile(numero,List_Plateau):
                 image(mine3,pos2x,pos2y)
             else :
                 image(mine0,pos2x,pos2y)
-    
+                
+#Fonction pour inserer une tuile de facon trier dans une liste       
+def inserer(T,L):
+    L.append(0)
+    k = len(L)-2
+    while k >= 0 and L[k].numero >= T.numero:
+        L[k+1] = L[k]
+        k = k - 1
+        
+    L[k+1] = T
+    return L
+                
 def DeroulementTour():
     clear()
     background(255,255,255)
@@ -223,9 +234,10 @@ def DeroulementTour():
     #Prend une tuile aleatoire
     for i in range(1, nb_generation+1):
         T = RTG.generate()
-        List_Plateau.append(T)
+        inserer(T,List_Plateau)
         affiche_tuile(i,List_Plateau)
-        #print("la tuile {a} est : {b} {c} {d} {e}".format(a=T.numero,b=T.tuile_1,c=T.couronne_1,d=T.tuile_2,e=T.couronne_2))
+    for T in List_Plateau:
+        print("la tuile {a} est : {b} {c} {d} {e}".format(a=T.numero,b=T.tuile_1,c=T.couronne_1,d=T.tuile_2,e=T.couronne_2))
     if RTG.taille - 1 < 0 or nb_tour == 0:
         fill(color(255,0,0))
         textSize(20)
@@ -405,7 +417,7 @@ def keyPressed():
     if key == 'a' and RTG.taille > 0 and nb_tour != 0:
         j = j + 1
         boolrelance = True
-        print(boolrelance)       
+        #print(boolrelance)       
 
 def overRect(x, y, width, height):
     return x <= mouseX <= x + width and y <= mouseY <= y + height
