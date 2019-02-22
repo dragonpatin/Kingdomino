@@ -219,8 +219,7 @@ def inserer(T,L):
 
 def DeroulementTour():
     background(255, 255, 255)
-    global boolJouer, LJ, j
-    boolJouer = False
+    global LJ, j
     if bool2Joueur:
         nb_generation = 4
         j = j % 2
@@ -344,12 +343,14 @@ def draw():
         Acceuil()
     if boolJouer:
         if bool2Joueur:
+            
             if initialisation:
                 nb_tour = 5
                 LC = Game(2)
                 LJ = LC.createListJoueurs()
                 L = DeroulementTour()
                 initialisation=False
+            updateJouer2_4(mouseX,mouseY)
             affiche_tuile(L)
         elif bool3Joueur:
             if initialisation:
@@ -358,7 +359,7 @@ def draw():
                 LJ = LC.createListJoueurs()
                 L = DeroulementTour()
                 initialisation=False
-
+            updateJouer3(mouseX,mouseY)
             affiche_tuile(L)
         elif bool4Joueur:
             if initialisation:
@@ -367,6 +368,7 @@ def draw():
                 LJ = LC.createListJoueurs()
                 L = DeroulementTour()
                 initialisation=False
+            updateJouer2_4(mouseX,mouseY)
             affiche_tuile(L)
         else : 
             Jouer()
@@ -412,29 +414,29 @@ def mousePressed():
             currentColor = regleColor
             bool2Joueur = True
             if Tuile1:
-                print(3)
+                print(1)
             if Tuile2:
-                print(3)
+                print(2)
             if Tuile3:
                 print(3)
             if Tuile4:
-                print(3)
+                print(4)
         if Joueur3Over:
             currentColor = regleColor
             bool3Joueur = True
             if Tuile1:
-                print(3)
+                print(1)
             if Tuile2:
-                print(3)
+                print(2)
             if Tuile3:
                 print(3)
         if Joueur4Over:
             currentColor = regleColor
             bool4Joueur = True
             if Tuile1:
-                print(3)
+                print(1)
             if Tuile2:
-                print(3)
+                print(2)
             if Tuile3:
                 print(3)
             if Tuile4:
