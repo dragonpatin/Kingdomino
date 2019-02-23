@@ -12,11 +12,11 @@ fps = 30
 boolQuitter = boolRegle = boolJouer = bool2Joueur = bool3Joueur = bool4Joueur = bool3Joueur = bool4Joueur =  boolrelance = Tuile1 = Tuile2 = Tuile3 = Tuile4 = test  = False
 boolMenu = initialisation = True
 boolResize = True
-regleInt = 0
+regleInt = nb_tour = 0
 LT = None
 LJ = None
 i = 0
-j = 0
+j = -1 #Car premier passage dans mousePressed initialise a 0
 L = list()
 def Regle():
     updateRegle(mouseX, mouseY)
@@ -206,7 +206,27 @@ def affiche_tuile(List_Plateau):
             else :
                 image(mine0,pos2x,pos2y)
         i = i+1
+      
         
+def affichePlateau(List_Plateau):
+    affiche_tuile(List_Plateau)
+    if bool2Joueur :
+        text("Joueur {a}".format(a=LJ[j%2].nom), 350, 25)
+    else : 
+        text("Joueur {a}".format(a=LJ[j].nom), 350, 25)
+    if RTG.taille - 1 < 0 or nb_tour == 0:
+        fill(color(255, 0, 0))
+        textSize(20)
+        textAlign(CENTER, CENTER)
+        text("Fin du Game", 300, 300)
+    fill(color(0,0,0))
+    textSize(20)
+    textAlign(CENTER, CENTER)
+    for player in LJ :
+        print("Joueur {a}".format(a = player.nom))
+        textAlign(CENTER, CENTER)
+        text("Joueur {a}".format(a = player.nom), 350, 400 + player.nom * 30)
+    
 def inserer(T,L):
     L.append(0)
     k = len(L)-2
@@ -222,36 +242,21 @@ def DeroulementTour():
     global LJ, j
     if bool2Joueur:
         nb_generation = 4
-        j = j % 2
     elif bool3Joueur:
         nb_generation = 3
-        j = j % 3
     elif bool4Joueur:
         nb_generation = 4
-        j = j % 4
-    fill(color(0, 0, 0))
-    textSize(20)
-    textAlign(CENTER, CENTER)
-    text("Joueur {a}".format(a=LJ[j].nom), 350, 25)
+    #fill(color(0, 0, 0))
+    #textSize(20)
+    #textAlign(CENTER, CENTER)
+    #text("Joueur {a}".format(a=LJ[j].nom), 350, 25)
     List_Plateau = list()
     # Prend une tuile aleatoire
     for i in range(1, nb_generation + 1):
         T = RTG.generate()
         inserer(T, List_Plateau)
-        print("la tuile {a} est : {b} {c} {d} {e}".format(a=T.numero,b=T.tuile_1,c=T.couronne_1,d=T.tuile_2,e=T.couronne_2))
-    if RTG.taille - 1 < 0 or nb_tour == 0:
-        fill(color(255, 0, 0))
-        textSize(20)
-        textAlign(CENTER, CENTER)
-        text("Fin du Game", 300, 300)
-    fill(color(0,0,0))
-    textSize(20)
-    textAlign(CENTER, CENTER)
+        #print("la tuile {a} est : {b} {c} {d} {e}".format(a=T.numero,b=T.tuile_1,c=T.couronne_1,d=T.tuile_2,e=T.couronne_2))
     #text("la tuile {a} est : {b} {c} {d} {e}".format(a=T.numero,b=T.tuile_1,c=T.couronne_1,d=T.tuile_2,e=T.couronne_2), 350, 350)
-    for player in LJ :
-        print("Joueur {a}".format(a = player.nom))
-        textAlign(CENTER, CENTER)
-        text("Joueur {a}".format(a = player.nom), 350, 400 + player.nom * 30)
     return List_Plateau
 
 def setup():
@@ -336,6 +341,7 @@ def setup():
     this.surface.setResizable(True)
 
 def draw():
+    background(255, 255, 255)
     global boolrelance, nb_tour, LJ,test,L,initialisation
     if boolRegle:
         Regle()
@@ -343,7 +349,6 @@ def draw():
         Acceuil()
     if boolJouer:
         if bool2Joueur:
-            
             if initialisation:
                 nb_tour = 5
                 LC = Game(2)
@@ -351,7 +356,7 @@ def draw():
                 L = DeroulementTour()
                 initialisation=False
             updateJouer2_4(mouseX,mouseY)
-            affiche_tuile(L)
+            affichePlateau(L)
         elif bool3Joueur:
             if initialisation:
                 nb_tour = 11
@@ -360,7 +365,7 @@ def draw():
                 L = DeroulementTour()
                 initialisation=False
             updateJouer3(mouseX,mouseY)
-            affiche_tuile(L)
+            affichePlateau(L)
         elif bool4Joueur:
             if initialisation:
                 nb_tour = 11
@@ -369,7 +374,8 @@ def draw():
                 L = DeroulementTour()
                 initialisation=False
             updateJouer2_4(mouseX,mouseY)
-            affiche_tuile(L)
+            affichePlateau(L)
+            
         else : 
             Jouer()
     if boolrelance :
@@ -406,41 +412,62 @@ def updateJouer3(x, y):
     Tuile2 = overRect(220, 70, 120, 60)
     Tuile3 = overRect(370, 70, 120, 60)
   
+def tourSuivant():
+    global boolrelance, test
+    if RTG.taille > 0 and nb_tour != 0:
+        test = True
+        boolrelance = True
+
 def mousePressed():
-    global currentColor, boolQuitter, boolRegle, boolJouer, boolMenu, bool2Joueur, bool3Joueur, bool4Joueur, reglePrecOver, regleSuivOver, regleMenuOver, regleInt, boolrelance
+    global currentColor, boolQuitter, boolRegle, boolJouer, boolMenu, bool2Joueur, bool3Joueur, bool4Joueur, reglePrecOver, regleSuivOver, regleMenuOver, regleInt, boolrelance,j
     ###Faire Fonction chaque if.
     if boolJouer:
         if Joueur2Over:
             currentColor = regleColor
             bool2Joueur = True
             if Tuile1:
-                print(1)
+                LJ[j%2].list_tuile.append(L[0])
             if Tuile2:
-                print(2)
+                LJ[j%2].list_tuile.append(L[1])
             if Tuile3:
-                print(3)
+                LJ[j%2].list_tuile.append(L[2])
             if Tuile4:
-                print(4)
+                LJ[j%2].list_tuile.append(L[3])
+            
+            j = (j+1) % 4
+            if j == 0:
+                tourSuivant()
+                
+                
         if Joueur3Over:
             currentColor = regleColor
             bool3Joueur = True
             if Tuile1:
-                print(1)
+                LJ[j].list_tuile.append(L[0])
             if Tuile2:
-                print(2)
+                LJ[j].list_tuile.append(L[1])
             if Tuile3:
-                print(3)
+                LJ[j].list_tuile.append(L[2])
+                
+            j = (j+1) % 3
+            if j == 0:
+                tourSuivant()
+                
         if Joueur4Over:
             currentColor = regleColor
             bool4Joueur = True
             if Tuile1:
-                print(1)
+                LJ[j].list_tuile.append(L[0])
             if Tuile2:
-                print(2)
+                LJ[j].list_tuile.append(L[1])
             if Tuile3:
-                print(3)
+                LJ[j].list_tuile.append(L[2])
             if Tuile4:
-                print(4)
+                LJ[j].list_tuile.append(L[3])
+               
+            j = (j+1) % 4
+            if j == 0:
+                tourSuivant()
     if boolMenu:
         if jouerOver:
             currentColor = regleColor
@@ -463,10 +490,9 @@ def mousePressed():
             boolRegle = False
 
 def keyPressed():
-    global boolrelance, j, test
+    global boolrelance, test
     if key == 'a' and RTG.taille > 0 and nb_tour != 0:
         test = True
-        j = j + 1
         boolrelance = True
 
 def overRect(x, y, width, height):
