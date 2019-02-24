@@ -10,13 +10,15 @@ jouerColor = color(255)
 quitterColor = color(255)
 fps = 30
 boolQuitter = boolRegle = boolJouer = bool2Joueur = bool3Joueur = bool4Joueur = bool3Joueur = bool4Joueur =  boolrelance = Tuile1 = Tuile2 = Tuile3 = Tuile4 = test  = False
+AjouterTileJ = False
+Tuile1NonUsed = Tuile2NonUsed = Tuile3NonUsed = Tuile4NonUsed = True 
 boolMenu = initialisation = True
 boolResize = True
-regleInt = 0
+regleInt = nb_tour = 0
 LT = None
 LJ = None
 i = 0
-j = 0
+j = 0 #Car premier passage dans mousePressed initialise a 0
 L = list()
 def Regle():
     updateRegle(mouseX, mouseY)
@@ -112,101 +114,389 @@ def affiche_tuile(List_Plateau):
     pos1y = 70
     pos2y = 70
     for T in List_Plateau:
-        pos1x = 70 * i + 80 * (i - 1)
-        pos2x = 130 * i + 20 * (i - 1)
-        textSize(14)
-        text("Tuile : {a}".format(a=T.numero),pos2x, 58)
+        if((i == 1 and Tuile1NonUsed) or (i == 2 and Tuile2NonUsed) or (i == 3 and Tuile3NonUsed) or (i == 4 and Tuile4NonUsed)):
+            pos1x = 70 * i + 80 * (i - 1)
+            pos2x = 130 * i + 20 * (i - 1)
+            textSize(15)
+            text("Tuile : {a}".format(a=T.numero),pos2x, 58)
+            # #Champs
+            if T.tuile_1 == 1: 
+                if T.couronne_1 == 1:
+                    image(champ1,pos1x,pos1y)
+                else:
+                    image(champ0,pos1x,pos1y)
+            #plaines
+            if T.tuile_1 == 2:
+                if T.couronne_1 == 1:
+                    image(plaine1,pos1x,pos1y)
+                elif T.couronne_1 == 2:
+                    image(plaine2,pos1x,pos1y)
+                else :
+                    image(plaine0,pos1x,pos1y)
+            #oceans
+            if T.tuile_1 == 3:
+                if T.couronne_1 == 1:
+                    image(ocean1,pos1x,pos1y)
+                else:
+                    image(ocean0,pos1x,pos1y)
+            #marais
+            if T.tuile_1 == 4:
+                if T.couronne_1 == 1:
+                    image(marai1,pos1x,pos1y)
+                elif T.couronne_1 == 2:
+                    image(marai2,pos1x,pos1y)
+                else :
+                    image(marai0,pos1x,pos1y)
+            #Forets
+            if T.tuile_1 == 5:
+                if T.couronne_1 == 1:
+                    image(foret1,pos1x,pos1y)
+                else :
+                    image(foret0,pos1x,pos1y)
+            #Mines
+            if T.tuile_1 == 6:
+                if T.couronne_1 == 1:
+                    image(mine1,pos1x,pos1y)
+                elif T.couronne_1 == 2:
+                    image(mine2,pos1x,pos1y)
+                elif T.couronne_1 == 3:
+                    image(mine3,pos1x,pos1y)
+                else :
+                    image(mine0,pos1x,pos1y)
+            #--------------------------- Tuile 2 -------------------
+            #Champs
+            if T.tuile_2 == 1: 
+                if T.couronne_2 == 1:
+                    image(champ1,pos2x,pos2y)
+                else:
+                    image(champ0,pos2x,pos2y)
+            #plaines
+            if T.tuile_2 == 2:
+                if T.couronne_2 == 1:
+                    image(plaine1,pos2x,pos2y)
+                elif T.couronne_2 == 2:
+                    image(plaine2,pos2x,pos2y)
+                else :
+                    image(plaine0,pos2x,pos2y)
+            #oceans
+            if T.tuile_2 == 3:
+                if T.couronne_2 == 1:
+                    image(ocean1,pos2x,pos2y)
+                else:
+                    image(ocean0,pos2x,pos2y)
+            #marais
+            if T.tuile_2 == 4:
+                if T.couronne_2 == 1:
+                    image(marai1,pos2x,pos2y)
+                elif T.couronne_2 == 2:
+                    image(marai2,pos2x,pos2y)
+                else :
+                    image(marai0,pos2x,pos2y)
+            #Forets
+            if T.tuile_2 == 5:
+                if T.couronne_2 == 1:
+                    image(foret1,pos2x,pos2y)
+                else :
+                    image(foret0,pos2x,pos2y)
+            #Mines
+            if T.tuile_2 == 6:
+                if T.couronne_2 == 1:
+                    image(mine1,pos2x,pos2y)
+                elif T.couronne_2 == 2:
+                    image(mine2,pos2x,pos2y)
+                elif T.couronne_2 == 3:
+                    image(mine3,pos2x,pos2y)
+                else :
+                    image(mine0,pos2x,pos2y)
+        i = i+1
+        
+def affiche_list_tile(player,i):
+    for T in player.list_tuile :
+        if(i == 0 or i == 1) :
+            mody = 0
+        else : 
+            mody = 280
+        if(i == 0 or (i == 2 and bool4Joueur)) :
+            modx = 0
+        elif (i == 2 and bool3Joueur) : 
+            modx = 200
+        else :
+            modx = 360
+        pos1x = 40+T.position_x*40+modx
+        pos1y = 200+T.position_y*40+mody
+        if(T.orientation == 0):
+            pos2y = pos1y
+            pos2x = pos1x + 40
+        if(T.orientation == 1):
+            pos2x = pos1x
+            pos2y = pos1y + 40
+        if(T.orientation == 2):
+            pos2y = pos1y
+            pos2x = pos1x - 40
+        if(T.orientation == 3):
+            pos2x = pos1x
+            pos2y = pos1y - 40
         # #Champs
         if T.tuile_1 == 1: 
             if T.couronne_1 == 1:
-                image(champ1,pos1x,pos1y)
+                image(champ1x40,pos1x,pos1y)
             else:
-                image(champ0,pos1x,pos1y)
+                image(champ0x40,pos1x,pos1y)
         #plaines
         if T.tuile_1 == 2:
             if T.couronne_1 == 1:
-                image(plaine1,pos1x,pos1y)
+                image(plaine1x40,pos1x,pos1y)
             elif T.couronne_1 == 2:
-                image(plaine2,pos1x,pos1y)
+                image(plaine2x40,pos1x,pos1y)
             else :
-                image(plaine0,pos1x,pos1y)
+                image(plaine0x40,pos1x,pos1y)
         #oceans
         if T.tuile_1 == 3:
             if T.couronne_1 == 1:
-                image(ocean1,pos1x,pos1y)
+                image(ocean1x40,pos1x,pos1y)
             else:
-                image(ocean0,pos1x,pos1y)
+                image(ocean0x40,pos1x,pos1y)
         #marais
         if T.tuile_1 == 4:
             if T.couronne_1 == 1:
-                image(plaine1,pos1x,pos1y)
+                image(marai1x40,pos1x,pos1y)
             elif T.couronne_1 == 2:
-                image(plaine2,pos1x,pos1y)
+                image(marai2x40,pos1x,pos1y)
             else :
-                image(plaine0,pos1x,pos1y)
+                image(marai0x40,pos1x,pos1y)
         #Forets
         if T.tuile_1 == 5:
             if T.couronne_1 == 1:
-                image(foret1,pos1x,pos1y)
+                image(foret1x40,pos1x,pos1y)
             else :
-                image(foret0,pos1x,pos1y)
+                image(foret0x40,pos1x,pos1y)
         #Mines
         if T.tuile_1 == 6:
             if T.couronne_1 == 1:
-                image(mine1,pos1x,pos1y)
+                image(mine1x40,pos1x,pos1y)
             elif T.couronne_1 == 2:
-                image(mine2,pos1x,pos1y)
+                image(mine2x40,pos1x,pos1y)
             elif T.couronne_1 == 3:
-                image(mine3,pos1x,pos1y)
+                image(mine3x40,pos1x,pos1y)
             else :
-                image(mine0,pos1x,pos1y)
+                image(mine0x40,pos1x,pos1y)
         #--------------------------- Tuile 2 -------------------
         #Champs
         if T.tuile_2 == 1: 
             if T.couronne_2 == 1:
-                image(champ1,pos2x,pos2y)
+                image(champ1x40,pos2x,pos2y)
             else:
-                image(champ0,pos2x,pos2y)
+                image(champ0x40,pos2x,pos2y)
         #plaines
         if T.tuile_2 == 2:
             if T.couronne_2 == 1:
-                image(plaine1,pos2x,pos2y)
+                image(plaine1x40,pos2x,pos2y)
             elif T.couronne_2 == 2:
-                image(plaine2,pos2x,pos2y)
+                image(plaine2x40,pos2x,pos2y)
             else :
-                image(plaine0,pos2x,pos2y)
+                image(plaine0x40,pos2x,pos2y)
         #oceans
         if T.tuile_2 == 3:
             if T.couronne_2 == 1:
-                image(ocean1,pos2x,pos2y)
+                image(ocean1x40,pos2x,pos2y)
             else:
-                image(ocean0,pos2x,pos2y)
+                image(ocean0x40,pos2x,pos2y)
         #marais
         if T.tuile_2 == 4:
             if T.couronne_2 == 1:
-                image(marai1,pos2x,pos2y)
+                image(marai1x40,pos2x,pos2y)
             elif T.couronne_2 == 2:
-                image(marai2,pos2x,pos2y)
+                image(marai2x40,pos2x,pos2y)
             else :
-                image(marai0,pos2x,pos2y)
+                image(marai0x40,pos2x,pos2y)
         #Forets
         if T.tuile_2 == 5:
             if T.couronne_2 == 1:
-                image(foret1,pos2x,pos2y)
+                image(foret1x40,pos2x,pos2y)
             else :
-                image(foret0,pos2x,pos2y)
+                image(foret0x40,pos2x,pos2y)
         #Mines
         if T.tuile_2 == 6:
             if T.couronne_2 == 1:
-                image(mine1,pos2x,pos2y)
+                image(mine1x40,pos2x,pos2y)
             elif T.couronne_2 == 2:
-                image(mine2,pos2x,pos2y)
+                image(mine2x40,pos2x,pos2y)
             elif T.couronne_2 == 3:
-                image(mine3,pos2x,pos2y)
+                image(mine3x40,pos2x,pos2y)
             else :
-                image(mine0,pos2x,pos2y)
-        i = i+1
-        
+                image(mine0x40,pos2x,pos2y)
+
+def affiche_last_tile(player,i):
+    if(player.lastTile!=None):
+        T = player.lastTile
+        if(i == 0 or i == 1) :
+            mody = 0
+        else : 
+            mody = 280
+        if(i == 0 or (i == 2 and bool4Joueur)) :
+            modx = 0
+        elif (i == 2 and bool3Joueur) : 
+            modx = 200
+        else :
+            modx = 360
+        pos1x = 40+T.position_x*40+modx
+        pos1y = 200+T.position_y*40+mody
+        if(T.orientation == 0):
+            pos2y = pos1y
+            pos2x = pos1x + 40
+        if(T.orientation == 1):
+            pos2x = pos1x
+            pos2y = pos1y + 40
+        if(T.orientation == 2):
+            pos2y = pos1y
+            pos2x = pos1x - 40
+        if(T.orientation == 3):
+            pos2x = pos1x
+            pos2y = pos1y - 40
+        # #Champs
+        if T.tuile_1 == 1: 
+            if T.couronne_1 == 1:
+                image(champ1x40,pos1x,pos1y)
+            else:
+                image(champ0x40,pos1x,pos1y)
+        #plaines
+        if T.tuile_1 == 2:
+            if T.couronne_1 == 1:
+                image(plaine1x40,pos1x,pos1y)
+            elif T.couronne_1 == 2:
+                image(plaine2x40,pos1x,pos1y)
+            else :
+                image(plaine0x40,pos1x,pos1y)
+        #oceans
+        if T.tuile_1 == 3:
+            if T.couronne_1 == 1:
+                image(ocean1x40,pos1x,pos1y)
+            else:
+                image(ocean0x40,pos1x,pos1y)
+        #marais
+        if T.tuile_1 == 4:
+            if T.couronne_1 == 1:
+                image(marai1x40,pos1x,pos1y)
+            elif T.couronne_1 == 2:
+                image(marai2x40,pos1x,pos1y)
+            else :
+                image(marai0x40,pos1x,pos1y)
+        #Forets
+        if T.tuile_1 == 5:
+            if T.couronne_1 == 1:
+                image(foret1x40,pos1x,pos1y)
+            else :
+                image(foret0x40,pos1x,pos1y)
+        #Mines
+        if T.tuile_1 == 6:
+            if T.couronne_1 == 1:
+                image(mine1x40,pos1x,pos1y)
+            elif T.couronne_1 == 2:
+                image(mine2x40,pos1x,pos1y)
+            elif T.couronne_1 == 3:
+                image(mine3x40,pos1x,pos1y)
+            else :
+                image(mine0x40,pos1x,pos1y)
+        #--------------------------- Tuile 2 -------------------
+        #Champs
+        if T.tuile_2 == 1: 
+            if T.couronne_2 == 1:
+                image(champ1x40,pos2x,pos2y)
+            else:
+                image(champ0x40,pos2x,pos2y)
+        #plaines
+        if T.tuile_2 == 2:
+            if T.couronne_2 == 1:
+                image(plaine1x40,pos2x,pos2y)
+            elif T.couronne_2 == 2:
+                image(plaine2x40,pos2x,pos2y)
+            else :
+                image(plaine0x40,pos2x,pos2y)
+        #oceans
+        if T.tuile_2 == 3:
+            if T.couronne_2 == 1:
+                image(ocean1x40,pos2x,pos2y)
+            else:
+                image(ocean0x40,pos2x,pos2y)
+        #marais
+        if T.tuile_2 == 4:
+            if T.couronne_2 == 1:
+                image(marai1x40,pos2x,pos2y)
+            elif T.couronne_2 == 2:
+                image(marai2x40,pos2x,pos2y)
+            else :
+                image(marai0x40,pos2x,pos2y)
+        #Forets
+        if T.tuile_2 == 5:
+            if T.couronne_2 == 1:
+                image(foret1x40,pos2x,pos2y)
+            else :
+                image(foret0x40,pos2x,pos2y)
+        #Mines
+        if T.tuile_2 == 6:
+            if T.couronne_2 == 1:
+                image(mine1x40,pos2x,pos2y)
+            elif T.couronne_2 == 2:
+                image(mine2x40,pos2x,pos2y)
+            elif T.couronne_2 == 3:
+                image(mine3x40,pos2x,pos2y)
+            else :
+                image(mine0x40,pos2x,pos2y)
+    
+def affiche_chateau(player,i):
+    croix.resize(40,40)
+    if(i == 0 or i == 1) :
+        mody = 0
+    else : 
+        mody = 280
+    if(i == 1 or (i == 2 and bool4Joueur)) :
+        modx = 0
+    elif (i == 2 and bool3Joueur) : 
+        modx = 200
+    else :
+        modx = 360
+    image(croix,40+player.castle_x*40+modx,200+player.castle_y*40+mody)
+
+def affiche_joueur():
+    if bool2Joueur :
+        text("Joueur {a}".format(a=LJ[j%2].nom), 350, 25)
+    else : 
+        text("Joueur {a}".format(a=LJ[j].nom), 350, 25)
+    i = 0
+    for player in LJ :
+        affiche_chateau(player,i)
+        affiche_last_tile(player,i)
+        affiche_list_tile(player,i)
+        if(i == 0) :
+            textAlign(CENTER, CENTER)
+            text("Joueur {a}".format(a = player.nom), 150, 150)
+        elif(i == 1) :
+            textAlign(CENTER, CENTER)
+            text("Joueur {a}".format(a = player.nom), 500, 150)
+        elif(i == 2) :
+            if bool3Joueur:
+                textAlign(CENTER, CENTER)
+                text("Joueur {a}".format(a = player.nom), 350, 450)
+            if bool4Joueur:
+                textAlign(CENTER, CENTER)
+                text("Joueur {a}".format(a = player.nom), 150, 450)
+        elif(i == 3):
+            textAlign(CENTER, CENTER)
+            text("Joueur {a}".format(a = player.nom), 500, 450)
+        i += 1
+def affichePlateau(List_Plateau):
+    affiche_tuile(List_Plateau)
+    affiche_joueur();
+    if RTG.taille - 1 < 0 or nb_tour == 0:
+        fill(color(255, 0, 0))
+        textSize(20)
+        textAlign(CENTER, CENTER)
+        text("Fin du Game", 300, 300)
+    fill(color(0,0,0))
+    textSize(20)
+    textAlign(CENTER, CENTER)
+
+    
 def inserer(T,L):
     L.append(0)
     k = len(L)-2
@@ -222,17 +512,14 @@ def DeroulementTour():
     global LJ, j
     if bool2Joueur:
         nb_generation = 4
-        j = j % 2
     elif bool3Joueur:
         nb_generation = 3
-        j = j % 3
     elif bool4Joueur:
         nb_generation = 4
-        j = j % 4
-    fill(color(0, 0, 0))
-    textSize(20)
-    textAlign(CENTER, CENTER)
-    text("Joueur {a}".format(a=LJ[j].nom), 350, 25)
+    #fill(color(0, 0, 0))
+    #textSize(20)
+    #textAlign(CENTER, CENTER)
+    #text("Joueur {a}".format(a=LJ[j].nom), 350, 25)
     List_Plateau = list()
     # Prend une tuile aleatoire
     for i in range(1, nb_generation + 1):
@@ -262,7 +549,7 @@ def setup():
     # The image file must be in the data folder of the current sketch
     # to load successfully
     size(700, 700)
-    global imgMenue, ImgRegle1, ImgRegle2, ImgRegle3, ImgRegle4, fleche1, fleche2, croix, champ0, champ1, plaine0, plaine1, plaine2, ocean0, ocean1, mine0, mine1, mine2, mine3, marai0, marai1, marai2, foret0, foret1
+    global imgMenue, ImgRegle1, ImgRegle2, ImgRegle3, ImgRegle4, fleche1, fleche2, croix, champ0, champ1, plaine0, plaine1, plaine2, ocean0, ocean1, mine0, mine1, mine2, mine3, marai0, marai1, marai2, foret0, foret1, champ0x40, champ1x40, plaine0x40, plaine1x40, plaine2x40, ocean0x40, ocean1x40, mine0x40, mine1x40, mine2x40, mine3x40, marai0x40, marai1x40, marai2x40, foret0x40, foret1x40
     # Load the image into the program
     imgMenue = loadImage("data/Kingdomino.png")
     imgMenue.resize(700, 700)
@@ -284,42 +571,74 @@ def setup():
     #-------------------------------------- Load img tuile -------------------
     # Champs
     champ0 = loadImage("data/Champ.PNG")
+    champ0x40 = loadImage("data/Champ.PNG")
     champ0.resize(60, 60)
+    champ0x40.resize(40, 40)
     champ1 = loadImage("data/Champcouronne.PNG")
+    champ1x40 = loadImage("data/Champcouronne.PNG")
     champ1.resize(60, 60)
+    champ1x40.resize(40, 40)
     # Plaines
     plaine0 = loadImage("data/Plaine.PNG")
+    plaine0x40 = loadImage("data/Plaine.PNG")
     plaine0.resize(60, 60)
+    plaine0x40.resize(40, 40)
     plaine1 = loadImage("data/Plaine1couronne.PNG")
+    plaine1x40 = loadImage("data/Plaine1couronne.PNG")
     plaine1.resize(60, 60)
+    plaine1x40.resize(40, 40)
     plaine2 = loadImage("data/Plaine2couronne.PNG")
+    plaine2x40 = loadImage("data/Plaine2couronne.PNG")
     plaine2.resize(60, 60)
+    plaine2x40.resize(40, 40)
     # Océan
     ocean0 = loadImage("data/Ocean.PNG")
+    ocean0x40 =loadImage("data/Ocean.PNG")
     ocean0.resize(60, 60)
+    ocean0x40.resize(40, 40)
     ocean1 = loadImage("data/Ocean1couronne.PNG")
+    ocean1x40 = loadImage("data/Ocean1couronne.PNG")
     ocean1.resize(60, 60)
+    ocean1x40.resize(40, 40)
     # Mines
     mine0 = loadImage("data/Mine.PNG")
+    mine0x40 = loadImage("data/Mine.PNG")
     mine0.resize(60, 60)
+    mine0.resize(40, 40)
     mine1 = loadImage("data/Mine1couronne.PNG")
+    mine1x40 = loadImage("data/Mine1couronne.PNG")
     mine1.resize(60, 60)
+    mine1x40.resize(40, 40)
     mine2 = loadImage("data/Mine2couronne.PNG")
+    mine2x40 = loadImage("data/Mine2couronne.PNG")
     mine2.resize(60, 60)
+    mine2x40.resize(40, 40)
     mine3 = loadImage("data/Mine3couronne.PNG")
+    mine3x40 =loadImage("data/Mine3couronne.PNG")
     mine3.resize(60, 60)
+    mine3x40.resize(40, 40)
     # Marais
     marai0 = loadImage("data/Marai.PNG")
+    marai0x40 = loadImage("data/Marai.PNG")
     marai0.resize(60, 60)
+    marai0x40.resize(40, 40)
     marai1 = loadImage("data/Marai1couronne.PNG")
+    marai1x40 = loadImage("data/Marai1couronne.PNG")
     marai1.resize(60, 60)
+    marai1x40.resize(40, 40)
     marai2 = loadImage("data/Marai2couronne.PNG")
+    marai2x40 = loadImage("data/Marai2couronne.PNG")
     marai2.resize(60, 60)
+    marai2x40.resize(40, 40)
     # Forets
     foret0 = loadImage("data/Foret.PNG")
+    foret0x40 = loadImage("data/Foret.PNG")
     foret0.resize(60, 60)
+    foret0x40.resize(40, 40)
     foret1 = loadImage("data/Foret1couronne.PNG")
+    foret1x40 = loadImage("data/Foret1couronne.PNG")
     foret1.resize(60, 60)
+    foret1x40.resize(40, 40)
 
     global jouerX, jouerY, regleX, regleY, quitterX, quitterY
     jouerX = width / 2 - rectSize - 10
@@ -333,6 +652,7 @@ def setup():
     this.surface.setResizable(True)
 
 def draw():
+    background(255, 255, 255)
     global boolrelance, nb_tour, LJ,test,L,initialisation
     if boolRegle:
         Regle()
@@ -340,7 +660,6 @@ def draw():
         Acceuil()
     if boolJouer:
         if bool2Joueur:
-            
             if initialisation:
                 nb_tour = 5
                 LC = Game(2)
@@ -348,7 +667,7 @@ def draw():
                 L = DeroulementTour()
                 initialisation=False
             updateJouer2_4(mouseX,mouseY)
-            affiche_tuile(L)
+            affichePlateau(L)
         elif bool3Joueur:
             if initialisation:
                 nb_tour = 11
@@ -357,7 +676,7 @@ def draw():
                 L = DeroulementTour()
                 initialisation=False
             updateJouer3(mouseX,mouseY)
-            affiche_tuile(L)
+            affichePlateau(L)
         elif bool4Joueur:
             if initialisation:
                 nb_tour = 11
@@ -366,7 +685,8 @@ def draw():
                 L = DeroulementTour()
                 initialisation=False
             updateJouer2_4(mouseX,mouseY)
-            affiche_tuile(L)
+            affichePlateau(L)
+            
         else : 
             Jouer()
     if boolrelance :
@@ -403,43 +723,109 @@ def updateJouer3(x, y):
     Tuile2 = overRect(220, 70, 120, 60)
     Tuile3 = overRect(370, 70, 120, 60)
   
+def tourSuivant():
+    global boolrelance, test,Tuile1NonUsed,Tuile2NonUsed,Tuile3NonUsed,Tuile4NonUsed
+    Tuile1NonUsed = Tuile2NonUsed = Tuile3NonUsed = Tuile4NonUsed = True
+    if RTG.taille > 0 and nb_tour != 0:
+        test = True
+        boolrelance = True
+
 def mousePressed():
-    global currentColor, boolQuitter, boolRegle, boolJouer, boolMenu, bool2Joueur, bool3Joueur, bool4Joueur, reglePrecOver, regleSuivOver, regleMenuOver, regleInt, boolrelance
+    global currentColor, boolQuitter, boolRegle, boolJouer, boolMenu, bool2Joueur, bool3Joueur, bool4Joueur, reglePrecOver, regleSuivOver, regleMenuOver, regleInt, boolrelance,j
+    global Tuile1NonUsed,Tuile2NonUsed,Tuile3NonUsed,Tuile4NonUsed,AjouterTileJ
     ###Faire Fonction chaque if.
     if boolJouer:
-        if Joueur2Over:
+        print(j)
+        if Joueur2Over and (AjouterTileJ == False):
             currentColor = regleColor
             bool2Joueur = True
-            if Tuile1:
-                print(1)
-                LJ[1].list_tuile.append(L[1])
-                print("tuile J1 : {a}".format(a=LJ[1].list_tuile[0]))
-            if Tuile2:
-                print(2)
-            if Tuile3:
-                print(3)
-            if Tuile4:
-                print(4)
+            if Tuile1 and Tuile1NonUsed:
+                LJ[j%2].setLastTile(L[0])
+                j = (j+1) % 4
+                Tuile1NonUsed = False
+                AjouterTileJ = True
+                if j == 0:
+                    tourSuivant()
+            if Tuile2 and Tuile2NonUsed:
+                LJ[j%2].setLastTile(L[1])
+                j = (j+1) % 4
+                Tuile2NonUsed = False
+                AjouterTileJ = True
+                if j == 0:
+                    tourSuivant()
+            if Tuile3 and Tuile3NonUsed:
+                LJ[j%2].setLastTile(L[2])
+                j = (j+1) % 4
+                Tuile3NonUsed = False
+                AjouterTileJ = True
+                if j == 0:
+                    tourSuivant()
+            if Tuile4 and Tuile4NonUsed:
+                LJ[j%2].setLastTile(L[3])
+                j = (j+1) % 4
+                Tuile4NonUsed = False
+                AjouterTileJ = True
+                if j == 0:
+                    tourSuivant()
+                
+                
         if Joueur3Over:
             currentColor = regleColor
             bool3Joueur = True
-            if Tuile1:
-                print(1)
-            if Tuile2:
-                print(2)
-            if Tuile3:
-                print(3)
+            if Tuile1 and Tuile1NonUsed:
+                LJ[j].setLastTile(L[0])
+                j = (j+1) % 3
+                Tuile1NonUsed = False
+                AjouterTileJ = True
+                if j == 0:
+                    tourSuivant()
+            if Tuile2 and Tuile2NonUsed:
+                LJ[j].setLastTile(L[1])
+                j = (j+1) % 3
+                Tuile2NonUsed = False
+                AjouterTileJ = True
+                if j == 0:
+                    tourSuivant()
+            if Tuile3 and Tuile3NonUsed:
+                LJ[j].setLastTile(L[2])
+                j = (j+1) % 3
+                Tuile3NonUsed = False
+                AjouterTileJ = True
+                if j == 0:
+                    tourSuivant()
+                
         if Joueur4Over:
             currentColor = regleColor
             bool4Joueur = True
-            if Tuile1:
-                print(1)
-            if Tuile2:
-                print(2)
-            if Tuile3:
-                print(3)
-            if Tuile4:
-                print(4)
+            print(j)
+            if Tuile1 and Tuile1NonUsed:
+                LJ[j].setLastTile(L[0])
+                j = (j+1) % 4
+                Tuile1NonUsed = False
+                AjouterTileJ = True
+                if j == 0:
+                    tourSuivant()
+            if Tuile2 and Tuile2NonUsed:
+                LJ[j].setLastTile(L[1])
+                j = (j+1) % 4
+                Tuile2NonUsed = False
+                AjouterTileJ = True
+                if j == 0:
+                    tourSuivant()
+            if Tuile3 and Tuile3NonUsed:
+                LJ[j].setLastTile(L[2])
+                j = (j+1) % 4
+                Tuile3NonUsed = False
+                AjouterTileJ = True
+                if j == 0:
+                    tourSuivant()
+            if Tuile4 and Tuile4NonUsed:
+                LJ[j].setLastTile(L[3])
+                j = (j+1) % 4
+                Tuile4NonUsed = False
+                AjouterTileJ = True
+                if j == 0:
+                    tourSuivant()
     if boolMenu:
         if jouerOver:
             currentColor = regleColor
@@ -462,11 +848,29 @@ def mousePressed():
             boolRegle = False
 
 def keyPressed():
-    global boolrelance, j, test
-    if key == 'a' and RTG.taille > 0 and nb_tour != 0:
-        test = True
-        j = j + 1
-        boolrelance = True
+    global boolrelance, test,AjouterTileJ,LJ
+    if bool3Joueur:
+        i = (j-1)%3
+    if bool4Joueur:
+        i = (j-1)%4
+    if bool2Joueur:
+        i = (j-1)%2
+    if AjouterTileJ :
+        if keyCode == LEFT:
+            print(1)
+            LJ[i].tileLeft()
+        if keyCode == RIGHT:
+            LJ[i].tileRight()
+        if keyCode == UP:
+            LJ[i].tileUp()
+        if keyCode == DOWN:
+            LJ[i].tileDown()
+        if keyCode == CONTROL:
+            LJ[i].tileOrientation()
+        if key == ENTER:
+            LJ[i].list_tuile.append(LJ[i].lastTile)
+            LJ[i].lastTile = None
+            AjouterTileJ = False
 
 def overRect(x, y, width, height):
     return x <= mouseX <= x + width and y <= mouseY <= y + height
