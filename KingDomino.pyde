@@ -420,156 +420,92 @@ def affiche_last_tile(player,i):
         # #Champs
         if T.tuile_1 == 1: 
             if T.couronne_1 == 1:
-                champ1.resize(40,40)
-                image(champ1,pos1x,pos1y)
-                champ1.resize(60,60)
+                image(champ1x40,pos1x,pos1y)
             else:
-                champ0.resize(40,40)
-                image(champ0,pos1x,pos1y)
-                champ0.resize(60,60)
+                image(champ0x40,pos1x,pos1y)
         #plaines
         if T.tuile_1 == 2:
             if T.couronne_1 == 1:
-                plaine1.resize(40,40)
-                image(plaine1,pos1x,pos1y)
-                plaine1.resize(60,60)
+                image(plaine1x40,pos1x,pos1y)
             elif T.couronne_1 == 2:
-                plaine2.resize(40,40)
-                image(plaine2,pos1x,pos1y)
-                plaine2.resize(60,60)
+                image(plaine2x40,pos1x,pos1y)
             else :
-                plaine0.resize(40,40)
-                image(plaine0,pos1x,pos1y)
-                plaine0.resize(60,60)
+                image(plaine0x40,pos1x,pos1y)
         #oceans
         if T.tuile_1 == 3:
             if T.couronne_1 == 1:
-                ocean1.resize(40,40)
-                image(ocean1,pos1x,pos1y)
-                ocean1.resize(60,60)
+                image(ocean1x40,pos1x,pos1y)
             else:
-                ocean0.resize(40,40)
-                image(ocean0,pos1x,pos1y)
-                ocean0.resize(60,60)
+                image(ocean0x40,pos1x,pos1y)
         #marais
         if T.tuile_1 == 4:
             if T.couronne_1 == 1:
-                marai1.resize(40,40)
-                image(marai1,pos1x,pos1y)
-                marai1.resize(60,60)
+                image(marai1x40,pos1x,pos1y)
             elif T.couronne_1 == 2:
-                marai2.resize(40,40)
-                image(marai2,pos1x,pos1y)
-                marai2.resize(60,60)
+                image(marai2x40,pos1x,pos1y)
             else :
-                marai0.resize(40,40)
-                image(marai0,pos1x,pos1y)
-                marai0.resize(60,60)
+                image(marai0x40,pos1x,pos1y)
         #Forets
         if T.tuile_1 == 5:
             if T.couronne_1 == 1:
-                foret1.resize(40,40)
-                image(foret1,pos1x,pos1y)
-                foret1.resize(60,60)
+                image(foret1x40,pos1x,pos1y)
             else :
-                foret0.resize(40,40)
-                image(foret0,pos1x,pos1y)
-                foret0.resize(60,60)
+                image(foret0x40,pos1x,pos1y)
         #Mines
         if T.tuile_1 == 6:
             if T.couronne_1 == 1:
-                mine1.resize(40,40)
-                image(mine1,pos1x,pos1y)
-                mine1.resize(60,60)
+                image(mine1x40,pos1x,pos1y)
             elif T.couronne_1 == 2:
-                mine2.resize(40,40)
-                image(mine2,pos1x,pos1y)
-                mine2.resize(60,60)
+                image(mine2x40,pos1x,pos1y)
             elif T.couronne_1 == 3:
-                mine3.resize(40,40)
-                image(mine3,pos1x,pos1y)
-                mine3.resize(60,60)
+                image(mine3x40,pos1x,pos1y)
             else :
-                mine0.resize(40,40)
-                image(mine0,pos1x,pos1y)
-                mine0.resize(60,60)
+                image(mine0x40,pos1x,pos1y)
         #--------------------------- Tuile 2 -------------------
         #Champs
         if T.tuile_2 == 1: 
             if T.couronne_2 == 1:
-                champ1.resize(40,40)
-                image(champ1,pos2x,pos2y)
-                champ1.resize(60,60)
+                image(champ1x40,pos2x,pos2y)
             else:
-                champ0.resize(40,40)
-                image(champ0,pos2x,pos2y)
-                champ0.resize(60,60)
+                image(champ0x40,pos2x,pos2y)
         #plaines
         if T.tuile_2 == 2:
             if T.couronne_2 == 1:
-                plaine1.resize(40,40)
-                image(plaine1,pos2x,pos2y)
-                plaine1.resize(60,60)
+                image(plaine1x40,pos2x,pos2y)
             elif T.couronne_2 == 2:
-                plaine2.resize(40,40)
-                image(plaine2,pos2x,pos2y)
-                plaine2.resize(60,60)
+                image(plaine2x40,pos2x,pos2y)
             else :
-                plaine0.resize(40,40)
-                image(plaine0,pos2x,pos2y)
-                plaine0.resize(60,60)
+                image(plaine0x40,pos2x,pos2y)
         #oceans
         if T.tuile_2 == 3:
             if T.couronne_2 == 1:
-                ocean1.resize(40,40)
-                image(ocean1,pos2x,pos2y)
-                ocean1.resize(60,60)
+                image(ocean1x40,pos2x,pos2y)
             else:
-                ocean0.resize(40,40)
-                image(ocean0,pos2x,pos2y)
-                ocean0.resize(60,60)
+                image(ocean0x40,pos2x,pos2y)
         #marais
         if T.tuile_2 == 4:
             if T.couronne_2 == 1:
-                marai1.resize(40,40)
-                image(marai1,pos2x,pos2y)
-                marai2.resize(60,60)
+                image(marai1x40,pos2x,pos2y)
             elif T.couronne_2 == 2:
-                marai2.resize(40,40)
-                image(marai2,pos2x,pos2y)
-                marai2.resize(60,60)
+                image(marai2x40,pos2x,pos2y)
             else :
-                marai0.resize(40,40)
-                image(marai0,pos2x,pos2y)
-                marai0.resize(60,60)
+                image(marai0x40,pos2x,pos2y)
         #Forets
         if T.tuile_2 == 5:
             if T.couronne_2 == 1:
-                foret1.resize(40,40)
-                image(foret1,pos2x,pos2y)
-                foret1.resize(60,60)
+                image(foret1x40,pos2x,pos2y)
             else :
-                foret0.resize(40,40)
-                image(foret0,pos2x,pos2y)
-                foret0.resize(60,60)
+                image(foret0x40,pos2x,pos2y)
         #Mines
         if T.tuile_2 == 6:
             if T.couronne_2 == 1:
-                mine1.resize(40,40)
-                image(mine1,pos2x,pos2y)
-                mine1.resize(60,60)
+                image(mine1x40,pos2x,pos2y)
             elif T.couronne_2 == 2:
-                mine2.resize(40,40)
-                image(mine2,pos2x,pos2y)
-                mine2.resize(60,60)
+                image(mine2x40,pos2x,pos2y)
             elif T.couronne_2 == 3:
-                mine3.resize(40,40)
-                image(mine3,pos2x,pos2y)
-                mine3.resize(60,60)
+                image(mine3x40,pos2x,pos2y)
             else :
-                mine0.resize(40,40)
-                image(mine0,pos2x,pos2y)
-                mine0.resize(60,60)
+                image(mine0x40,pos2x,pos2y)
     
 def affiche_chateau(player,i):
     croix.resize(40,40)
@@ -668,7 +604,7 @@ def setup():
     # The image file must be in the data folder of the current sketch
     # to load successfully
     size(700, 700)
-    global imgMenue, ImgRegle1, ImgRegle2, ImgRegle3, ImgRegle4, fleche1, fleche2, croix, champ0, champ1, plaine0, plaine1, plaine2, ocean0, ocean1, mine0, mine1, mine2, mine3, marai0, marai1, marai2, foret0, foret1
+    global imgMenue, ImgRegle1, ImgRegle2, ImgRegle3, ImgRegle4, fleche1, fleche2, croix, champ0, champ1, plaine0, plaine1, plaine2, ocean0, ocean1, mine0, mine1, mine2, mine3, marai0, marai1, marai2, foret0, foret1, champ0x40, champ1x40, plaine0x40, plaine1x40, plaine2x40, ocean0x40, ocean1x40, mine0x40, mine1x40, mine2x40, mine3x40, marai0x40, marai1x40, marai2x40, foret0x40, foret1x40
     # Load the image into the program
     imgMenue = loadImage("data/Kingdomino.png")
     imgMenue.resize(700, 700)
@@ -690,42 +626,74 @@ def setup():
     #-------------------------------------- Load img tuile -------------------
     # Champs
     champ0 = loadImage("data/Champ.PNG")
+    champ0x40 = loadImage("data/Champ.PNG")
     champ0.resize(60, 60)
+    champ0x40.resize(40, 40)
     champ1 = loadImage("data/Champcouronne.PNG")
+    champ1x40 = loadImage("data/Champcouronne.PNG")
     champ1.resize(60, 60)
+    champ1x40.resize(40, 40)
     # Plaines
     plaine0 = loadImage("data/Plaine.PNG")
+    plaine0x40 = loadImage("data/Plaine.PNG")
     plaine0.resize(60, 60)
+    plaine0x40.resize(40, 40)
     plaine1 = loadImage("data/Plaine1couronne.PNG")
+    plaine1x40 = loadImage("data/Plaine1couronne.PNG")
     plaine1.resize(60, 60)
+    plaine1x40.resize(40, 40)
     plaine2 = loadImage("data/Plaine2couronne.PNG")
+    plaine2x40 = loadImage("data/Plaine2couronne.PNG")
     plaine2.resize(60, 60)
+    plaine2x40.resize(40, 40)
     # Océan
     ocean0 = loadImage("data/Ocean.PNG")
+    ocean0x40 =loadImage("data/Ocean.PNG")
     ocean0.resize(60, 60)
+    ocean0x40.resize(40, 40)
     ocean1 = loadImage("data/Ocean1couronne.PNG")
+    ocean1x40 = loadImage("data/Ocean1couronne.PNG")
     ocean1.resize(60, 60)
+    ocean1x40.resize(40, 40)
     # Mines
     mine0 = loadImage("data/Mine.PNG")
+    mine0x40 = loadImage("data/Mine.PNG")
     mine0.resize(60, 60)
+    mine0.resize(40, 40)
     mine1 = loadImage("data/Mine1couronne.PNG")
+    mine1x40 = loadImage("data/Mine1couronne.PNG")
     mine1.resize(60, 60)
+    mine1x40.resize(40, 40)
     mine2 = loadImage("data/Mine2couronne.PNG")
+    mine2x40 = loadImage("data/Mine2couronne.PNG")
     mine2.resize(60, 60)
+    mine2x40.resize(40, 40)
     mine3 = loadImage("data/Mine3couronne.PNG")
+    mine3x40 =loadImage("data/Mine3couronne.PNG")
     mine3.resize(60, 60)
+    mine3x40.resize(40, 40)
     # Marais
     marai0 = loadImage("data/Marai.PNG")
+    marai0x40 = loadImage("data/Marai.PNG")
     marai0.resize(60, 60)
+    marai0x40.resize(40, 40)
     marai1 = loadImage("data/Marai1couronne.PNG")
+    marai1x40 = loadImage("data/Marai1couronne.PNG")
     marai1.resize(60, 60)
+    marai1x40.resize(40, 40)
     marai2 = loadImage("data/Marai2couronne.PNG")
+    marai2x40 = loadImage("data/Marai2couronne.PNG")
     marai2.resize(60, 60)
+    marai2x40.resize(40, 40)
     # Forets
     foret0 = loadImage("data/Foret.PNG")
+    foret0x40 = loadImage("data/Foret.PNG")
     foret0.resize(60, 60)
+    foret0x40.resize(40, 40)
     foret1 = loadImage("data/Foret1couronne.PNG")
+    foret1x40 = loadImage("data/Foret1couronne.PNG")
     foret1.resize(60, 60)
+    foret1x40.resize(40, 40)
 
     global jouerX, jouerY, regleX, regleY, quitterX, quitterY
     jouerX = width / 2 - rectSize - 10
