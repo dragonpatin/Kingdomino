@@ -595,7 +595,7 @@ def setup():
     mine0 = loadImage("data/Mine.PNG")
     mine0x40 = loadImage("data/Mine.PNG")
     mine0.resize(60, 60)
-    mine0.resize(40, 40)
+    mine0x40.resize(40, 40)
     mine1 = loadImage("data/Mine1couronne.PNG")
     mine1x40 = loadImage("data/Mine1couronne.PNG")
     mine1.resize(60, 60)
@@ -735,32 +735,24 @@ def mousePressed():
                 j = (j+1) % 4
                 Tuile1NonUsed = False
                 AjouterTileJ = True
-                if j == 0:
-                    tourSuivant()
             if Tuile2 and Tuile2NonUsed:
                 LJ[j%2].setLastTile(L[1])
                 j = (j+1) % 4
                 Tuile2NonUsed = False
                 AjouterTileJ = True
-                if j == 0:
-                    tourSuivant()
             if Tuile3 and Tuile3NonUsed:
                 LJ[j%2].setLastTile(L[2])
                 j = (j+1) % 4
                 Tuile3NonUsed = False
                 AjouterTileJ = True
-                if j == 0:
-                    tourSuivant()
             if Tuile4 and Tuile4NonUsed:
                 LJ[j%2].setLastTile(L[3])
                 j = (j+1) % 4
                 Tuile4NonUsed = False
                 AjouterTileJ = True
-                if j == 0:
-                    tourSuivant()
                 
                 
-        if Joueur3Over:
+        if Joueur3Over and (AjouterTileJ == False) :
             currentColor = regleColor
             bool3Joueur = True
             if Tuile1 and Tuile1NonUsed:
@@ -768,24 +760,18 @@ def mousePressed():
                 j = (j+1) % 3
                 Tuile1NonUsed = False
                 AjouterTileJ = True
-                if j == 0:
-                    tourSuivant()
             if Tuile2 and Tuile2NonUsed:
                 LJ[j].setLastTile(L[1])
                 j = (j+1) % 3
                 Tuile2NonUsed = False
                 AjouterTileJ = True
-                if j == 0:
-                    tourSuivant()
             if Tuile3 and Tuile3NonUsed:
                 LJ[j].setLastTile(L[2])
                 j = (j+1) % 3
                 Tuile3NonUsed = False
                 AjouterTileJ = True
-                if j == 0:
-                    tourSuivant()
                 
-        if Joueur4Over:
+        if Joueur4Over and (AjouterTileJ == False) :
             currentColor = regleColor
             bool4Joueur = True
             print(j)
@@ -794,29 +780,21 @@ def mousePressed():
                 j = (j+1) % 4
                 Tuile1NonUsed = False
                 AjouterTileJ = True
-                if j == 0:
-                    tourSuivant()
             if Tuile2 and Tuile2NonUsed:
                 LJ[j].setLastTile(L[1])
                 j = (j+1) % 4
                 Tuile2NonUsed = False
                 AjouterTileJ = True
-                if j == 0:
-                    tourSuivant()
             if Tuile3 and Tuile3NonUsed:
                 LJ[j].setLastTile(L[2])
                 j = (j+1) % 4
                 Tuile3NonUsed = False
                 AjouterTileJ = True
-                if j == 0:
-                    tourSuivant()
             if Tuile4 and Tuile4NonUsed:
                 LJ[j].setLastTile(L[3])
                 j = (j+1) % 4
                 Tuile4NonUsed = False
                 AjouterTileJ = True
-                if j == 0:
-                    tourSuivant()
     if boolMenu:
         if jouerOver:
             currentColor = regleColor
@@ -862,6 +840,8 @@ def keyPressed():
             LJ[i].list_tuile.append(LJ[i].lastTile)
             LJ[i].lastTile = None
             AjouterTileJ = False
+            if j == 0:
+                    tourSuivant()
 
 def overRect(x, y, width, height):
     return x <= mouseX <= x + width and y <= mouseY <= y + height
