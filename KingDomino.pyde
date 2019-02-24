@@ -114,7 +114,7 @@ def affiche_tuile(List_Plateau):
     for T in List_Plateau:
         pos1x = 70 * i + 80 * (i - 1)
         pos2x = 130 * i + 20 * (i - 1)
-        textSize(15)
+        textSize(14)
         text("Tuile : {a}".format(a=T.numero),pos2x, 58)
         # #Champs
         if T.tuile_1 == 1: 
@@ -244,10 +244,7 @@ def DeroulementTour():
         textSize(20)
         textAlign(CENTER, CENTER)
         text("Fin du Game", 300, 300)
-    fill(color(0,0,0))
-    textSize(20)
-    textAlign(CENTER, CENTER)
-    #text("la tuile {a} est : {b} {c} {d} {e}".format(a=T.numero,b=T.tuile_1,c=T.couronne_1,d=T.tuile_2,e=T.couronne_2), 350, 350)
+        fill(color(0, 0, 0))
     for player in LJ :
         print("Joueur {a}".format(a = player.nom))
         textAlign(CENTER, CENTER)
@@ -415,6 +412,8 @@ def mousePressed():
             bool2Joueur = True
             if Tuile1:
                 print(1)
+                LJ[1].list_tuile.append(L[1])
+                print("tuile J1 : {a}".format(a=LJ[1].list_tuile[0]))
             if Tuile2:
                 print(2)
             if Tuile3:
