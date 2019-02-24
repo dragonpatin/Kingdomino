@@ -239,156 +239,92 @@ def affiche_list_tile(player,i):
         # #Champs
         if T.tuile_1 == 1: 
             if T.couronne_1 == 1:
-                champ1.resize(40,40)
-                image(champ1,pos1x,pos1y)
-                champ1.resize(60,60)
+                image(champ1x40,pos1x,pos1y)
             else:
-                champ0.resize(40,40)
-                image(champ0,pos1x,pos1y)
-                champ0.resize(60,60)
+                image(champ0x40,pos1x,pos1y)
         #plaines
         if T.tuile_1 == 2:
             if T.couronne_1 == 1:
-                plaine1.resize(40,40)
-                image(plaine1,pos1x,pos1y)
-                plaine1.resize(60,60)
+                image(plaine1x40,pos1x,pos1y)
             elif T.couronne_1 == 2:
-                plaine2.resize(40,40)
-                image(plaine2,pos1x,pos1y)
-                plaine2.resize(60,60)
+                image(plaine2x40,pos1x,pos1y)
             else :
-                plaine0.resize(40,40)
-                image(plaine0,pos1x,pos1y)
-                plaine0.resize(60,60)
+                image(plaine0x40,pos1x,pos1y)
         #oceans
         if T.tuile_1 == 3:
             if T.couronne_1 == 1:
-                ocean1.resize(40,40)
-                image(ocean1,pos1x,pos1y)
-                ocean1.resize(60,60)
+                image(ocean1x40,pos1x,pos1y)
             else:
-                ocean0.resize(40,40)
-                image(ocean0,pos1x,pos1y)
-                ocean0.resize(60,60)
+                image(ocean0x40,pos1x,pos1y)
         #marais
         if T.tuile_1 == 4:
             if T.couronne_1 == 1:
-                marai1.resize(40,40)
-                image(marai1,pos1x,pos1y)
-                marai1.resize(60,60)
+                image(marai1x40,pos1x,pos1y)
             elif T.couronne_1 == 2:
-                marai2.resize(40,40)
-                image(marai2,pos1x,pos1y)
-                marai2.resize(60,60)
+                image(marai2x40,pos1x,pos1y)
             else :
-                marai0.resize(40,40)
-                image(marai0,pos1x,pos1y)
-                marai0.resize(60,60)
+                image(marai0x40,pos1x,pos1y)
         #Forets
         if T.tuile_1 == 5:
             if T.couronne_1 == 1:
-                foret1.resize(40,40)
-                image(foret1,pos1x,pos1y)
-                foret1.resize(60,60)
+                image(foret1x40,pos1x,pos1y)
             else :
-                foret0.resize(40,40)
-                image(foret0,pos1x,pos1y)
-                foret0.resize(60,60)
+                image(foret0x40,pos1x,pos1y)
         #Mines
         if T.tuile_1 == 6:
             if T.couronne_1 == 1:
-                mine1.resize(40,40)
-                image(mine1,pos1x,pos1y)
-                mine1.resize(60,60)
+                image(mine1x40,pos1x,pos1y)
             elif T.couronne_1 == 2:
-                mine2.resize(40,40)
-                image(mine2,pos1x,pos1y)
-                mine2.resize(60,60)
+                image(mine2x40,pos1x,pos1y)
             elif T.couronne_1 == 3:
-                mine3.resize(40,40)
-                image(mine3,pos1x,pos1y)
-                mine3.resize(60,60)
+                image(mine3x40,pos1x,pos1y)
             else :
-                mine0.resize(40,40)
-                image(mine0,pos1x,pos1y)
-                mine0.resize(60,60)
+                image(mine0x40,pos1x,pos1y)
         #--------------------------- Tuile 2 -------------------
         #Champs
         if T.tuile_2 == 1: 
             if T.couronne_2 == 1:
-                champ1.resize(40,40)
-                image(champ1,pos2x,pos2y)
-                champ1.resize(60,60)
+                image(champ1x40,pos2x,pos2y)
             else:
-                champ0.resize(40,40)
-                image(champ0,pos2x,pos2y)
-                champ0.resize(60,60)
+                image(champ0x40,pos2x,pos2y)
         #plaines
         if T.tuile_2 == 2:
             if T.couronne_2 == 1:
-                plaine1.resize(40,40)
-                image(plaine1,pos2x,pos2y)
-                plaine1.resize(60,60)
+                image(plaine1x40,pos2x,pos2y)
             elif T.couronne_2 == 2:
-                plaine2.resize(40,40)
-                image(plaine2,pos2x,pos2y)
-                plaine2.resize(60,60)
+                image(plaine2x40,pos2x,pos2y)
             else :
-                plaine0.resize(40,40)
-                image(plaine0,pos2x,pos2y)
-                plaine0.resize(60,60)
+                image(plaine0x40,pos2x,pos2y)
         #oceans
         if T.tuile_2 == 3:
             if T.couronne_2 == 1:
-                ocean1.resize(40,40)
-                image(ocean1,pos2x,pos2y)
-                ocean1.resize(60,60)
+                image(ocean1x40,pos2x,pos2y)
             else:
-                ocean0.resize(40,40)
-                image(ocean0,pos2x,pos2y)
-                ocean0.resize(60,60)
+                image(ocean0x40,pos2x,pos2y)
         #marais
         if T.tuile_2 == 4:
             if T.couronne_2 == 1:
-                marai1.resize(40,40)
-                image(marai1,pos2x,pos2y)
-                marai2.resize(60,60)
+                image(marai1x40,pos2x,pos2y)
             elif T.couronne_2 == 2:
-                marai2.resize(40,40)
-                image(marai2,pos2x,pos2y)
-                marai2.resize(60,60)
+                image(marai2x40,pos2x,pos2y)
             else :
-                marai0.resize(40,40)
-                image(marai0,pos2x,pos2y)
-                marai0.resize(60,60)
+                image(marai0x40,pos2x,pos2y)
         #Forets
         if T.tuile_2 == 5:
             if T.couronne_2 == 1:
-                foret1.resize(40,40)
-                image(foret1,pos2x,pos2y)
-                foret1.resize(60,60)
+                image(foret1x40,pos2x,pos2y)
             else :
-                foret0.resize(40,40)
-                image(foret0,pos2x,pos2y)
-                foret0.resize(60,60)
+                image(foret0x40,pos2x,pos2y)
         #Mines
         if T.tuile_2 == 6:
             if T.couronne_2 == 1:
-                mine1.resize(40,40)
-                image(mine1,pos2x,pos2y)
-                mine1.resize(60,60)
+                image(mine1x40,pos2x,pos2y)
             elif T.couronne_2 == 2:
-                mine2.resize(40,40)
-                image(mine2,pos2x,pos2y)
-                mine2.resize(60,60)
+                image(mine2x40,pos2x,pos2y)
             elif T.couronne_2 == 3:
-                mine3.resize(40,40)
-                image(mine3,pos2x,pos2y)
-                mine3.resize(60,60)
+                image(mine3x40,pos2x,pos2y)
             else :
-                mine0.resize(40,40)
-                image(mine0,pos2x,pos2y)
-                mine0.resize(60,60)
+                image(mine0x40,pos2x,pos2y)
 
 def affiche_last_tile(player,i):
     if(player.lastTile!=None):
@@ -831,18 +767,21 @@ def mousePressed():
                 LJ[j].setLastTile(L[0])
                 j = (j+1) % 3
                 Tuile1NonUsed = False
+                AjouterTileJ = True
                 if j == 0:
                     tourSuivant()
             if Tuile2 and Tuile2NonUsed:
                 LJ[j].setLastTile(L[1])
                 j = (j+1) % 3
                 Tuile2NonUsed = False
+                AjouterTileJ = True
                 if j == 0:
                     tourSuivant()
             if Tuile3 and Tuile3NonUsed:
                 LJ[j].setLastTile(L[2])
                 j = (j+1) % 3
                 Tuile3NonUsed = False
+                AjouterTileJ = True
                 if j == 0:
                     tourSuivant()
                 
@@ -854,24 +793,28 @@ def mousePressed():
                 LJ[j].setLastTile(L[0])
                 j = (j+1) % 4
                 Tuile1NonUsed = False
+                AjouterTileJ = True
                 if j == 0:
                     tourSuivant()
             if Tuile2 and Tuile2NonUsed:
                 LJ[j].setLastTile(L[1])
                 j = (j+1) % 4
                 Tuile2NonUsed = False
+                AjouterTileJ = True
                 if j == 0:
                     tourSuivant()
             if Tuile3 and Tuile3NonUsed:
                 LJ[j].setLastTile(L[2])
                 j = (j+1) % 4
                 Tuile3NonUsed = False
+                AjouterTileJ = True
                 if j == 0:
                     tourSuivant()
             if Tuile4 and Tuile4NonUsed:
                 LJ[j].setLastTile(L[3])
                 j = (j+1) % 4
                 Tuile4NonUsed = False
+                AjouterTileJ = True
                 if j == 0:
                     tourSuivant()
     if boolMenu:
