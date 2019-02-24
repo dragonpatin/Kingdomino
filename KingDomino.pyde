@@ -525,8 +525,17 @@ def DeroulementTour():
     for i in range(1, nb_generation + 1):
         T = RTG.generate()
         inserer(T, List_Plateau)
-        #print("la tuile {a} est : {b} {c} {d} {e}".format(a=T.numero,b=T.tuile_1,c=T.couronne_1,d=T.tuile_2,e=T.couronne_2))
-    #text("la tuile {a} est : {b} {c} {d} {e}".format(a=T.numero,b=T.tuile_1,c=T.couronne_1,d=T.tuile_2,e=T.couronne_2), 350, 350)
+        print("la tuile {a} est : {b} {c} {d} {e}".format(a=T.numero,b=T.tuile_1,c=T.couronne_1,d=T.tuile_2,e=T.couronne_2))
+    if RTG.taille - 1 < 0 or nb_tour == 0:
+        fill(color(255, 0, 0))
+        textSize(20)
+        textAlign(CENTER, CENTER)
+        text("Fin du Game", 300, 300)
+        fill(color(0, 0, 0))
+    for player in LJ :
+        print("Joueur {a}".format(a = player.nom))
+        textAlign(CENTER, CENTER)
+        text("Joueur {a}".format(a = player.nom), 350, 400 + player.nom * 30)
     return List_Plateau
 
 def setup():
