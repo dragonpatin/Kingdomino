@@ -484,6 +484,7 @@ def affiche_joueur():
             textAlign(CENTER, CENTER)
             text("Joueur {a}".format(a = player.nom), 500, 450)
         i += 1
+        
 def affichePlateau(List_Plateau):
     affiche_tuile(List_Plateau)
     affiche_joueur();
