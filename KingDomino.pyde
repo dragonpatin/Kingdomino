@@ -818,10 +818,13 @@ def mousePressed():
             boolQuitter = True
     if boolRegle:
         if regleSuivOver:
-            regleInt += 1
+            if not(regleInt == 3):
+                regleInt += 1
         if reglePrecOver:
-            regleInt -= 1
+            if not(regleInt == 0):
+                regleInt -= 1
         if regleMenuOver:
+            regleMenuOver = False
             boolMenu = True
             boolRegle = False
 
