@@ -18,7 +18,7 @@ regleInt = nb_tour = 0
 LT = None
 LJ = None
 i = 0
-j = 0 #Car premier passage dans mousePressed initialise a 0
+j = 0 
 L = list()
 def Regle():
     updateRegle(mouseX, mouseY)
@@ -113,15 +113,15 @@ def affiche_tuile(List_Plateau):
     i = 1
     pos1y = 70
     pos2y = 70
-    #displayWidth,displayHeight
+    #width,height
     for T in List_Plateau:
         if((i == 1 and Tuile1NonUsed) or (i == 2 and Tuile2NonUsed) or (i == 3 and Tuile3NonUsed) or (i == 4 and Tuile4NonUsed)):
             if bool3Joueur :
-                pos1x = displayWidth * 0.09 + 0.33 * (i-1) * displayWidth
-                pos2x = (displayWidth * 0.17 + 0.33 * (i-1) * displayWidth ) - 1
+                pos1x = width * 0.09 + 0.33 * (i-1) * width
+                pos2x = (width * 0.17 + 0.33 * (i-1) * width ) - 1
             else : 
-                pos1x = displayWidth * 0.045 + 0.25 * (i-1) * displayWidth
-                pos2x = (displayWidth * 0.125 + 0.25 * (i-1) * displayWidth ) - 1
+                pos1x = width * 0.045 + 0.25 * (i-1) * width
+                pos2x = (width * 0.125 + 0.25 * (i-1) * width ) - 1
             textSize(15)
             text("Tuile : {a}".format(a=T.numero),pos2x, 58)
             # #Champs
@@ -219,34 +219,34 @@ def affiche_list_tile(player,i):
     for T in player.list_tuile :
         if i == 0:
             if bool2Joueur : 
-                pos1x = displayWidth/4 - 100 + T.position_x*40 
-                pos1y = displayWidth*0.08 + 70 + displayHeight*0.1 + T.position_y*40
+                pos1x = width/4 - 100 + T.position_x*40 
+                pos1y = width*0.08 + 70 + height*0.1 + T.position_y*40
             elif bool3Joueur:
-                pos1x = displayWidth/6 - 100 + T.position_x*40
-                pos1y = displayWidth*0.08 + 70 + displayHeight*0.1 + T.position_y*40
+                pos1x = width/6 - 100 + T.position_x*40
+                pos1y = width*0.08 + 70 + height*0.1 + T.position_y*40
             else :
-                pos1x = displayWidth/8 - 100 + T.position_x*40  
-                pos1y = displayWidth*0.08 + 70 + displayHeight*0.1+ T.position_y*40
+                pos1x = width/8 - 100 + T.position_x*40  
+                pos1y = width*0.08 + 70 + height*0.1+ T.position_y*40
         if i == 1:
             if bool2Joueur : 
-                pos1x = displayWidth/4 + displayWidth/2 *i- 100 + T.position_x*40
-                pos1y = displayWidth*0.08 + 70 + displayHeight*0.1+ T.position_y*40
+                pos1x = width/4 + width/2 *i- 100 + T.position_x*40
+                pos1y = width*0.08 + 70 + height*0.1+ T.position_y*40
             elif bool3Joueur:
-                pos1x = displayWidth/6 + displayWidth/3 *i - 100 + T.position_x*40
-                pos1y = displayWidth*0.08 + 70 + displayHeight*0.1+ T.position_y*40
+                pos1x = width/6 + width/3 *i - 100 + T.position_x*40
+                pos1y = width*0.08 + 70 + height*0.1+ T.position_y*40
             else :
-                pos1x = displayWidth/8 + displayWidth/4 *i - 100 + T.position_x*40
-                pos1y = displayWidth*0.08 + 70 + displayHeight*0.1+ T.position_y*40
+                pos1x = width/8 + width/4 *i - 100 + T.position_x*40
+                pos1y = width*0.08 + 70 + height*0.1+ T.position_y*40
         if i == 2:
             if bool3Joueur:
-                pos1x = displayWidth/6 + displayWidth/3 *i - 100 + T.position_x*40
-                pos1y = displayWidth*0.08 + 70 + displayHeight*0.1+ T.position_y*40
+                pos1x = width/6 + width/3 *i - 100 + T.position_x*40
+                pos1y = width*0.08 + 70 + height*0.1+ T.position_y*40
             else :
-                pos1x = displayWidth/8 + displayWidth/4 *i - 100 + T.position_x*40
-                pos1y = displayWidth*0.08 + 70 + displayHeight*0.1+ T.position_y*40
+                pos1x = width/8 + width/4 *i - 100 + T.position_x*40
+                pos1y = width*0.08 + 70 + height*0.1+ T.position_y*40
         if i == 3:
-            pos1x = displayWidth/8 + displayWidth/4 *i - 100 + T.position_x*40
-            pos1y = displayWidth*0.08 + 70 + displayHeight*0.1+ T.position_y*40
+            pos1x = width/8 + width/4 *i - 100 + T.position_x*40
+            pos1y = width*0.08 + 70 + height*0.1+ T.position_y*40
         if(T.orientation == 0):
             pos2y = pos1y
             pos2x = pos1x + 40
@@ -354,34 +354,34 @@ def affiche_last_tile(player,i):
         T = player.lastTile
         if i == 0:
             if bool2Joueur : 
-                pos1x = displayWidth/4 - 100 + T.position_x*40 
-                pos1y = displayWidth*0.08 + 70 + displayHeight*0.1 + T.position_y*40
+                pos1x = width/4 - 100 + T.position_x*40 
+                pos1y = width*0.08 + 70 + height*0.1 + T.position_y*40
             elif bool3Joueur:
-                pos1x = displayWidth/6 - 100 + T.position_x*40
-                pos1y = displayWidth*0.08 + 70 + displayHeight*0.1 + T.position_y*40
+                pos1x = width/6 - 100 + T.position_x*40
+                pos1y = width*0.08 + 70 + height*0.1 + T.position_y*40
             else :
-                pos1x = displayWidth/8 - 100 + T.position_x*40  
-                pos1y = displayWidth*0.08 + 70 + displayHeight*0.1+ T.position_y*40
+                pos1x = width/8 - 100 + T.position_x*40  
+                pos1y = width*0.08 + 70 + height*0.1+ T.position_y*40
         if i == 1:
             if bool2Joueur : 
-                pos1x = displayWidth/4 + displayWidth/2 *i- 100 + T.position_x*40
-                pos1y = displayWidth*0.08 + 70 + displayHeight*0.1+ T.position_y*40
+                pos1x = width/4 + width/2 *i- 100 + T.position_x*40
+                pos1y = width*0.08 + 70 + height*0.1+ T.position_y*40
             elif bool3Joueur:
-                pos1x = displayWidth/6 + displayWidth/3 *i - 100 + T.position_x*40
-                pos1y = displayWidth*0.08 + 70 + displayHeight*0.1+ T.position_y*40
+                pos1x = width/6 + width/3 *i - 100 + T.position_x*40
+                pos1y = width*0.08 + 70 + height*0.1+ T.position_y*40
             else :
-                pos1x = displayWidth/8 + displayWidth/4 *i - 100 + T.position_x*40
-                pos1y = displayWidth*0.08 + 70 + displayHeight*0.1+ T.position_y*40
+                pos1x = width/8 + width/4 *i - 100 + T.position_x*40
+                pos1y = width*0.08 + 70 + height*0.1+ T.position_y*40
         if i == 2:
             if bool3Joueur:
-                pos1x = displayWidth/6 + displayWidth/3 *i - 100 + T.position_x*40
-                pos1y = displayWidth*0.08 + 70 + displayHeight*0.1+ T.position_y*40
+                pos1x = width/6 + width/3 *i - 100 + T.position_x*40
+                pos1y = width*0.08 + 70 + height*0.1+ T.position_y*40
             else :
-                pos1x = displayWidth/8 + displayWidth/4 *i - 100 + T.position_x*40
-                pos1y = displayWidth*0.08 + 70 + displayHeight*0.1+ T.position_y*40
+                pos1x = width/8 + width/4 *i - 100 + T.position_x*40
+                pos1y = width*0.08 + 70 + height*0.1+ T.position_y*40
         if i == 3:
-            pos1x = displayWidth/8 + displayWidth/4 *i - 100 + T.position_x*40
-            pos1y = displayWidth*0.08 + 70 + displayHeight*0.1+ T.position_y*40
+            pos1x = width/8 + width/4 *i - 100 + T.position_x*40
+            pos1y = width*0.08 + 70 + height*0.1+ T.position_y*40
         if(T.orientation == 0):
             pos2y = pos1y
             pos2x = pos1x + 40
@@ -488,32 +488,32 @@ def affiche_chateau(player,i):
     croix.resize(40,40)
     if i == 0:
         if bool2Joueur : 
-            image(croix,displayWidth/4 - 100 + player.castle_x*40 ,displayWidth*0.08 + 70 + displayHeight*0.1 + player.castle_y*40)
+            image(croix,width/4 - 100 + player.castle_x*40 ,width*0.08 + 70 + height*0.1 + player.castle_y*40)
         elif bool3Joueur:
-            image(croix,displayWidth/6 - 100 + player.castle_x*40,displayWidth*0.08 + 70 + displayHeight*0.1 + player.castle_y*40)
+            image(croix,width/6 - 100 + player.castle_x*40,width*0.08 + 70 + height*0.1 + player.castle_y*40)
         else :
-            image(croix,displayWidth/8 - 100 + player.castle_x*40 ,displayWidth*0.08 + 70 + displayHeight*0.1+ player.castle_y*40)
+            image(croix,width/8 - 100 + player.castle_x*40 ,width*0.08 + 70 + height*0.1+ player.castle_y*40)
     if i == 1:
         if bool2Joueur : 
-            image(croix,displayWidth/4 + displayWidth/2 *i- 100 + player.castle_x*40,displayWidth*0.08 + 70 + displayHeight*0.1+ player.castle_y*40)
+            image(croix,width/4 + width/2 *i- 100 + player.castle_x*40,width*0.08 + 70 + height*0.1+ player.castle_y*40)
         elif bool3Joueur:
-            image(croix,displayWidth/6 + displayWidth/3 *i - 100 + player.castle_x*40,displayWidth*0.08 + 70 + displayHeight*0.1+ player.castle_y*40)
+            image(croix,width/6 + width/3 *i - 100 + player.castle_x*40,width*0.08 + 70 + height*0.1+ player.castle_y*40)
         else :
-            image(croix,displayWidth/8 + displayWidth/4 *i - 100 + player.castle_x*40,displayWidth*0.08 + 70 + displayHeight*0.1+ player.castle_y*40)
+            image(croix,width/8 + width/4 *i - 100 + player.castle_x*40,width*0.08 + 70 + height*0.1+ player.castle_y*40)
     if i == 2:
         if bool3Joueur:
-            image(croix,displayWidth/6 + displayWidth/3 *i - 100 + player.castle_x*40,displayWidth*0.08 + 70 + displayHeight*0.1+ player.castle_y*40)
+            image(croix,width/6 + width/3 *i - 100 + player.castle_x*40,width*0.08 + 70 + height*0.1+ player.castle_y*40)
         else :
-            image(croix,displayWidth/8 + displayWidth/4 *i - 100 + player.castle_x*40,displayWidth*0.08 + 70 + displayHeight*0.1+ player.castle_y*40)
+            image(croix,width/8 + width/4 *i - 100 + player.castle_x*40,width*0.08 + 70 + height*0.1+ player.castle_y*40)
     if i == 3:
-        image(croix,displayWidth/8 + displayWidth/4 *i - 100 + player.castle_x*40,displayWidth*0.08 + 70 + displayHeight*0.1+ player.castle_y*40)
+        image(croix,width/8 + width/4 *i - 100 + player.castle_x*40,width*0.08 + 70 + height*0.1+ player.castle_y*40)
 
 
 def affiche_joueur():
     if bool2Joueur :
-        text("Joueur {a}".format(a=LJ[j%2].nom), int(displayWidth /2), 25)
+        text("Joueur {a}".format(a=LJ[j%2].nom), int(width /2), 25)
     else : 
-        text("Joueur {a}".format(a=LJ[j].nom), int(displayWidth /2), 25)
+        text("Joueur {a}".format(a=LJ[j].nom), int(width /2), 25)
     for player in LJ :
         i = player.nom - 1
         affiche_chateau(player,i)
@@ -522,28 +522,28 @@ def affiche_joueur():
         if(i == 0) :
             textAlign(CENTER, CENTER)
             if bool2Joueur : 
-                text("Joueur {a}".format(a = player.nom), displayWidth*0.25, displayWidth*0.08 + 70 + displayHeight*0.05)
+                text("Joueur {a}".format(a = player.nom), width*0.25, width*0.08 + 70 + height*0.05)
             elif bool3Joueur:
-                text("Joueur {a}".format(a = player.nom), displayWidth*0.165, displayWidth*0.08 + 70 + displayHeight*0.05)
+                text("Joueur {a}".format(a = player.nom), width*0.165, width*0.08 + 70 + height*0.05)
             else :
-                text("Joueur {a}".format(a = player.nom), displayWidth*0.125, displayWidth*0.08 + 70 + displayHeight*0.05)
+                text("Joueur {a}".format(a = player.nom), width*0.125, width*0.08 + 70 + height*0.05)
         elif(i == 1) :
             textAlign(CENTER, CENTER)
             if bool2Joueur : 
-                text("Joueur {a}".format(a = player.nom), displayWidth*0.75, displayWidth*0.08 + 70 + displayHeight*0.05)
+                text("Joueur {a}".format(a = player.nom), width*0.75, width*0.08 + 70 + height*0.05)
             elif bool3Joueur:
-                text("Joueur {a}".format(a = player.nom), displayWidth*0.165 + i * 0.33 * displayWidth, displayWidth*0.08 + 70 + displayHeight*0.05)
+                text("Joueur {a}".format(a = player.nom), width*0.165 + i * 0.33 * width, width*0.08 + 70 + height*0.05)
             else :
-                text("Joueur {a}".format(a = player.nom), displayWidth*0.125 + i * 0.25 * displayWidth, displayWidth*0.08 + 70 + displayHeight*0.05)
+                text("Joueur {a}".format(a = player.nom), width*0.125 + i * 0.25 * width, width*0.08 + 70 + height*0.05)
         elif(i == 2) :
             textAlign(CENTER, CENTER)
             if bool3Joueur:
-                text("Joueur {a}".format(a = player.nom), displayWidth*0.165 + i * 0.33 * displayWidth, displayWidth*0.08 + 70 + displayHeight*0.05)
+                text("Joueur {a}".format(a = player.nom), width*0.165 + i * 0.33 * width, width*0.08 + 70 + height*0.05)
             else :
-                text("Joueur {a}".format(a = player.nom), displayWidth*0.125 + i * 0.25 * displayWidth, displayWidth*0.08 + 70 + displayHeight*0.05)
+                text("Joueur {a}".format(a = player.nom), width*0.125 + i * 0.25 * width, width*0.08 + 70 + height*0.05)
         elif(i == 3):
             textAlign(CENTER, CENTER)
-            text("Joueur {a}".format(a = player.nom), displayWidth*0.125 + i * 0.25 * displayWidth, displayWidth*0.08 + 70 + displayHeight*0.05)
+            text("Joueur {a}".format(a = player.nom), width*0.125 + i * 0.25 * width, width*0.08 + 70 + height*0.05)
         i += 1
 def affichePlateau(List_Plateau):
     affiche_tuile(List_Plateau)
@@ -567,6 +567,96 @@ def inserer(T,L):
 
     L[k+1] = T
     return L
+
+def loadTuilex40():
+    global champ0x40, champ1x40, plaine0x40, plaine1x40, plaine2x40, ocean0x40, ocean1x40, mine0x40, mine1x40, mine2x40, mine3x40, marai0x40, marai1x40, marai2x40, foret0x40, foret1x40
+
+#-------------------------------------- Load img tuile -------------------
+    # Champs
+    champ0x40 = loadImage("data/Champ.PNG")
+    champ0x40.resize(40, 40)
+    champ1x40 = loadImage("data/Champcouronne.PNG")
+    champ1x40.resize(40, 40)
+    # Plaines
+    plaine0x40 = loadImage("data/Plaine.PNG")
+    plaine0x40.resize(40, 40)
+    plaine1x40 = loadImage("data/Plaine1couronne.PNG")
+    plaine1x40.resize(40, 40)
+    plaine2x40 = loadImage("data/Plaine2couronne.PNG")
+    plaine2x40.resize(40, 40)
+    # Océan
+    ocean0x40 =loadImage("data/Ocean.PNG")
+    ocean0x40.resize(40, 40)
+    ocean1x40 = loadImage("data/Ocean1couronne.PNG")
+    ocean1x40.resize(40, 40)
+    # Mines
+    mine0x40 = loadImage("data/Mine.PNG")
+    mine0x40.resize(40, 40)
+    mine1x40 = loadImage("data/Mine1couronne.PNG")
+    mine1x40.resize(40, 40)
+    mine2x40 = loadImage("data/Mine2couronne.PNG")
+    mine2x40.resize(40, 40)
+    mine3x40 =loadImage("data/Mine3couronne.PNG")
+    mine3x40.resize(40, 40)
+    # Marais
+    marai0x40 = loadImage("data/Marai.PNG")
+    marai0x40.resize(40, 40)
+    marai1x40 = loadImage("data/Marai1couronne.PNG")
+    marai1x40.resize(40, 40)
+    marai2x40 = loadImage("data/Marai2couronne.PNG")
+    marai2x40.resize(40, 40)
+    # Forets
+    foret0x40 = loadImage("data/Foret.PNG")
+    foret0x40.resize(40, 40)
+    foret1x40 = loadImage("data/Foret1couronne.PNG")
+    foret1x40.resize(40, 40)
+
+def loadTuile(boolResize):
+    global champ0, champ1, plaine0, plaine1, plaine2, ocean0, ocean1, mine0, mine1, mine2, mine3, marai0, marai1, marai2, foret0, foret1
+    if boolResize :
+        taillex1 = int( width * 0.08)
+    else :
+        taillex1 = int( displayWidth * 0.08)
+    print(taillex1)
+    #-------------------------------------- Load img tuile -------------------
+    # Champs
+    champ0 = loadImage("data/Champ.PNG")
+    champ0.resize(taillex1, taillex1)
+    champ1 = loadImage("data/Champcouronne.PNG")
+    champ1.resize(taillex1, taillex1)
+    # Plaines
+    plaine0 = loadImage("data/Plaine.PNG")
+    plaine0.resize(taillex1, taillex1)
+    plaine1 = loadImage("data/Plaine1couronne.PNG")
+    plaine1.resize(taillex1, taillex1)
+    plaine2 = loadImage("data/Plaine2couronne.PNG")
+    plaine2.resize(taillex1, taillex1)
+    # Océan
+    ocean0 = loadImage("data/Ocean.PNG")
+    ocean0.resize(taillex1,taillex1)
+    ocean1 = loadImage("data/Ocean1couronne.PNG")
+    ocean1.resize(taillex1, taillex1)
+    # Mines
+    mine0 = loadImage("data/Mine.PNG")
+    mine0.resize(taillex1, taillex1)
+    mine1 = loadImage("data/Mine1couronne.PNG")
+    mine1.resize(taillex1, taillex1)
+    mine2 = loadImage("data/Mine2couronne.PNG")
+    mine2.resize(taillex1, taillex1)
+    mine3 = loadImage("data/Mine3couronne.PNG")
+    mine3.resize(taillex1, taillex1)
+    # Marais
+    marai0 = loadImage("data/Marai.PNG")
+    marai0.resize(taillex1,taillex1)
+    marai1 = loadImage("data/Marai1couronne.PNG")
+    marai1.resize(taillex1, taillex1)
+    marai2 = loadImage("data/Marai2couronne.PNG")
+    marai2.resize(taillex1, taillex1)
+    # Forets
+    foret0 = loadImage("data/Foret.PNG")
+    foret0.resize(taillex1, taillex1)
+    foret1 = loadImage("data/Foret1couronne.PNG")
+    foret1.resize(taillex1, taillex1)
 
 def DeroulementTour():
     background(255, 255, 255)
@@ -599,6 +689,12 @@ def DeroulementTour():
         text("Joueur {a}".format(a = player.nom), 350, 400 + player.nom * 30)
     return List_Plateau
 
+def resizeTuile(force):
+    global sizeSave_x
+    if not(sizeSave_x == width) and not(force):
+        loadTuile(True)
+        sizeSave_x = displayWidth
+        
 def setup():
     LC = ListCreator()
     global LT, RTG
@@ -628,82 +724,10 @@ def setup():
     fleche2.resize(100, 100)
     croix = loadImage("data/multiply.png")
     croix.resize(25, 25)
-
-
-    taillex1 = int( displayWidth * 0.08)
-    print(taillex1)
-    #-------------------------------------- Load img tuile -------------------
-    # Champs
-    champ0 = loadImage("data/Champ.PNG")
-    champ0x40 = loadImage("data/Champ.PNG")
-    champ0.resize(taillex1, taillex1)
-    champ0x40.resize(40, 40)
-    champ1 = loadImage("data/Champcouronne.PNG")
-    champ1x40 = loadImage("data/Champcouronne.PNG")
-    champ1.resize(taillex1, taillex1)
-    champ1x40.resize(40, 40)
-    # Plaines
-    plaine0 = loadImage("data/Plaine.PNG")
-    plaine0x40 = loadImage("data/Plaine.PNG")
-    plaine0.resize(taillex1, taillex1)
-    plaine0x40.resize(40, 40)
-    plaine1 = loadImage("data/Plaine1couronne.PNG")
-    plaine1x40 = loadImage("data/Plaine1couronne.PNG")
-    plaine1.resize(taillex1, taillex1)
-    plaine1x40.resize(40, 40)
-    plaine2 = loadImage("data/Plaine2couronne.PNG")
-    plaine2x40 = loadImage("data/Plaine2couronne.PNG")
-    plaine2.resize(taillex1, taillex1)
-    plaine2x40.resize(40, 40)
-    # Océan
-    ocean0 = loadImage("data/Ocean.PNG")
-    ocean0x40 =loadImage("data/Ocean.PNG")
-    ocean0.resize(taillex1,taillex1)
-    ocean0x40.resize(40, 40)
-    ocean1 = loadImage("data/Ocean1couronne.PNG")
-    ocean1x40 = loadImage("data/Ocean1couronne.PNG")
-    ocean1.resize(taillex1, taillex1)
-    ocean1x40.resize(40, 40)
-    # Mines
-    mine0 = loadImage("data/Mine.PNG")
-    mine0x40 = loadImage("data/Mine.PNG")
-    mine0.resize(taillex1, taillex1)
-    mine0x40.resize(40, 40)
-    mine1 = loadImage("data/Mine1couronne.PNG")
-    mine1x40 = loadImage("data/Mine1couronne.PNG")
-    mine1.resize(taillex1, taillex1)
-    mine1x40.resize(40, 40)
-    mine2 = loadImage("data/Mine2couronne.PNG")
-    mine2x40 = loadImage("data/Mine2couronne.PNG")
-    mine2.resize(taillex1, taillex1)
-    mine2x40.resize(40, 40)
-    mine3 = loadImage("data/Mine3couronne.PNG")
-    mine3x40 =loadImage("data/Mine3couronne.PNG")
-    mine3.resize(taillex1, taillex1)
-    mine3x40.resize(40, 40)
-    # Marais
-    marai0 = loadImage("data/Marai.PNG")
-    marai0x40 = loadImage("data/Marai.PNG")
-    marai0.resize(taillex1,taillex1)
-    marai0x40.resize(40, 40)
-    marai1 = loadImage("data/Marai1couronne.PNG")
-    marai1x40 = loadImage("data/Marai1couronne.PNG")
-    marai1.resize(taillex1, taillex1)
-    marai1x40.resize(40, 40)
-    marai2 = loadImage("data/Marai2couronne.PNG")
-    marai2x40 = loadImage("data/Marai2couronne.PNG")
-    marai2.resize(taillex1, taillex1)
-    marai2x40.resize(40, 40)
-    # Forets
-    foret0 = loadImage("data/Foret.PNG")
-    foret0x40 = loadImage("data/Foret.PNG")
-    foret0.resize(taillex1, taillex1)
-    foret0x40.resize(40, 40)
-    foret1 = loadImage("data/Foret1couronne.PNG")
-    foret1x40 = loadImage("data/Foret1couronne.PNG")
-    foret1.resize(taillex1, taillex1)
-    foret1x40.resize(40, 40)
-
+    global sizeSave_x
+    sizeSave_x = displayWidth
+    loadTuile(False)
+    loadTuilex40()
     global jouerX, jouerY, regleX, regleY, quitterX, quitterY
     jouerX = width / 2 - rectSize - 10
     jouerY = (height - 200) / 2 - rectSize / 2
@@ -731,6 +755,9 @@ def draw():
                 L = DeroulementTour()
                 initialisation=False
                 this.surface.setSize(displayWidth,displayHeight)
+                resizeTuile(True)
+            else : 
+                resizeTuile(False)
             updateJouer2_4(mouseX,mouseY)
             affichePlateau(L)
         elif bool3Joueur:
@@ -741,6 +768,9 @@ def draw():
                 L = DeroulementTour()
                 initialisation=False
                 this.surface.setSize(displayWidth,displayHeight)
+                resizeTuile(True)
+            else :
+                resizeTuile(False)
             updateJouer3(mouseX,mouseY)
             affichePlateau(L)
         elif bool4Joueur:
@@ -751,6 +781,9 @@ def draw():
                 L = DeroulementTour()
                 initialisation=False
                 this.surface.setSize(displayWidth,displayHeight)
+                resizeTuile(True)
+            else:
+                resizeTuile(False)
             updateJouer2_4(mouseX,mouseY)
             affichePlateau(L)
             
@@ -779,16 +812,16 @@ def updateRegle(x, y):
     
 def updateJouer2_4(x, y):
     global Tuile1, Tuile2,Tuile3,Tuile4
-    Tuile1 = overRect(displayWidth * 0.045 + 0.25 * 0 * displayWidth, 70,  2 * int(displayWidth*0.08), int(displayWidth*0.08))
-    Tuile2 = overRect(displayWidth * 0.045 + 0.25 * 1 * displayWidth, 70,  2 * int(displayWidth*0.08), int(displayWidth*0.08))
-    Tuile3 = overRect(displayWidth * 0.045 + 0.25 * 2 * displayWidth, 70,  2 * int(displayWidth*0.08), int(displayWidth*0.08))
-    Tuile4 = overRect(displayWidth * 0.045 + 0.25 * 3 * displayWidth, 70,  2 * int(displayWidth*0.08), int(displayWidth*0.08))
+    Tuile1 = overRect(width * 0.045 + 0.25 * 0 * width, 70,  2 * int(width*0.08), int(width*0.08))
+    Tuile2 = overRect(width * 0.045 + 0.25 * 1 * width, 70,  2 * int(width*0.08), int(width*0.08))
+    Tuile3 = overRect(width * 0.045 + 0.25 * 2 * width, 70,  2 * int(width*0.08), int(width*0.08))
+    Tuile4 = overRect(width * 0.045 + 0.25 * 3 * width, 70,  2 * int(width*0.08), int(width*0.08))
   
 def updateJouer3(x, y):
     global Tuile1, Tuile2,Tuile3
-    Tuile1 = overRect(displayWidth * 0.09 + 0.33 * 0 * displayWidth, 70, 2 * int(displayWidth*0.08), int(displayWidth*0.08))
-    Tuile2 = overRect(displayWidth * 0.09 + 0.33 * 1 * displayWidth, 70, 2 * int(displayWidth*0.08), int(displayWidth*0.08))
-    Tuile3 = overRect(displayWidth * 0.09 + 0.33 * 2 * displayWidth, 70, 2 * int(displayWidth*0.08), int(displayWidth*0.08))
+    Tuile1 = overRect(width * 0.09 + 0.33 * 0 * width, 70, 2 * int(width*0.08), int(width*0.08))
+    Tuile2 = overRect(width * 0.09 + 0.33 * 1 * width, 70, 2 * int(width*0.08), int(width*0.08))
+    Tuile3 = overRect(width * 0.09 + 0.33 * 2 * width, 70, 2 * int(width*0.08), int(width*0.08))
   
 def tourSuivant():
     global boolrelance, test,Tuile1NonUsed,Tuile2NonUsed,Tuile3NonUsed,Tuile4NonUsed
