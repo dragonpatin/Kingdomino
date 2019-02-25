@@ -217,18 +217,36 @@ def affiche_tuile(List_Plateau):
         
 def affiche_list_tile(player,i):
     for T in player.list_tuile :
-        if(i == 0 or i == 1) :
-            mody = 0
-        else : 
-            mody = 280
-        if(i == 0 or (i == 2 and bool4Joueur)) :
-            modx = 0
-        elif (i == 2 and bool3Joueur) : 
-            modx = 200
-        else :
-            modx = 360
-        pos1x = 40+T.position_x*40+modx
-        pos1y = 200+T.position_y*40+mody
+        if i == 0:
+            if bool2Joueur : 
+                pos1x = displayWidth/4 - 100 + T.position_x*40 
+                pos1y = displayWidth*0.08 + 70 + displayHeight*0.1 + T.position_y*40
+            elif bool3Joueur:
+                pos1x = displayWidth/6 - 100 + T.position_x*40
+                pos1y = displayWidth*0.08 + 70 + displayHeight*0.1 + T.position_y*40
+            else :
+                pos1x = displayWidth/8 - 100 + T.position_x*40  
+                pos1y = displayWidth*0.08 + 70 + displayHeight*0.1+ T.position_y*40
+        if i == 1:
+            if bool2Joueur : 
+                pos1x = displayWidth/4 + displayWidth/2 *i- 100 + T.position_x*40
+                pos1y = displayWidth*0.08 + 70 + displayHeight*0.1+ T.position_y*40
+            elif bool3Joueur:
+                pos1x = displayWidth/6 + displayWidth/3 *i - 100 + T.position_x*40
+                pos1y = displayWidth*0.08 + 70 + displayHeight*0.1+ T.position_y*40
+            else :
+                pos1x = displayWidth/8 + displayWidth/4 *i - 100 + T.position_x*40
+                pos1y = displayWidth*0.08 + 70 + displayHeight*0.1+ T.position_y*40
+        if i == 2:
+            if bool3Joueur:
+                pos1x = displayWidth/6 + displayWidth/3 *i - 100 + T.position_x*40
+                pos1y = displayWidth*0.08 + 70 + displayHeight*0.1+ T.position_y*40
+            else :
+                pos1x = displayWidth/8 + displayWidth/4 *i - 100 + T.position_x*40
+                pos1y = displayWidth*0.08 + 70 + displayHeight*0.1+ T.position_y*40
+        if i == 3:
+            pos1x = displayWidth/8 + displayWidth/4 *i - 100 + T.position_x*40
+            pos1y = displayWidth*0.08 + 70 + displayHeight*0.1+ T.position_y*40
         if(T.orientation == 0):
             pos2y = pos1y
             pos2x = pos1x + 40
