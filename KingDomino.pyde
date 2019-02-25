@@ -537,7 +537,7 @@ def affichePlateau(List_Plateau):
         textSize(15)
         textAlign(CENTER, CENTER)
         text("Fin du Game", 300, 300)
-    fill(color(0,0,0))
+    fill(color(255,255,255))
     textSize(15)
     textAlign(CENTER, CENTER)
 
