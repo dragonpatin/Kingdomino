@@ -545,7 +545,9 @@ def affiche_joueur():
             textAlign(CENTER, CENTER)
             text("Joueur {a}".format(a = player.nom), width*0.125 + i * 0.25 * width, width*0.08 + 70 + height*0.05)
         i += 1
+        
 def affichePlateau(List_Plateau):
+    image(imgPlateau, 0, 0)
     affiche_tuile(List_Plateau)
     affiche_joueur();
     if RTG.taille - 1 < 0 or nb_tour == 0:
@@ -553,7 +555,7 @@ def affichePlateau(List_Plateau):
         textSize(15)
         textAlign(CENTER, CENTER)
         text("Fin du Game", 300, 300)
-    fill(color(0,0,0))
+    fill(color(255,255,255))
     textSize(15)
     textAlign(CENTER, CENTER)
 
@@ -706,7 +708,7 @@ def setup():
     # The image file must be in the data folder of the current sketch
     # to load successfully
     size(700, 700)
-    global imgMenue, ImgRegle1, ImgRegle2, ImgRegle3, ImgRegle4, fleche1, fleche2, croix, champ0, champ1, plaine0, plaine1, plaine2, ocean0, ocean1, mine0, mine1, mine2, mine3, marai0, marai1, marai2, foret0, foret1, champ0x40, champ1x40, plaine0x40, plaine1x40, plaine2x40, ocean0x40, ocean1x40, mine0x40, mine1x40, mine2x40, mine3x40, marai0x40, marai1x40, marai2x40, foret0x40, foret1x40
+    global imgMenue, ImgRegle1, ImgRegle2, ImgRegle3, ImgRegle4, fleche1, fleche2, croix, champ0, champ1, plaine0, plaine1, plaine2, ocean0, ocean1, mine0, mine1, mine2, mine3, marai0, marai1, marai2, foret0, foret1, champ0x40, champ1x40, plaine0x40, plaine1x40, plaine2x40, ocean0x40, ocean1x40, mine0x40, mine1x40, mine2x40, mine3x40, marai0x40, marai1x40, marai2x40, foret0x40, foret1x40, imgPlateau
     # Load the image into the program
     imgMenue = loadImage("data/Kingdomino.png")
     imgMenue.resize(700, 700)
@@ -728,6 +730,8 @@ def setup():
     sizeSave_x = displayWidth
     loadTuile(False)
     loadTuilex40()
+    imgPlateau = loadImage("data/imagePlateau.jpg")
+    imgPlateau.resize(displayWidth, displayHeight)
     global jouerX, jouerY, regleX, regleY, quitterX, quitterY
     jouerX = width / 2 - rectSize - 10
     jouerY = (height - 200) / 2 - rectSize / 2
