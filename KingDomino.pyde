@@ -619,7 +619,7 @@ def loadTuile(boolResize):
         taillex1 = int( width * 0.08)
     else :
         taillex1 = int( displayWidth * 0.08)
-    print(taillex1)
+    #print(taillex1)
     #-------------------------------------- Load img tuile -------------------
     # Champs
     champ0 = loadImage("data/Champ.PNG")
