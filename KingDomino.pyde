@@ -10,7 +10,7 @@ jouerColor = color(255)
 quitterColor = color(255)
 fps = 30
 boolQuitter = boolRegle = boolJouer = bool2Joueur = bool3Joueur = bool4Joueur = bool3Joueur = bool4Joueur =  boolrelance = Tuile1 = Tuile2 = Tuile3 = Tuile4 = test  = False
-AjouterTileJ = False
+AjouterTileJ = DeplacerPlateau = False
 Tuile1NonUsed = Tuile2NonUsed = Tuile3NonUsed = Tuile4NonUsed = True 
 boolMenu = initialisation = True
 boolResize = True
@@ -933,7 +933,7 @@ def mousePressed():
             boolRegle = False
 
 def keyPressed():
-    global boolrelance, test,AjouterTileJ,LJ
+    global boolrelance, test,AjouterTileJ,LJ,DeplacerPlateau
     if bool3Joueur:
         i = (j-1)%3
     if bool4Joueur:
@@ -941,23 +941,38 @@ def keyPressed():
     if bool2Joueur:
         i = (j-1)%2
     if AjouterTileJ :
-        if keyCode == LEFT:
-            print(1)
-            LJ[i].tileLeft()
-        if keyCode == RIGHT:
-            LJ[i].tileRight()
-        if keyCode == UP:
-            LJ[i].tileUp()
-        if keyCode == DOWN:
-            LJ[i].tileDown()
-        if keyCode == CONTROL:
-            LJ[i].tileOrientation()
-        if key == ENTER:
-            LJ[i].list_tuile.append(LJ[i].lastTile)
-            LJ[i].lastTile = None
-            AjouterTileJ = False
-            if j == 0:
-                    tourSuivant()
+        if DeplacerPlateau :
+            if keyCode == LEFT:
+                print(1)
+                LJ[i].plateauLeft()
+            if keyCode == RIGHT:
+                LJ[i].plateauRight()
+            if keyCode == UP:
+                LJ[i].plateauUp()
+            if keyCode == DOWN:
+                LJ[i].plateauDown()
+            if keyCode == SHIFT:
+                DeplacerPlateau = False
+        else :
+            if keyCode == LEFT:
+                print(1)
+                LJ[i].tileLeft()
+            if keyCode == RIGHT:
+                LJ[i].tileRight()
+            if keyCode == UP:
+                LJ[i].tileUp()
+            if keyCode == DOWN:
+                LJ[i].tileDown()
+            if keyCode == CONTROL:
+                LJ[i].tileOrientation()
+            if keyCode == SHIFT:
+                DeplacerPlateau = True
+            if key == ENTER:
+                LJ[i].list_tuile.append(LJ[i].lastTile)
+                LJ[i].lastTile = None
+                AjouterTileJ = False
+                if j == 0:
+                        tourSuivant()
 
 def overRect(x, y, width, height):
     return x <= mouseX <= x + width and y <= mouseY <= y + height
