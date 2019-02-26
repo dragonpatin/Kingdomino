@@ -77,7 +77,96 @@ class Player:
 			self.castle_y -= 1
 			for T in self.list_tuile :
 				T.up()
+				
+	def testSuperpositionChateau(self):
+		if(self.lastTile.position_x == self.castle_x and self.lastTile.position_y == self.castle_y) :
+			return True
+		if(self.lastTile.getPos2x() == self.castle_x and self.lastTile.getPos2y() == self.castle_y) :
+			return True
+		return False
+	def testSuperpositionList(self):
+		for T in self.list_tuile :
+			if(self.lastTile.position_x == T.position_x and self.lastTile.position_y == T.position_y) :
+				return True
+			if(self.lastTile.getPos2x() == T.position_x and self.lastTile.getPos2y() == T.position_y) :
+				return True
+			if(self.lastTile.position_x == T.getPos2x() and self.lastTile.position_y == T.getPos2y()) :
+				return True
+			if(self.lastTile.getPos2x() == T.getPos2x() and self.lastTile.getPos2y() == T.getPos2y()) :
+				return True
+		return False
+	def testSuperposition(self):
+		if(self.testSuperpositionChateau() or self.testSuperpositionList()):
+			return True
+		return False
+		
+	def isNotNextCastle(self) :
+		if(self.lastTile.position_x + 1 == self.castle_x and self.lastTile.position_y == self.castle_y) :
+			return False
+		if(self.lastTile.position_x - 1 == self.castle_x and self.lastTile.position_y == self.castle_y) :
+			return False
+		if(self.lastTile.position_x == self.castle_x and self.lastTile.position_y + 1 == self.castle_y) :
+			return False
+		if(self.lastTile.position_x == self.castle_x and self.lastTile.position_y - 1 == self.castle_y) :
+			return False
+		if(self.lastTile.getPos2x() + 1 == self.castle_x and self.lastTile.getPos2y() == self.castle_y) :
+			return False
+		if(self.lastTile.getPos2x() - 1 == self.castle_x and self.lastTile.getPos2y() == self.castle_y) :
+			return False
+		if(self.lastTile.getPos2x() == self.castle_x and self.lastTile.getPos2y() - 1 == self.castle_y) :
+			return False
+		if(self.lastTile.getPos2x() == self.castle_x and self.lastTile.getPos2y() + 1 == self.castle_y) :
+			return False
+		return True
+		
+	def isNextGoodTile(self):
+		for T in self.list_tuile :
+			if T.tuile_1 == self.lastTile.tuile_1 :
+				if(self.lastTile.position_x + 1 == T.position_x and self.lastTile.position_y == T.position_y) :
+					return True
+				if(self.lastTile.position_x - 1 == T.position_x and self.lastTile.position_y == T.position_y) :
+					return True
+				if(self.lastTile.position_x == T.position_x and self.lastTile.position_y + 1 == T.position_y) :
+					return True
+				if(self.lastTile.position_x == T.position_x and self.lastTile.position_y - 1 == T.position_y) :
+					return True
+			if T.tuile_1 == self.lastTile.tuile_2 :
+				if(self.lastTile.getPos2x() + 1 == T.position_x and self.lastTile.getPos2y() == T.position_y) :
+					return True
+				if(self.lastTile.getPos2x() - 1 == T.position_x and self.lastTile.getPos2y() == T.position_y) :
+					return True
+				if(self.lastTile.getPos2x() == T.position_x and self.lastTile.getPos2y() - 1 == T.position_y) :
+					return True
+				if(self.lastTile.getPos2x() == T.position_x and self.lastTile.getPos2y() + 1 == T.position_y) :
+					return True
+			if T.tuile_2 == self.lastTile.tuile_1 :
+				if(self.lastTile.position_x + 1 == T.getPos2x() and self.lastTile.position_y == T.getPos2y()) :
+					return True
+				if(self.lastTile.position_x - 1 == T.getPos2x() and self.lastTile.position_y == T.getPos2y()) :
+					return True
+				if(self.lastTile.position_x == T.getPos2x() and self.lastTile.position_y + 1 == T.getPos2y()) :
+					return True
+				if(self.lastTile.position_x == T.getPos2x() and self.lastTile.position_y - 1 == T.getPos2y()) :
+					return True
+			if T.tuile_2 == self.lastTile.tuile_2 :
+				if(self.lastTile.getPos2x() + 1 == T.getPos2x() and self.lastTile.getPos2y() == T.getPos2y()) :
+					return True
+				if(self.lastTile.getPos2x() - 1 == T.getPos2x() and self.lastTile.getPos2y() == T.getPos2y()) :
+					return True
+				if(self.lastTile.getPos2x() == T.getPos2x() and self.lastTile.getPos2y() - 1 == T.getPos2y()) :
+					return True
+				if(self.lastTile.getPos2x() == T.getPos2x() and self.lastTile.getPos2y() + 1 == T.getPos2y()) :
+					return True
+		return False
 	
+	def autorisationSauveguarde(self):
+		if self.testSuperposition() :
+			return False
+		if self.isNotNextCastle() :
+			if not(self.isNextGoodTile()) :
+				return False
+		return True
+		
 	def tileOrientation(self):
 		self.lastTile.orient()
 		

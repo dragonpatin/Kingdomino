@@ -934,6 +934,8 @@ def mousePressed():
 
 def keyPressed():
     global boolrelance, test,AjouterTileJ,LJ,DeplacerPlateau
+    print(key)
+    print(keyCode)
     if bool3Joueur:
         i = (j-1)%3
     if bool4Joueur:
@@ -967,7 +969,12 @@ def keyPressed():
                 LJ[i].tileOrientation()
             if keyCode == SHIFT:
                 DeplacerPlateau = True
-            if key == ENTER:
+            if keyCode == 8 :
+                LJ[i].lastTile = None
+                AjouterTileJ = False
+                if j == 0:
+                        tourSuivant()
+            if key == ENTER and LJ[i].autorisationSauveguarde():
                 LJ[i].list_tuile.append(LJ[i].lastTile)
                 LJ[i].lastTile = None
                 AjouterTileJ = False
