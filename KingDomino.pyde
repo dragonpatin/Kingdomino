@@ -17,6 +17,7 @@ boolResize = True
 regleInt = nb_tour = 0
 LT = None
 LJ = None
+LC = None
 i = 0
 j = 0 
 L = list()
@@ -745,7 +746,7 @@ def setup():
 
 def draw():
     background(255, 255, 255)
-    global boolrelance, nb_tour, LJ,test,L,initialisation
+    global boolrelance, nb_tour, LJ,test,L,initialisation,LC
     if boolRegle:
         Regle()
     if boolMenu:
@@ -828,8 +829,22 @@ def updateJouer3(x, y):
     Tuile3 = overRect(width * 0.09 + 0.33 * 2 * width, 70, 2 * int(width*0.08), int(width*0.08))
   
 def tourSuivant():
-    global boolrelance, test,Tuile1NonUsed,Tuile2NonUsed,Tuile3NonUsed,Tuile4NonUsed
+    global boolrelance, test,Tuile1NonUsed,Tuile2NonUsed,Tuile3NonUsed,Tuile4NonUsed,LJ
     Tuile1NonUsed = Tuile2NonUsed = Tuile3NonUsed = Tuile4NonUsed = True
+    if bool2Joueur :
+        LJ[0].setNextPos(2)
+        LJ[1].setNextPos(1)
+    nl = list()
+    for i in range(0,LC.nbjoueurs):
+        for j in range(0,LC.nbjoueurs):
+            if LJ[j].getNextPos() == i+1 :
+                t = LJ[j]
+                nl.append(t)
+    LJ = nl
+    # for a in nl :
+    #     print(a.nom)
+    # for i in range(0,LC.nbjoueurs):
+    #     LJ.append(nl[i])
     if RTG.taille > 0 and nb_tour != 0:
         test = True
         boolrelance = True
@@ -839,7 +854,6 @@ def mousePressed():
     global Tuile1NonUsed,Tuile2NonUsed,Tuile3NonUsed,Tuile4NonUsed,AjouterTileJ
     ###Faire Fonction chaque if.
     if boolJouer:
-        print(j)
         if Joueur2Over and (AjouterTileJ == False):
             currentColor = regleColor
             bool2Joueur = True
@@ -870,16 +884,19 @@ def mousePressed():
             bool3Joueur = True
             if Tuile1 and Tuile1NonUsed:
                 LJ[j].setLastTile(L[0])
+                LJ[j].setNextPos(1)
                 j = (j+1) % 3
                 Tuile1NonUsed = False
                 AjouterTileJ = True
             if Tuile2 and Tuile2NonUsed:
                 LJ[j].setLastTile(L[1])
+                LJ[j].setNextPos(2)
                 j = (j+1) % 3
                 Tuile2NonUsed = False
                 AjouterTileJ = True
             if Tuile3 and Tuile3NonUsed:
                 LJ[j].setLastTile(L[2])
+                LJ[j].setNextPos(3)
                 j = (j+1) % 3
                 Tuile3NonUsed = False
                 AjouterTileJ = True
@@ -890,21 +907,25 @@ def mousePressed():
             print(j)
             if Tuile1 and Tuile1NonUsed:
                 LJ[j].setLastTile(L[0])
+                LJ[j].setNextPos(1)
                 j = (j+1) % 4
                 Tuile1NonUsed = False
                 AjouterTileJ = True
             if Tuile2 and Tuile2NonUsed:
                 LJ[j].setLastTile(L[1])
+                LJ[j].setNextPos(2)
                 j = (j+1) % 4
                 Tuile2NonUsed = False
                 AjouterTileJ = True
             if Tuile3 and Tuile3NonUsed:
                 LJ[j].setLastTile(L[2])
+                LJ[j].setNextPos(3)
                 j = (j+1) % 4
                 Tuile3NonUsed = False
                 AjouterTileJ = True
             if Tuile4 and Tuile4NonUsed:
                 LJ[j].setLastTile(L[3])
+                LJ[j].setNextPos(4)
                 j = (j+1) % 4
                 Tuile4NonUsed = False
                 AjouterTileJ = True
@@ -977,7 +998,7 @@ def keyPressed():
             if key == ENTER and LJ[i].autorisationSauveguarde():
                 LJ[i].list_tuile.append(LJ[i].lastTile)
                 LJ[i].lastTile = None
-                AjouterTileJ = False
+                AjouterTileJ = False;
                 if j == 0:
                         tourSuivant()
 

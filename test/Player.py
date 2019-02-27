@@ -6,9 +6,16 @@ class Player:
 		self.castle_x = 0
 		self.castle_y = 0
 		self.lastTile = None
+		self.nextPos = nom
 
 	def setLastTile(self,T):
 		self.lastTile = T
+		
+	def setNextPos(self,pos):
+		self.nextPos = pos
+		
+	def getNextPos(self):
+		return self.nextPos
 		
 	def tileLeft(self):
 		self.lastTile.left()
