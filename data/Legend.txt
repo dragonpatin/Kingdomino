@@ -4,5 +4,6 @@ Ocean 3
 Marraie 4
 Foret 5
 Mine 6
+Chateau 7
 
 Numero_Plaque tuile_1 NB_couronne tuile_2 NB_couronne
