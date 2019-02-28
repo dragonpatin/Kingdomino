@@ -2,12 +2,6 @@ from test.ListCreator import *
 from test.Game import *
 from test.RandomTileGenerator import *
 
-import processing.awt.PSurfaceAWT.SmoothCanvas;
-import javax.swing.JFrame;
-import java.awt.Dimension;
-
-
-
 rectSize = 90
 jouerOver = regleOver = quitterOver = Joueur1Over = Joueur2Over = Joueur4Over = False
 reglePrecOver = regleSuivOver = regleMenuOver = False
@@ -15,7 +9,7 @@ regleColor = color(255)
 jouerColor = color(255)
 quitterColor = color(255)
 fps = 30
-boolQuitter = boolRegle = boolJouer = bool2Joueur = bool3Joueur = bool4Joueur = bool3Joueur = bool4Joueur =  boolrelance = Tuile1 = Tuile2 = Tuile3 = Tuile4 = test  = False
+boolQuitter = boolRegle = boolJouer = bool2Joueur = bool3Joueur = bool4Joueur =  boolrelance = Tuile1 = Tuile2 = Tuile3 = Tuile4 = test = boolPause = continuerOver = menuOver = boolrecommencer= False
 AjouterTileJ = DeplacerPlateau = False
 Tuile1NonUsed = Tuile2NonUsed = Tuile3NonUsed = Tuile4NonUsed = True 
 boolMenu = initialisation = True
@@ -26,6 +20,39 @@ LJ = None
 i = 0
 j = 0 
 L = list()
+
+def Pause():
+    image(imgMenue, 0, 0)
+    update(mouseX, mouseY)
+    stroke(0)
+    if continuerOver:
+        fill(color(204))
+    else:
+        fill(color(255))
+    rect(jouerX, jouerY, 200, 50, 20)
+    if menuOver:
+        fill(color(204))
+    else:
+        fill(color(255))
+    rect(regleX, regleY, 200, 50, 20)
+    if quitterOver:
+        fill(color(204))
+    else:
+        fill(color(255))
+    rect(quitterX, quitterY, 200, 50, 20)
+    fill(color(255, 0, 0))
+    textSize(40)
+    # Displays the image at its actual size at point (0,0)
+    if bool2Joueur or bool3Joueur or bool4Joueur:
+        text("Continuer", 348, 222)
+        text("Menu", 350, 322)
+        text("Quitter", 350, 422)
+    else :
+        text("Continuer", 255, 242)
+        text("Menu", 300, 342)
+        text("Quitter", 280, 442)
+    
+    
 def Regle():
     updateRegle(mouseX, mouseY)
     global boolResize
@@ -84,9 +111,15 @@ def Acceuil():
     rect(quitterX, quitterY, 200, 50, 20)
     fill(color(255, 0, 0))
     textSize(40)
-    text("Jouer", 300, 242)
-    text("Regle", 300, 342)
-    text("Quitter", 280, 442)
+    if boolrecommencer: 
+        print("test")
+        text("Jouer", 350, 222)
+        text("Regle", 350, 322)
+        text("Quitter", 350, 422)
+    else : 
+        text("Jouer", 300, 242)
+        text("Regle", 300, 342)
+        text("Quitter", 280, 442)
 
 def Jouer():
     image(imgMenue, 0, 0)
@@ -109,9 +142,15 @@ def Jouer():
     rect(quitterX, quitterY, 200, 50, 20)
     fill(color(255, 0, 0))
     textSize(40)
-    text("2 Joueurs", 255, 244)
-    text("3 Joueurs", 255, 344)
-    text("4 Joueurs", 255, 444)
+    if boolrecommencer: 
+        text("2 Joueurs", 355, 224)
+        text("3 Joueurs", 355, 324)
+        text("4 Joueurs", 355, 424)
+    else : 
+        text("2 Joueurs", 255, 244)
+        text("3 Joueurs", 255, 344)
+        text("4 Joueurs", 255, 444)
+    image(croix, 335, 665)
     
 def affiche_tuile(List_Plateau):
     #position tuiles
@@ -738,6 +777,7 @@ def loadTuile(boolResize):
     foret1.resize(taillex1, taillex1)
 
 def DeroulementTour():
+    print("test1682")
     #background(255, 255, 255)
     global LJ, j
     if bool2Joueur:
@@ -770,16 +810,13 @@ def DeroulementTour():
 
 def resizeTuile(force):
     global sizeSave_x
-    if width < int(displayWidth*0.6):
-        this.surface.setSize(int(displayWidth*0.6),int(displayHeight*0.6))
-    elif width<sizeSave_x and (width - sizeSave_x) < 10:
+    if width<sizeSave_x and (width - sizeSave_x) < 10:
         testAffiche()
         sizeSave_x = width
     elif not(force):
         loadTuile(True)
         sizeSave_x = width
     elif width>sizeSave_x :
-        print("test88")
         testAffiche()
         sizeSave_x = width
         
@@ -879,7 +916,6 @@ def draw():
                 resizeTuile(False)
             updateJouer2_4(mouseX,mouseY)
             affichePlateau(L)
-            
         else : 
             Jouer()
     if boolrelance :
@@ -889,13 +925,17 @@ def draw():
         boolrelance = False
     if boolQuitter:
         exit()
+    if boolPause:
+        Pause()
 
 
 def update(x, y):
-    global jouerOver, regleOver, quitterOver, Joueur2Over, Joueur3Over, Joueur4Over, tuile1Over, tuile2Over, tuile3Over, tuile4Over
-    jouerOver = Joueur2Over = overRect(jouerX, jouerY, 200, 50)
-    regleOver = Joueur3Over = overRect(regleX, regleY, 200, 50)
+    global jouerOver, regleOver, quitterOver, Joueur2Over, Joueur3Over, Joueur4Over, tuile1Over,retourOver,continuerOver,menuOver
+    jouerOver = Joueur2Over = continuerOver = overRect(jouerX, jouerY, 200, 50)
+    regleOver = Joueur3Over = menuOver = overRect(regleX, regleY, 200, 50)
     quitterOver = Joueur4Over = overRect(quitterX, quitterY, 200, 50)
+    if boolJouer:
+        retourOver = overRect(335, 665, 25, 25)
 
 def updateRegle(x, y):
     global reglePrecOver, regleSuivOver, regleMenuOver
@@ -924,11 +964,25 @@ def tourSuivant():
         boolrelance = True
 
 def mousePressed():
-    global currentColor, boolQuitter, boolRegle, boolJouer, boolMenu, bool2Joueur, bool3Joueur, bool4Joueur, reglePrecOver, regleSuivOver, regleMenuOver, regleInt, boolrelance,j
-    global Tuile1NonUsed,Tuile2NonUsed,Tuile3NonUsed,Tuile4NonUsed,AjouterTileJ
+    global currentColor, boolQuitter, boolRegle, boolJouer, boolMenu, bool2Joueur, bool3Joueur, bool4Joueur, reglePrecOver, regleSuivOver, regleMenuOver, regleInt, boolrelance,j,i,boolResize,Tuile1, Tuile2, Tuile3, Tuile4,test, boolPause,boolrecommencer
+    global Tuile1NonUsed,Tuile2NonUsed,Tuile3NonUsed,Tuile4NonUsed,AjouterTileJ,boolPause, initialisation,AjouterTileJ, DeplacerPlateau,Tuile1NonUsed, Tuile2NonUsed, Tuile3NonUsed, Tuile4NonUsed,LJ
     ###Faire Fonction chaque if.
-    if boolJouer:
-        print(j)
+    if boolPause:
+        if continuerOver:
+            this.surface.setSize(int(displayWidth*0.6),int(displayHeight*0.6))
+            boolPause = False
+        if menuOver:           
+            boolQuitter = boolRegle = boolJouer = bool2Joueur = bool3Joueur = bool4Joueur =  boolrelance = Tuile1 = Tuile2 = Tuile3 = Tuile4 = test = boolPause = False
+            AjouterTileJ = DeplacerPlateau = False
+            Tuile1NonUsed = Tuile2NonUsed = Tuile3NonUsed = Tuile4NonUsed = True 
+            boolMenu = initialisation = True
+            boolResize = True
+            LJ = None
+            i = j = regleInt = nb_tour = 0
+            boolrecommencer = True
+        elif quitterOver :
+            exit()
+    elif boolJouer:
         if Joueur2Over and (AjouterTileJ == False):
             currentColor = regleColor
             bool2Joueur = True
@@ -948,8 +1002,6 @@ def mousePressed():
                 LJ[j%2].setLastTile(L[3])
                 Tuile4NonUsed = False
                 AjouterTileJ = True
-                
-                
         if Joueur3Over and (AjouterTileJ == False) :
             currentColor = regleColor
             bool3Joueur = True
@@ -965,11 +1017,9 @@ def mousePressed():
                 LJ[j].setLastTile(L[2])
                 Tuile3NonUsed = False
                 AjouterTileJ = True
-                
         if Joueur4Over and (AjouterTileJ == False) :
             currentColor = regleColor
             bool4Joueur = True
-            print(j)
             if Tuile1 and Tuile1NonUsed:
                 LJ[j].setLastTile(L[0])
                 Tuile1NonUsed = False
@@ -986,7 +1036,10 @@ def mousePressed():
                 LJ[j].setLastTile(L[3])
                 Tuile4NonUsed = False
                 AjouterTileJ = True
-    if boolMenu:
+        if retourOver:
+            boolJouer = False
+            boolMenu = True
+    elif boolMenu:
         if jouerOver:
             currentColor = regleColor
             boolJouer = True
@@ -998,7 +1051,7 @@ def mousePressed():
         if quitterOver:
             currentColor = regleColor
             boolQuitter = True
-    if boolRegle:
+    elif boolRegle:
         if regleSuivOver:
             if not(regleInt == 3):
                 regleInt += 1
@@ -1009,10 +1062,13 @@ def mousePressed():
             regleMenuOver = False
             boolMenu = True
             boolRegle = False
-            
-
 def keyPressed():
-    global boolrelance, test,AjouterTileJ,LJ,DeplacerPlateau,j
+    global boolrelance, test,AjouterTileJ,LJ,DeplacerPlateau,j,boolPause
+    if keyCode == 32:
+        if bool2Joueur or bool3Joueur or bool4Joueur :
+            if not(boolPause):
+                this.surface.setSize(700,700)
+            boolPause = True
     if bool3Joueur:
         i = (j)%3
     if bool4Joueur:
@@ -1056,6 +1112,7 @@ def keyPressed():
                     j = (j+1) % 4
                 if j == 0 and not (nb_tour == 0):
                     tourSuivant()
+                
 
 def overRect(x, y, width, height):
     return x <= mouseX <= x + width and y <= mouseY <= y + height
