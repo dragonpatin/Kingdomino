@@ -113,7 +113,6 @@ def Acceuil():
     fill(color(255, 0, 0))
     textSize(40)
     if boolrecommencer: 
-        print("test")
         text("Jouer", 350, 222)
         text("Regle", 350, 322)
         text("Quitter", 350, 422)
@@ -778,7 +777,6 @@ def loadTuile(boolResize):
     foret1.resize(taillex1, taillex1)
 
 def DeroulementTour():
-    print("test1682")
     #background(255, 255, 255)
     global LJ, j
     if bool2Joueur:
@@ -868,11 +866,7 @@ def setup():
     this.surface.setResizable(False)
 
 def draw():
-<<<<<<< HEAD
-    background(255, 255, 255)
-=======
     #background(255, 255, 255)
->>>>>>> Jean-Charles
     global boolrelance, nb_tour, LJ,test,L,initialisation,LC
     if boolRegle:
         Regle()
@@ -984,18 +978,15 @@ def tourSuivant():
 
 def mousePressed():
     global currentColor, boolQuitter, boolRegle, boolJouer, boolMenu, bool2Joueur, bool3Joueur, bool4Joueur, reglePrecOver, regleSuivOver, regleMenuOver, regleInt, boolrelance,j,i,boolResize,Tuile1, Tuile2, Tuile3, Tuile4,test, boolPause,boolrecommencer
-    global Tuile1NonUsed,Tuile2NonUsed,Tuile3NonUsed,Tuile4NonUsed,AjouterTileJ,boolPause, initialisation,AjouterTileJ, DeplacerPlateau,Tuile1NonUsed, Tuile2NonUsed, Tuile3NonUsed, Tuile4NonUsed,LJ
+    global Tuile1NonUsed,Tuile2NonUsed,Tuile3NonUsed,Tuile4NonUsed,AjouterTileJ,boolPause, initialisation,AjouterTileJ, DeplacerPlateau,Tuile1NonUsed, Tuile2NonUsed, Tuile3NonUsed, Tuile4NonUsed,LJ,regleOver
     ###Faire Fonction chaque if.
-<<<<<<< HEAD
-    if boolJouer:
-=======
     if boolPause:
         if continuerOver:
             this.surface.setSize(int(displayWidth*0.6),int(displayHeight*0.6))
             boolPause = False
-        if menuOver:           
+        elif menuOver:           
             boolQuitter = boolRegle = boolJouer = bool2Joueur = bool3Joueur = bool4Joueur =  boolrelance = Tuile1 = Tuile2 = Tuile3 = Tuile4 = test = boolPause = False
-            AjouterTileJ = DeplacerPlateau = False
+            AjouterTileJ = DeplacerPlateau = regleOver = False
             Tuile1NonUsed = Tuile2NonUsed = Tuile3NonUsed = Tuile4NonUsed = True 
             boolMenu = initialisation = True
             boolResize = True
@@ -1004,8 +995,7 @@ def mousePressed():
             boolrecommencer = True
         elif quitterOver :
             exit()
-    elif boolJouer:
->>>>>>> Jean-Charles
+    if boolJouer:
         if Joueur2Over and (AjouterTileJ == False):
             currentColor = regleColor
             bool2Joueur = True
@@ -1025,79 +1015,51 @@ def mousePressed():
                 LJ[j%2].setLastTile(L[3])
                 Tuile4NonUsed = False
                 AjouterTileJ = True
-        if Joueur3Over and (AjouterTileJ == False) :
+        elif Joueur3Over and (AjouterTileJ == False) :
             currentColor = regleColor
             bool3Joueur = True
             if Tuile1 and Tuile1NonUsed:
                 LJ[j].setLastTile(L[0])
-<<<<<<< HEAD
                 LJ[j].setNextPos(1)
-                j = (j+1) % 3
-=======
->>>>>>> Jean-Charles
                 Tuile1NonUsed = False
                 AjouterTileJ = True
             if Tuile2 and Tuile2NonUsed:
                 LJ[j].setLastTile(L[1])
-<<<<<<< HEAD
                 LJ[j].setNextPos(2)
-                j = (j+1) % 3
-=======
->>>>>>> Jean-Charles
                 Tuile2NonUsed = False
                 AjouterTileJ = True
             if Tuile3 and Tuile3NonUsed:
                 LJ[j].setLastTile(L[2])
-<<<<<<< HEAD
                 LJ[j].setNextPos(3)
-                j = (j+1) % 3
-=======
->>>>>>> Jean-Charles
                 Tuile3NonUsed = False
                 AjouterTileJ = True
-        if Joueur4Over and (AjouterTileJ == False) :
+        elif Joueur4Over and (AjouterTileJ == False) :
             currentColor = regleColor
             bool4Joueur = True
             if Tuile1 and Tuile1NonUsed:
                 LJ[j].setLastTile(L[0])
-<<<<<<< HEAD
                 LJ[j].setNextPos(1)
-                j = (j+1) % 4
-=======
->>>>>>> Jean-Charles
                 Tuile1NonUsed = False
                 AjouterTileJ = True
             if Tuile2 and Tuile2NonUsed:
                 LJ[j].setLastTile(L[1])
-<<<<<<< HEAD
                 LJ[j].setNextPos(2)
-                j = (j+1) % 4
-=======
->>>>>>> Jean-Charles
                 Tuile2NonUsed = False
                 AjouterTileJ = True
             if Tuile3 and Tuile3NonUsed:
                 LJ[j].setLastTile(L[2])
-<<<<<<< HEAD
                 LJ[j].setNextPos(3)
-                j = (j+1) % 4
-=======
->>>>>>> Jean-Charles
                 Tuile3NonUsed = False
                 AjouterTileJ = True
             if Tuile4 and Tuile4NonUsed:
                 LJ[j].setLastTile(L[3])
-<<<<<<< HEAD
                 LJ[j].setNextPos(4)
-                j = (j+1) % 4
-=======
->>>>>>> Jean-Charles
                 Tuile4NonUsed = False
                 AjouterTileJ = True
-        if retourOver:
+        elif retourOver:
             boolJouer = False
             boolMenu = True
-    elif boolMenu:
+    if boolMenu:
         if jouerOver:
             currentColor = regleColor
             boolJouer = True
@@ -1109,7 +1071,7 @@ def mousePressed():
         if quitterOver:
             currentColor = regleColor
             boolQuitter = True
-    elif boolRegle:
+    if boolRegle:
         if regleSuivOver:
             if not(regleInt == 3):
                 regleInt += 1
@@ -1121,18 +1083,12 @@ def mousePressed():
             boolMenu = True
             boolRegle = False
 def keyPressed():
-<<<<<<< HEAD
-    global boolrelance, test,AjouterTileJ,LJ,DeplacerPlateau
-    print(key)
-    print(keyCode)
-=======
     global boolrelance, test,AjouterTileJ,LJ,DeplacerPlateau,j,boolPause
     if keyCode == 32:
         if bool2Joueur or bool3Joueur or bool4Joueur :
             if not(boolPause):
                 this.surface.setSize(700,700)
             boolPause = True
->>>>>>> Jean-Charles
     if bool3Joueur:
         i = (j)%3
     if bool4Joueur:
@@ -1142,7 +1098,7 @@ def keyPressed():
     if AjouterTileJ :
         if DeplacerPlateau :
             if keyCode == LEFT:
-                print(1)
+                #print(1)
                 LJ[i].plateauLeft()
             if keyCode == RIGHT:
                 LJ[i].plateauRight()
@@ -1154,7 +1110,7 @@ def keyPressed():
                 DeplacerPlateau = False
         else :
             if keyCode == LEFT:
-                print(1)
+                #print(1)
                 LJ[i].tileLeft()
             if keyCode == RIGHT:
                 LJ[i].tileRight()
