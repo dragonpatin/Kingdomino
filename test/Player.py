@@ -58,6 +58,7 @@ class Player:
 	def plateauLeft(self):
 		if(self.autorisationDeplacementPlateauLeft()):
 			self.castle_x -= 1
+			self.resetTabPoint()
 			for T in self.list_tuile :
 				T.left()
 				self.constructionTabPoint(T)
@@ -66,6 +67,7 @@ class Player:
 	def plateauRight(self):
 		if(self.autorisationDeplacementPlateauRight()):
 			self.castle_x += 1
+			self.resetTabPoint()
 			for T in self.list_tuile :
 				T.right()
 				self.constructionTabPoint(T)
@@ -74,6 +76,7 @@ class Player:
 	def plateauDown(self):
 		if(self.autorisationDeplacementPlateauDown()):
 			self.castle_y += 1
+			self.resetTabPoint()
 			for T in self.list_tuile :
 				T.down()
 				self.constructionTabPoint(T)
@@ -82,6 +85,7 @@ class Player:
 	def plateauUp(self):
 		if(self.autorisationDeplacementPlateauUp()):
 			self.castle_y -= 1
+			self.resetTabPoint()
 			for T in self.list_tuile :
 				T.up()
 				self.constructionTabPoint(T)
@@ -186,9 +190,10 @@ class Player:
                 self.tabPoint[0][0][0] = 7
                 
         def resetTabPoint(self):
-                n = 5
-                m = 3
-                self.tabPoint = [[[0 for k in xrange(m)] for j in xrange(n)] for i in xrange(n)]
+                for i in range (0,5):
+                        for j in range (0,5):
+                                for k in range (0,3):
+                                        self.tabPoint[i][j][k] = 0
 
         def ajoutTileTabPoint(self):
                 self.tabPoint[self.lastTile.position_y][self.lastTile.position_x][0] = self.lastTile.tuile_1
@@ -198,7 +203,6 @@ class Player:
                 self.tabPoint[self.lastTile.getPos2y()][self.lastTile.getPos2x()][1] = self.lastTile.couronne_2
 
         def constructionTabPoint(self,T):
-                self.resetTabPoint()
                 self.tabPoint[T.position_y][T.position_x][0] = T.tuile_1
                 self.tabPoint[T.position_y][T.position_x][1] = T.couronne_1
                 
