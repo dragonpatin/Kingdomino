@@ -529,6 +529,7 @@ def affiche_joueur():
                 text("Points : {a}".format(a = player.nbpoint), width*0.215, width*0.08 + 70 + height*0.05)
             else :
                 text("Joueur {a}".format(a = player.nom), width*0.125, width*0.08 + 70 + height*0.05)
+                text("Points : {a}".format(a = player.nbpoint), width*0.175, width*0.08 + 70 + height*0.05)
         elif(i == 1) :
             textAlign(CENTER, CENTER)
             if bool2Joueur : 
@@ -539,6 +540,7 @@ def affiche_joueur():
                 text("Points : {a}".format(a = player.nbpoint), width*0.215 + i * 0.33 * width, width*0.08 + 70 + height*0.05)
             else :
                 text("Joueur {a}".format(a = player.nom), width*0.125 + i * 0.25 * width, width*0.08 + 70 + height*0.05)
+                text("Points : {a}".format(a = player.nbpoint), width*0.175 + i * 0.25 * width, width*0.08 + 70 + height*0.05)
         elif(i == 2) :
             textAlign(CENTER, CENTER)
             if bool3Joueur:
@@ -546,9 +548,11 @@ def affiche_joueur():
                 text("Points : {a}".format(a = player.nbpoint), width*0.215 + i * 0.33 * width, width*0.08 + 70 + height*0.05)
             else :
                 text("Joueur {a}".format(a = player.nom), width*0.125 + i * 0.25 * width, width*0.08 + 70 + height*0.05)
+                text("Points : {a}".format(a = player.nbpoint), width*0.175 + i * 0.25 * width, width*0.08 + 70 + height*0.05)
         elif(i == 3):
             textAlign(CENTER, CENTER)
             text("Joueur {a}".format(a = player.nom), width*0.125 + i * 0.25 * width, width*0.08 + 70 + height*0.05)
+            text("Points : {a}".format(a = player.nbpoint), width*0.175 + i * 0.25 * width, width*0.08 + 70 + height*0.05)
         i += 1
         
 def affichePlateau(List_Plateau):
