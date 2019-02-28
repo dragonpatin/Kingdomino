@@ -928,9 +928,17 @@ def draw():
         Pause()
 
 
+def updatePause(x, y):
+    global quitterOver, continuerOver,menuOver
+    continuerOver = overRect(jouerX, jouerY, 200, 50)
+    menuOver = overRect(regleX, regleY, 200, 50)
+    quitterOver = overRect(quitterX, quitterY, 200, 50)
+
 def update(x, y):
     global jouerOver, regleOver, quitterOver, Joueur2Over, Joueur3Over, Joueur4Over, tuile1Over,retourOver,continuerOver,menuOver
     jouerOver = Joueur2Over = continuerOver = overRect(jouerX, jouerY, 200, 50)
+    if continuerOver and  (bool3Joueur or bool4Joueur ): 
+        Joueur2Over = False
     regleOver = Joueur3Over = menuOver = overRect(regleX, regleY, 200, 50)
     quitterOver = Joueur4Over = overRect(quitterX, quitterY, 200, 50)
     if boolJouer:
