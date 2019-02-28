@@ -607,28 +607,37 @@ def affiche_joueur():
         if(i == 0) :
             textAlign(CENTER, CENTER)
             if bool2Joueur : 
-                text("Joueur {a}".format(a = player.nom), width*0.25, width*0.08 + 70 + height*0.05)
+                text("Joueur {a}".format(a = player.nom), width*0.25, width*0.08 + 70 + height*0.05 )
+                text("Points : {a}".format(a = player.nbpoint), width*0.30, width*0.08 + 70 + height*0.05+ 6*40)
             elif bool3Joueur:
                 text("Joueur {a}".format(a = player.nom), width*0.165, width*0.08 + 70 + height*0.05)
+                text("Points : {a}".format(a = player.nbpoint), width*0.215, width*0.08 + 70 + height*0.05+ 6*40)
             else :
                 text("Joueur {a}".format(a = player.nom), width*0.125, width*0.08 + 70 + height*0.05)
+                text("Points : {a}".format(a = player.nbpoint), width*0.175, width*0.08 + 70 + height*0.05+ 6*40)
         elif(i == 1) :
             textAlign(CENTER, CENTER)
             if bool2Joueur : 
                 text("Joueur {a}".format(a = player.nom), width*0.75, width*0.08 + 70 + height*0.05)
+                text("Points : {a}".format(a = player.nbpoint), width*0.80, width*0.08 + 70 + height*0.05+ 6*40)
             elif bool3Joueur:
                 text("Joueur {a}".format(a = player.nom), width*0.165 + i * 0.33 * width, width*0.08 + 70 + height*0.05)
+                text("Points : {a}".format(a = player.nbpoint), width*0.215 + i * 0.33 * width, width*0.08 + 70 + height*0.05+ 6*40)
             else :
                 text("Joueur {a}".format(a = player.nom), width*0.125 + i * 0.25 * width, width*0.08 + 70 + height*0.05)
+                text("Points : {a}".format(a = player.nbpoint), width*0.175 + i * 0.25 * width, width*0.08 + 70 + height*0.05+ 6*40)
         elif(i == 2) :
             textAlign(CENTER, CENTER)
             if bool3Joueur:
                 text("Joueur {a}".format(a = player.nom), width*0.165 + i * 0.33 * width, width*0.08 + 70 + height*0.05)
+                text("Points : {a}".format(a = player.nbpoint), width*0.215 + i * 0.33 * width, width*0.08 + 70 + height*0.05+ 6*40)
             else :
                 text("Joueur {a}".format(a = player.nom), width*0.125 + i * 0.25 * width, width*0.08 + 70 + height*0.05)
+                text("Points : {a}".format(a = player.nbpoint), width*0.175 + i * 0.25 * width, width*0.08 + 70 + height*0.05+ 6*40)
         elif(i == 3):
             textAlign(CENTER, CENTER)
             text("Joueur {a}".format(a = player.nom), width*0.125 + i * 0.25 * width, width*0.08 + 70 + height*0.05)
+            text("Points : {a}".format(a = player.nbpoint), width*0.175 + i * 0.25 * width, width*0.08 + 70 + height*0.05+ 6*40)
         i += 1
         
 def affichePlateau(List_Plateau):
@@ -785,10 +794,6 @@ def DeroulementTour():
         nb_generation = 3
     elif bool4Joueur:
         nb_generation = 4
-    #fill(color(0, 0, 0))
-    #textSize(20)
-    #textAlign(CENTER, CENTER)
-    #text("Joueur {a}".format(a=LJ[j].nom), 350, 25)
     List_Plateau = list()
     # Prend une tuile aleatoire
     for i in range(1, nb_generation + 1):
@@ -879,6 +884,8 @@ def draw():
                 nb_tour = 5
                 LC = Game(2)
                 LJ = LC.createListJoueurs()
+                for player in LJ:
+                    player.initTabPoint ()
                 L = DeroulementTour()
                 initialisation=False
                 this.surface.setSize(int(displayWidth*0.6),int(displayHeight*0.6))
@@ -893,6 +900,8 @@ def draw():
                 nb_tour = 11
                 LC = Game(3)
                 LJ = LC.createListJoueurs()
+                for player in LJ:
+                    player.initTabPoint ()
                 L = DeroulementTour()
                 initialisation=False
                 this.surface.setSize(int(displayWidth*0.6),int(displayHeight*0.6))
@@ -907,6 +916,8 @@ def draw():
                 nb_tour = 11
                 LC = Game(4)
                 LJ = LC.createListJoueurs()
+                for player in LJ:
+                    player.initTabPoint ()
                 L = DeroulementTour()
                 initialisation=False
                 this.surface.setSize(int(displayWidth*0.6),int(displayHeight*0.6))
@@ -1106,7 +1117,6 @@ def keyPressed():
     if AjouterTileJ :
         if DeplacerPlateau :
             if keyCode == LEFT:
-                #print(1)
                 LJ[i].plateauLeft()
             if keyCode == RIGHT:
                 LJ[i].plateauRight()
@@ -1118,7 +1128,6 @@ def keyPressed():
                 DeplacerPlateau = False
         else :
             if keyCode == LEFT:
-                #print(1)
                 LJ[i].tileLeft()
             if keyCode == RIGHT:
                 LJ[i].tileRight()
@@ -1133,8 +1142,17 @@ def keyPressed():
             if keyCode == 8 :
                 LJ[i].lastTile = None
                 AjouterTileJ = False
+                if bool3Joueur :
+                    j = (j+1) % 3
+                else : 
+                    j = (j+1) % 4
+                if j == 0 and not (nb_tour == 0):
+                    tourSuivant()
             if key == ENTER and LJ[i].autorisationSauveguarde():
                 LJ[i].list_tuile.append(LJ[i].lastTile)
+                LJ[i].ajoutTileTabPoint()
+                LJ[i].comptagePoint()
+                print("nb point joueur {a} : {b}".format(a = LJ[i].nom, b = LJ[i].nbpoint))
                 LJ[i].lastTile = None
                 AjouterTileJ = False;
                 if bool3Joueur :
