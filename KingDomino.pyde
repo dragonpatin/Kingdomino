@@ -14,7 +14,10 @@ AjouterTileJ = DeplacerPlateau = False
 Tuile1NonUsed = Tuile2NonUsed = Tuile3NonUsed = Tuile4NonUsed = True 
 boolMenu = initialisation = True
 boolResize = True
+Mpressed = Kpressed = False
+Key = 0
 regleInt = nb_tour = 0
+NextTurn = False
 LT = None
 LJ = None
 LC = None
@@ -872,7 +875,7 @@ def setup():
 
 def draw():
     #background(255, 255, 255)
-    global boolrelance, nb_tour, LJ,test,L,initialisation,LC
+    global boolrelance, nb_tour, LJ,test,L,initialisation,LC,Mpressed,Tuile1NonUsed,Tuile2NonUsed,Tuile3NonUsed,Tuile4NonUsed,AjouterTileJ,Kpressed,j,Key,DeplacerPlateau,NextTurn
     if boolRegle:
         Regle()
     if boolMenu:
@@ -890,8 +893,12 @@ def draw():
                 initialisation=False
                 this.surface.setSize(int(displayWidth*0.6),int(displayHeight*0.6))
                 resizeTuile(True)
-            else : 
+            else :
                 resizeTuile(False)
+                Mpressed,Tuile1NonUsed,Tuile2NonUsed,Tuile3NonUsed,Tuile4NonUsed,AjouterTileJ = LJ[j%2].choisir(Mpressed,Tuile1,Tuile2,Tuile3,Tuile4,Tuile1NonUsed,Tuile2NonUsed,Tuile3NonUsed,Tuile4NonUsed,AjouterTileJ,bool2Joueur,bool3Joueur,bool4Joueur,L)
+                Kpressed,Key,j,AjouterTileJ,DeplacerPlateau,NextTurn = LJ[j%2].deplacer(Kpressed,Key,bool2Joueur,bool3Joueur,bool4Joueur,j,AjouterTileJ,DeplacerPlateau,NextTurn,nb_tour)
+                if NextTurn :
+                    tourSuivant()
             updateJouer2_4(mouseX,mouseY)
             affichePlateau(L)
         elif bool3Joueur:
@@ -908,6 +915,10 @@ def draw():
                 resizeTuile(True)
             else :
                 resizeTuile(False)
+                Mpressed,Tuile1NonUsed,Tuile2NonUsed,Tuile3NonUsed,Tuile4NonUsed,AjouterTileJ = LJ[j].choisir(Mpressed,Tuile1,Tuile2,Tuile3,Tuile4,Tuile1NonUsed,Tuile2NonUsed,Tuile3NonUsed,Tuile4NonUsed,AjouterTileJ,bool2Joueur,bool3Joueur,bool4Joueur,L)
+                Kpressed,Key,j,AjouterTileJ,DeplacerPlateau,NextTurn = LJ[j].deplacer(Kpressed,Key,bool2Joueur,bool3Joueur,bool4Joueur,j,AjouterTileJ,DeplacerPlateau,NextTurn,nb_tour)
+                if NextTurn :
+                    tourSuivant()
             updateJouer3(mouseX,mouseY)
             affichePlateau(L)
         elif bool4Joueur:
@@ -924,6 +935,10 @@ def draw():
                 resizeTuile(True)
             else:
                 resizeTuile(False)
+                Mpressed,Tuile1NonUsed,Tuile2NonUsed,Tuile3NonUsed,Tuile4NonUsed,AjouterTileJ = LJ[j].choisir(Mpressed,Tuile1,Tuile2,Tuile3,Tuile4,Tuile1NonUsed,Tuile2NonUsed,Tuile3NonUsed,Tuile4NonUsed,AjouterTileJ,bool2Joueur,bool3Joueur,bool4Joueur,L)
+                Kpressed,Key,j,AjouterTileJ,DeplacerPlateau,NextTurn = LJ[j].deplacer(Kpressed,Key,bool2Joueur,bool3Joueur,bool4Joueur,j,AjouterTileJ,DeplacerPlateau)
+                if NextTurn :
+                    tourSuivant()
             updateJouer2_4(mouseX,mouseY)
             affichePlateau(L)
         else : 
@@ -975,7 +990,7 @@ def updateJouer3(x, y):
     Tuile3 = overRect(width * 0.09 + 0.33 * 2 * width, 70, 2 * int(width*0.08), int(width*0.08))
   
 def tourSuivant():
-    global boolrelance, test,Tuile1NonUsed,Tuile2NonUsed,Tuile3NonUsed,Tuile4NonUsed,LJ
+    global boolrelance, test,Tuile1NonUsed,Tuile2NonUsed,Tuile3NonUsed,Tuile4NonUsed,LJ,NextTurn
     Tuile1NonUsed = Tuile2NonUsed = Tuile3NonUsed = Tuile4NonUsed = True
     if bool2Joueur :
         LJ[0].setNextPos(2)
@@ -986,6 +1001,7 @@ def tourSuivant():
             if LJ[j].getNextPos() == i+1 :
                 t = LJ[j]
                 nl.append(t)
+    NextTurn = False
     LJ = nl
     # for a in nl :
     #     print(a.nom)
@@ -998,6 +1014,7 @@ def tourSuivant():
 def mousePressed():
     global currentColor, boolQuitter, boolRegle, boolJouer, boolMenu, bool2Joueur, bool3Joueur, bool4Joueur, reglePrecOver, regleSuivOver, regleMenuOver, regleInt, boolrelance,j,i,boolResize,Tuile1, Tuile2, Tuile3, Tuile4,test, boolPause,boolrecommencer
     global Tuile1NonUsed,Tuile2NonUsed,Tuile3NonUsed,Tuile4NonUsed,AjouterTileJ,boolPause, initialisation,AjouterTileJ, DeplacerPlateau,Tuile1NonUsed, Tuile2NonUsed, Tuile3NonUsed, Tuile4NonUsed,LJ,regleOver
+    global Mpressed
     ###Faire Fonction chaque if.
     if boolPause:
         if continuerOver:
@@ -1014,67 +1031,17 @@ def mousePressed():
             boolrecommencer = True
         elif quitterOver :
             exit()
-    if boolJouer:
+    if boolJouer and (Mpressed == False) :
+        Mpressed = True
         if Joueur2Over and (AjouterTileJ == False):
             currentColor = regleColor
             bool2Joueur = True
-            if Tuile1 and Tuile1NonUsed:
-                LJ[j%2].setLastTile(L[0])
-                Tuile1NonUsed = False
-                AjouterTileJ = True
-            if Tuile2 and Tuile2NonUsed:
-                LJ[j%2].setLastTile(L[1])
-                Tuile2NonUsed = False
-                AjouterTileJ = True
-            if Tuile3 and Tuile3NonUsed:
-                LJ[j%2].setLastTile(L[2])
-                Tuile3NonUsed = False
-                AjouterTileJ = True
-            if Tuile4 and Tuile4NonUsed:
-                LJ[j%2].setLastTile(L[3])
-                Tuile4NonUsed = False
-                AjouterTileJ = True
-        elif Joueur3Over and (AjouterTileJ == False) :
+        elif Joueur3Over:
             currentColor = regleColor
             bool3Joueur = True
-            if Tuile1 and Tuile1NonUsed:
-                LJ[j].setLastTile(L[0])
-                LJ[j].setNextPos(1)
-                Tuile1NonUsed = False
-                AjouterTileJ = True
-            if Tuile2 and Tuile2NonUsed:
-                LJ[j].setLastTile(L[1])
-                LJ[j].setNextPos(2)
-                Tuile2NonUsed = False
-                AjouterTileJ = True
-            if Tuile3 and Tuile3NonUsed:
-                LJ[j].setLastTile(L[2])
-                LJ[j].setNextPos(3)
-                Tuile3NonUsed = False
-                AjouterTileJ = True
-        elif Joueur4Over and (AjouterTileJ == False) :
+        elif Joueur4Over:
             currentColor = regleColor
             bool4Joueur = True
-            if Tuile1 and Tuile1NonUsed:
-                LJ[j].setLastTile(L[0])
-                LJ[j].setNextPos(1)
-                Tuile1NonUsed = False
-                AjouterTileJ = True
-            if Tuile2 and Tuile2NonUsed:
-                LJ[j].setLastTile(L[1])
-                LJ[j].setNextPos(2)
-                Tuile2NonUsed = False
-                AjouterTileJ = True
-            if Tuile3 and Tuile3NonUsed:
-                LJ[j].setLastTile(L[2])
-                LJ[j].setNextPos(3)
-                Tuile3NonUsed = False
-                AjouterTileJ = True
-            if Tuile4 and Tuile4NonUsed:
-                LJ[j].setLastTile(L[3])
-                LJ[j].setNextPos(4)
-                Tuile4NonUsed = False
-                AjouterTileJ = True
         elif retourOver:
             boolJouer = False
             boolMenu = True
@@ -1101,66 +1068,32 @@ def mousePressed():
             regleMenuOver = False
             boolMenu = True
             boolRegle = False
+            
 def keyPressed():
-    global boolrelance, test,AjouterTileJ,LJ,DeplacerPlateau,j,boolPause
+    global boolrelance, test,AjouterTileJ,LJ,DeplacerPlateau,j,boolPause,Kpressed,Key
     if keyCode == 32:
         if bool2Joueur or bool3Joueur or bool4Joueur :
             if not(boolPause):
                 this.surface.setSize(700,700)
             boolPause = True
-    if bool3Joueur:
-        i = (j)%3
-    if bool4Joueur:
-        i = (j)%4
-    if bool2Joueur:
-        i = (j)%2
     if AjouterTileJ :
-        if DeplacerPlateau :
-            if keyCode == LEFT:
-                LJ[i].plateauLeft()
-            if keyCode == RIGHT:
-                LJ[i].plateauRight()
-            if keyCode == UP:
-                LJ[i].plateauUp()
-            if keyCode == DOWN:
-                LJ[i].plateauDown()
-            if keyCode == SHIFT:
-                DeplacerPlateau = False
-        else :
-            if keyCode == LEFT:
-                LJ[i].tileLeft()
-            if keyCode == RIGHT:
-                LJ[i].tileRight()
-            if keyCode == UP:
-                LJ[i].tileUp()
-            if keyCode == DOWN:
-                LJ[i].tileDown()
-            if keyCode == CONTROL:
-                LJ[i].tileOrientation()
-            if keyCode == SHIFT:
-                DeplacerPlateau = True
-            if keyCode == 8 :
-                LJ[i].lastTile = None
-                AjouterTileJ = False
-                if bool3Joueur :
-                    j = (j+1) % 3
-                else : 
-                    j = (j+1) % 4
-                if j == 0 and not (nb_tour == 0):
-                    tourSuivant()
-            if key == ENTER and LJ[i].autorisationSauveguarde():
-                LJ[i].list_tuile.append(LJ[i].lastTile)
-                LJ[i].ajoutTileTabPoint()
-                LJ[i].comptagePoint()
-                print("nb point joueur {a} : {b}".format(a = LJ[i].nom, b = LJ[i].nbpoint))
-                LJ[i].lastTile = None
-                AjouterTileJ = False;
-                if bool3Joueur :
-                    j = (j+1) % 3
-                else : 
-                    j = (j+1) % 4
-                if j == 0 and not (nb_tour == 0):
-                    tourSuivant()
+        Kpressed = True
+        if keyCode == LEFT:
+            Key = 1
+        if keyCode == RIGHT:
+            Key = 2
+        if keyCode == UP:
+            Key = 3
+        if keyCode == DOWN:
+            Key = 4
+        if keyCode == SHIFT:
+            Key = 5
+        if keyCode == CONTROL:
+            Key = 6
+        if keyCode == 8 :
+            Key = 7
+        if key == ENTER :
+            Key = 8
 
 def overRect(x, y, width, height):
     return x <= mouseX <= x + width and y <= mouseY <= y + height
