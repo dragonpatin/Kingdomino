@@ -9,7 +9,7 @@ regleColor = color(255)
 jouerColor = color(255)
 quitterColor = color(255)
 fps = 30
-boolQuitter = boolRegle = boolJouer = bool2Joueur = bool3Joueur = bool4Joueur =  boolrelance = Tuile1 = Tuile2 = Tuile3 = Tuile4 = test = boolPause = continuerOver = menuOver = boolrecommencer= False
+boolQuitter = boolRegle = boolJouer = bool2Joueur = bool3Joueur = bool4Joueur = Tuile1 = Tuile2 = Tuile3 = Tuile4 = test = boolPause = continuerOver = menuOver = boolrecommencer= False
 AjouterTileJ = DeplacerPlateau = False
 Tuile1NonUsed = Tuile2NonUsed = Tuile3NonUsed = Tuile4NonUsed = True 
 boolMenu = initialisation = True
@@ -875,7 +875,7 @@ def setup():
 
 def draw():
     #background(255, 255, 255)
-    global boolrelance, nb_tour, LJ,test,L,initialisation,LC,Mpressed,Tuile1NonUsed,Tuile2NonUsed,Tuile3NonUsed,Tuile4NonUsed,AjouterTileJ,Kpressed,j,Key,DeplacerPlateau,NextTurn
+    global nb_tour, LJ,test,L,initialisation,LC,Mpressed,Tuile1NonUsed,Tuile2NonUsed,Tuile3NonUsed,Tuile4NonUsed,AjouterTileJ,Kpressed,j,Key,DeplacerPlateau,NextTurn
     if boolRegle:
         Regle()
     if boolMenu:
@@ -943,11 +943,6 @@ def draw():
             affichePlateau(L)
         else : 
             Jouer()
-    if boolrelance :
-        nb_tour = nb_tour - 1
-        L = DeroulementTour()
-        affiche_tuile(L)
-        boolrelance = False
     if boolQuitter:
         exit()
     if boolPause:
@@ -990,7 +985,7 @@ def updateJouer3(x, y):
     Tuile3 = overRect(width * 0.09 + 0.33 * 2 * width, 70, 2 * int(width*0.08), int(width*0.08))
   
 def tourSuivant():
-    global boolrelance, test,Tuile1NonUsed,Tuile2NonUsed,Tuile3NonUsed,Tuile4NonUsed,LJ,NextTurn
+    global test,Tuile1NonUsed,Tuile2NonUsed,Tuile3NonUsed,Tuile4NonUsed,LJ,NextTurn,nb_tour,L
     Tuile1NonUsed = Tuile2NonUsed = Tuile3NonUsed = Tuile4NonUsed = True
     if bool2Joueur :
         LJ[0].setNextPos(2)
@@ -1008,11 +1003,12 @@ def tourSuivant():
     # for i in range(0,LC.nbjoueurs):
     #     LJ.append(nl[i])
     if RTG.taille > 0 and nb_tour != 0:
-        test = True
-        boolrelance = True
+        nb_tour = nb_tour - 1
+        L = DeroulementTour()
+        affiche_tuile(L)
 
 def mousePressed():
-    global currentColor, boolQuitter, boolRegle, boolJouer, boolMenu, bool2Joueur, bool3Joueur, bool4Joueur, reglePrecOver, regleSuivOver, regleMenuOver, regleInt, boolrelance,j,i,boolResize,Tuile1, Tuile2, Tuile3, Tuile4,test, boolPause,boolrecommencer
+    global currentColor, boolQuitter, boolRegle, boolJouer, boolMenu, bool2Joueur, bool3Joueur, bool4Joueur, reglePrecOver, regleSuivOver, regleMenuOver, regleInt,j,i,boolResize,Tuile1, Tuile2, Tuile3, Tuile4,test, boolPause,boolrecommencer
     global Tuile1NonUsed,Tuile2NonUsed,Tuile3NonUsed,Tuile4NonUsed,AjouterTileJ,boolPause, initialisation,AjouterTileJ, DeplacerPlateau,Tuile1NonUsed, Tuile2NonUsed, Tuile3NonUsed, Tuile4NonUsed,LJ,regleOver
     global Mpressed
     ###Faire Fonction chaque if.
@@ -1021,7 +1017,7 @@ def mousePressed():
             this.surface.setSize(int(displayWidth*0.6),int(displayHeight*0.6))
             boolPause = False
         elif menuOver:           
-            boolQuitter = boolRegle = boolJouer = bool2Joueur = bool3Joueur = bool4Joueur =  boolrelance = Tuile1 = Tuile2 = Tuile3 = Tuile4 = test = boolPause = False
+            boolQuitter = boolRegle = boolJouer = bool2Joueur = bool3Joueur = bool4Joueur = Tuile1 = Tuile2 = Tuile3 = Tuile4 = test = boolPause = False
             AjouterTileJ = DeplacerPlateau = regleOver = False
             Tuile1NonUsed = Tuile2NonUsed = Tuile3NonUsed = Tuile4NonUsed = True 
             boolMenu = initialisation = True
@@ -1070,7 +1066,7 @@ def mousePressed():
             boolRegle = False
             
 def keyPressed():
-    global boolrelance, test,AjouterTileJ,LJ,DeplacerPlateau,j,boolPause,Kpressed,Key
+    global test,AjouterTileJ,LJ,DeplacerPlateau,j,boolPause,Kpressed,Key
     if keyCode == 32:
         if bool2Joueur or bool3Joueur or bool4Joueur :
             if not(boolPause):
