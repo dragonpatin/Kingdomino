@@ -24,6 +24,8 @@ LC = None
 i = 0
 j = 0 
 L = list()
+ChoixJ1 = ChoixJ2 = ChoixJ3 = ChoixJ4 = 0
+boolChoixJ = ModifJ1 = ModifJ2 = ModifJ3 = ModifJ4 = LPartie = False
 
 def Pause():
     image(imgMenue, 0, 0)
@@ -123,7 +125,73 @@ def Acceuil():
         text("Jouer", 300, 242)
         text("Regle", 300, 342)
         text("Quitter", 280, 442)
+        
+def update_ChoixJoueur(x,y):
+    global ModifJ1,ModifJ2,ModifJ3,ModifJ4,LPartie
+    ModifJ1 = overRect(250, 200, 200, 50)
+    ModifJ2 = overRect(250, 300, 200, 50)
+    ModifJ3 = overRect(250, 400, 200, 50)
+    ModifJ4 = overRect(250, 500, 200, 50)
+    LPartie = overRect(250, 600, 200, 50)
 
+def ChoixJoueur():
+    image(imgMenue, 0, 0)
+    update_ChoixJoueur(mouseX,mouseY)
+    stroke(0)
+    if ModifJ1:
+        fill(color(204))
+    else:
+        fill(color(255))
+    rect(250, 200, 200, 50, 20)
+    fill(color(255, 0, 0))
+    if(ChoixJ1 == 0):
+        text("Humain", 275, 237)
+    if(ChoixJ1 == 1):
+        text("IA - 1", 275, 237)
+        
+    if ModifJ2:
+        fill(color(204))
+    else:
+        fill(color(255))
+    rect(250, 300, 200, 50, 20)
+    fill(color(255, 0, 0))
+    if(ChoixJ2 == 0):
+        text("Humain", 275, 337)
+    if(ChoixJ2 == 1):
+        text("IA - 1", 275, 337)
+    
+    if bool3Joueur or bool4Joueur:
+        if ModifJ3:
+            fill(color(204))
+        else:
+            fill(color(255))
+        rect(250, 400, 200, 50, 20)
+        fill(color(255, 0, 0))
+        if(ChoixJ3 == 0):
+            text("Humain", 275, 437)
+        if(ChoixJ3 == 1):
+            text("IA - 1", 275, 437)
+        
+    if bool4Joueur:
+        if ModifJ4:
+            fill(color(204))
+        else:
+            fill(color(255))
+        rect(250, 500, 200, 50, 20)
+        fill(color(255, 0, 0))
+        if(ChoixJ4 == 0):
+            text("Humain", 275, 537)
+        if(ChoixJ4 == 1):
+            text("IA - 1", 275, 537)
+    
+    if LPartie:
+        fill(color(204))
+    else:
+        fill(color(255))
+    rect(250,600, 200, 50, 20)
+    fill(color(255, 0, 0))
+    text("Jouer", 300, 637)
+     
 def Jouer():
     image(imgMenue, 0, 0)
     update(mouseX, mouseY)
@@ -878,6 +946,8 @@ def draw():
     global nb_tour, LJ,test,L,initialisation,LC,Mpressed,Tuile1NonUsed,Tuile2NonUsed,Tuile3NonUsed,Tuile4NonUsed,AjouterTileJ,Kpressed,j,Key,DeplacerPlateau,NextTurn
     if boolRegle:
         Regle()
+    if boolChoixJ :
+         ChoixJoueur()
     if boolMenu:
         Acceuil()
     if boolJouer:
@@ -886,7 +956,7 @@ def draw():
                 this.surface.setResizable(True)
                 nb_tour = 5
                 LC = Game(2)
-                LJ = LC.createListJoueurs()
+                LJ = LC.createListJoueurs(ChoixJ1,ChoixJ2)
                 for player in LJ:
                     player.initTabPoint ()
                 L = DeroulementTour()
@@ -906,7 +976,7 @@ def draw():
                 this.surface.setResizable(True)
                 nb_tour = 11
                 LC = Game(3)
-                LJ = LC.createListJoueurs()
+                LJ = LC.createListJoueurs(ChoixJ1,ChoixJ2,ChoixJ3)
                 for player in LJ:
                     player.initTabPoint ()
                 L = DeroulementTour()
@@ -926,7 +996,7 @@ def draw():
                 this.surface.setResizable(True)
                 nb_tour = 11
                 LC = Game(4)
-                LJ = LC.createListJoueurs()
+                LJ = LC.createListJoueurs(ChoixJ1,ChoixJ2,ChoixJ3,ChoixJ4)
                 for player in LJ:
                     player.initTabPoint ()
                 L = DeroulementTour()
@@ -1010,7 +1080,7 @@ def tourSuivant():
 def mousePressed():
     global currentColor, boolQuitter, boolRegle, boolJouer, boolMenu, bool2Joueur, bool3Joueur, bool4Joueur, reglePrecOver, regleSuivOver, regleMenuOver, regleInt,j,i,boolResize,Tuile1, Tuile2, Tuile3, Tuile4,test, boolPause,boolrecommencer
     global Tuile1NonUsed,Tuile2NonUsed,Tuile3NonUsed,Tuile4NonUsed,AjouterTileJ,boolPause, initialisation,AjouterTileJ, DeplacerPlateau,Tuile1NonUsed, Tuile2NonUsed, Tuile3NonUsed, Tuile4NonUsed,LJ,regleOver
-    global Mpressed
+    global Mpressed,boolChoixJ,LPartie,Joueur2Over,Joueur3Over,Joueur4Over,ChoixJ1,ChoixJ2,ChoixJ3,ChoixJ4
     ###Faire Fonction chaque if.
     if boolPause:
         if continuerOver:
@@ -1027,17 +1097,40 @@ def mousePressed():
             boolrecommencer = True
         elif quitterOver :
             exit()
-    if boolJouer and (Mpressed == False) :
+    if boolJouer and (bool2Joueur or bool3Joueur or bool4Joueur):
         Mpressed = True
-        if Joueur2Over and (AjouterTileJ == False):
+    if boolChoixJ:
+        if ModifJ1:
+            ChoixJ1 = (ChoixJ1 + 1)%2
+        if ModifJ2:
+            ChoixJ2 = (ChoixJ2 + 1)%2
+        if ModifJ3:
+            ChoixJ3 = (ChoixJ3 + 1)%2
+        if ModifJ4:
+            ChoixJ4 = (ChoixJ4 + 1)%2
+        if LPartie:
+            LPartie = False
+            boolChoixJ = False
+            boolJouer = True
+    if boolJouer :
+        if Joueur2Over:
             currentColor = regleColor
+            boolChoixJ = True
+            boolJouer = False
+            Joueur2Over = False
             bool2Joueur = True
         elif Joueur3Over:
             currentColor = regleColor
             bool3Joueur = True
+            boolChoixJ = True
+            Joueur3Over = False
+            boolJouer = False
         elif Joueur4Over:
             currentColor = regleColor
             bool4Joueur = True
+            boolChoixJ = True
+            Joueur4Over = False
+            boolJouer = False
         elif retourOver:
             boolJouer = False
             boolMenu = True
