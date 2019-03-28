@@ -1,4 +1,5 @@
 from Player import *
+from DumE import *
 from RandomTileGenerator import *
 
 class Game : 
@@ -9,10 +10,18 @@ class Game :
 		lj = list()
 		if ChoixJ1 == 0:
 			lj.append(Player(1))
+		if ChoixJ1 == 1:
+			lj.append(DumE(1))
 		if ChoixJ2 == 0:
 			lj.append(Player(2))
+		if ChoixJ2 == 1:
+			lj.append(DumE(2))
 		if ChoixJ3 == 0:
 			lj.append(Player(3))
+		if ChoixJ3 == 1:
+			lj.append(DumE(3))
 		if ChoixJ4 == 0:
 			lj.append(Player(4))
+		if ChoixJ4 == 1:
+			lj.append(DumE(4))
 		return lj

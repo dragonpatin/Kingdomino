@@ -25,7 +25,7 @@ i = 0
 j = 0 
 L = list()
 ChoixJ1 = ChoixJ2 = ChoixJ3 = ChoixJ4 = 0
-boolChoixJ = ModifJ1 = ModifJ2 = ModifJ3 = ModifJ4 = LPartie = False
+boolChoixJ = ModifJ1 = ModifJ2 = ModifJ3 = ModifJ4 = LPartie = TheEnd = False
 
 def Pause():
     image(imgMenue, 0, 0)
@@ -147,7 +147,7 @@ def ChoixJoueur():
     if(ChoixJ1 == 0):
         text("Humain", 275, 237)
     if(ChoixJ1 == 1):
-        text("IA - 1", 275, 237)
+        text("Dum-E", 275, 237)
         
     if ModifJ2:
         fill(color(204))
@@ -158,7 +158,7 @@ def ChoixJoueur():
     if(ChoixJ2 == 0):
         text("Humain", 275, 337)
     if(ChoixJ2 == 1):
-        text("IA - 1", 275, 337)
+        text("Dum-E", 275, 337)
     
     if bool3Joueur or bool4Joueur:
         if ModifJ3:
@@ -170,7 +170,7 @@ def ChoixJoueur():
         if(ChoixJ3 == 0):
             text("Humain", 275, 437)
         if(ChoixJ3 == 1):
-            text("IA - 1", 275, 437)
+            text("Dum-E", 275, 437)
         
     if bool4Joueur:
         if ModifJ4:
@@ -182,7 +182,7 @@ def ChoixJoueur():
         if(ChoixJ4 == 0):
             text("Humain", 275, 537)
         if(ChoixJ4 == 1):
-            text("IA - 1", 275, 537)
+            text("Dum-E", 275, 537)
     
     if LPartie:
         fill(color(204))
@@ -673,8 +673,8 @@ def affiche_joueur():
     for player in LJ :
         i = player.nom - 1
         affiche_chateau(player,i)
-        affiche_last_tile(player,i)
         affiche_list_tile(player,i)
+        affiche_last_tile(player,i)
         if(i == 0) :
             textAlign(CENTER, CENTER)
             if bool2Joueur : 
@@ -943,7 +943,7 @@ def setup():
 
 def draw():
     #background(255, 255, 255)
-    global nb_tour, LJ,test,L,initialisation,LC,Mpressed,Tuile1NonUsed,Tuile2NonUsed,Tuile3NonUsed,Tuile4NonUsed,AjouterTileJ,Kpressed,j,Key,DeplacerPlateau,NextTurn
+    global nb_tour, LJ,test,L,initialisation,LC,Mpressed,Tuile1NonUsed,Tuile2NonUsed,Tuile3NonUsed,Tuile4NonUsed,AjouterTileJ,Kpressed,j,Key,DeplacerPlateau,NextTurn,TheEnd
     if boolRegle:
         Regle()
     if boolChoixJ :
@@ -965,8 +965,9 @@ def draw():
                 resizeTuile(True)
             else :
                 resizeTuile(False)
-                Mpressed,Tuile1NonUsed,Tuile2NonUsed,Tuile3NonUsed,Tuile4NonUsed,AjouterTileJ = LJ[j%2].choisir(Mpressed,Tuile1,Tuile2,Tuile3,Tuile4,Tuile1NonUsed,Tuile2NonUsed,Tuile3NonUsed,Tuile4NonUsed,AjouterTileJ,bool2Joueur,bool3Joueur,bool4Joueur,L)
-                Kpressed,Key,j,AjouterTileJ,DeplacerPlateau,NextTurn = LJ[j%2].deplacer(Kpressed,Key,bool2Joueur,bool3Joueur,bool4Joueur,j,AjouterTileJ,DeplacerPlateau,NextTurn,nb_tour)
+                if not(TheEnd) :
+                    Mpressed,Tuile1NonUsed,Tuile2NonUsed,Tuile3NonUsed,Tuile4NonUsed,AjouterTileJ = LJ[j%2].choisir(Mpressed,Tuile1,Tuile2,Tuile3,Tuile4,Tuile1NonUsed,Tuile2NonUsed,Tuile3NonUsed,Tuile4NonUsed,AjouterTileJ,bool2Joueur,bool3Joueur,bool4Joueur,L)
+                    Kpressed,Key,j,AjouterTileJ,DeplacerPlateau,NextTurn,TheEnd = LJ[j%2].deplacer(Kpressed,Key,bool2Joueur,bool3Joueur,bool4Joueur,j,AjouterTileJ,DeplacerPlateau,NextTurn,nb_tour,TheEnd)
                 if NextTurn :
                     tourSuivant()
             updateJouer2_4(mouseX,mouseY)
@@ -985,8 +986,9 @@ def draw():
                 resizeTuile(True)
             else :
                 resizeTuile(False)
-                Mpressed,Tuile1NonUsed,Tuile2NonUsed,Tuile3NonUsed,Tuile4NonUsed,AjouterTileJ = LJ[j].choisir(Mpressed,Tuile1,Tuile2,Tuile3,Tuile4,Tuile1NonUsed,Tuile2NonUsed,Tuile3NonUsed,Tuile4NonUsed,AjouterTileJ,bool2Joueur,bool3Joueur,bool4Joueur,L)
-                Kpressed,Key,j,AjouterTileJ,DeplacerPlateau,NextTurn = LJ[j].deplacer(Kpressed,Key,bool2Joueur,bool3Joueur,bool4Joueur,j,AjouterTileJ,DeplacerPlateau,NextTurn,nb_tour)
+                if not(TheEnd) :
+                    Mpressed,Tuile1NonUsed,Tuile2NonUsed,Tuile3NonUsed,Tuile4NonUsed,AjouterTileJ = LJ[j].choisir(Mpressed,Tuile1,Tuile2,Tuile3,Tuile4,Tuile1NonUsed,Tuile2NonUsed,Tuile3NonUsed,Tuile4NonUsed,AjouterTileJ,bool2Joueur,bool3Joueur,bool4Joueur,L)
+                    Kpressed,Key,j,AjouterTileJ,DeplacerPlateau,NextTurn,TheEnd = LJ[j].deplacer(Kpressed,Key,bool2Joueur,bool3Joueur,bool4Joueur,j,AjouterTileJ,DeplacerPlateau,NextTurn,nb_tour,TheEnd)
                 if NextTurn :
                     tourSuivant()
             updateJouer3(mouseX,mouseY)
@@ -1005,8 +1007,9 @@ def draw():
                 resizeTuile(True)
             else:
                 resizeTuile(False)
-                Mpressed,Tuile1NonUsed,Tuile2NonUsed,Tuile3NonUsed,Tuile4NonUsed,AjouterTileJ = LJ[j].choisir(Mpressed,Tuile1,Tuile2,Tuile3,Tuile4,Tuile1NonUsed,Tuile2NonUsed,Tuile3NonUsed,Tuile4NonUsed,AjouterTileJ,bool2Joueur,bool3Joueur,bool4Joueur,L)
-                Kpressed,Key,j,AjouterTileJ,DeplacerPlateau,NextTurn = LJ[j].deplacer(Kpressed,Key,bool2Joueur,bool3Joueur,bool4Joueur,j,AjouterTileJ,DeplacerPlateau)
+                if not(TheEnd) :
+                    Mpressed,Tuile1NonUsed,Tuile2NonUsed,Tuile3NonUsed,Tuile4NonUsed,AjouterTileJ = LJ[j].choisir(Mpressed,Tuile1,Tuile2,Tuile3,Tuile4,Tuile1NonUsed,Tuile2NonUsed,Tuile3NonUsed,Tuile4NonUsed,AjouterTileJ,bool2Joueur,bool3Joueur,bool4Joueur,L)
+                    Kpressed,Key,j,AjouterTileJ,DeplacerPlateau,NextTurn,TheEnd = LJ[j].deplacer(Kpressed,Key,bool2Joueur,bool3Joueur,bool4Joueur,j,AjouterTileJ,DeplacerPlateau,NextTurn,nb_tour,TheEnd)
                 if NextTurn :
                     tourSuivant()
             updateJouer2_4(mouseX,mouseY)
