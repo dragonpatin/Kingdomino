@@ -144,26 +144,41 @@ def ChoixJoueur():
         fill(color(255))
     rect(250, 200, 200, 50, 20)
     fill(color(255, 0, 0))
-    if(ChoixJ1 == 0):
-        text("Humain", 275, 237)
-    if(ChoixJ1 == 1):
-        text("Dum-E", 275, 237)
-    if(ChoixJ1 == 2):
-        text("Num-P", 275, 237)
-        
+    if boolrecommencer: 
+        if(ChoixJ1 == 0):
+            text("Humain", 345, 220)
+        if(ChoixJ1 == 1):
+            text("Dum-E", 345, 220)
+        if(ChoixJ1 == 2):
+            text("Num-P", 345, 220)
+    else :
+        if(ChoixJ1 == 0):
+            text("Humain", 275, 237)
+        if(ChoixJ1 == 1):
+            text("Dum-E", 275, 237)
+        if(ChoixJ1 == 2):
+            text("Num-P", 275, 237)
+            
     if ModifJ2:
         fill(color(204))
     else:
         fill(color(255))
     rect(250, 300, 200, 50, 20)
     fill(color(255, 0, 0))
-    if(ChoixJ2 == 0):
-        text("Humain", 275, 337)
-    if(ChoixJ2 == 1):
-        text("Dum-E", 275, 337)
-    if(ChoixJ2 == 2):
-        text("Num-P", 275, 337)
-    
+    if boolrecommencer: 
+        if(ChoixJ2 == 0):
+            text("Humain", 345, 320)
+        if(ChoixJ2 == 1):
+            text("Dum-E", 345, 320)
+        if(ChoixJ2 == 2):
+            text("Num-P", 345, 320)
+    else:
+        if(ChoixJ2 == 0):
+            text("Humain", 275, 337)
+        if(ChoixJ2 == 1):
+            text("Dum-E", 275, 337)
+        if(ChoixJ2 == 2):
+            text("Num-P", 275, 337)
     if bool3Joueur or bool4Joueur:
         if ModifJ3:
             fill(color(204))
@@ -171,13 +186,20 @@ def ChoixJoueur():
             fill(color(255))
         rect(250, 400, 200, 50, 20)
         fill(color(255, 0, 0))
-        if(ChoixJ3 == 0):
-            text("Humain", 275, 437)
-        if(ChoixJ3 == 1):
-            text("Dum-E", 275, 437)
-        if(ChoixJ3 == 2):
-            text("Num-P", 275, 437)
-        
+        if boolrecommencer: 
+            if(ChoixJ3 == 0):
+                text("Humain", 345, 420)
+            if(ChoixJ3 == 1):
+                text("Dum-E", 345, 420)
+            if(ChoixJ3 == 2):
+                text("Num-P", 345, 420)
+        else:
+            if(ChoixJ3 == 0):
+                text("Humain", 275, 437)
+            if(ChoixJ3 == 1):
+                text("Dum-E", 275, 437)
+            if(ChoixJ3 == 2):
+                text("Num-P", 275, 437)
     if bool4Joueur:
         if ModifJ4:
             fill(color(204))
@@ -185,21 +207,30 @@ def ChoixJoueur():
             fill(color(255))
         rect(250, 500, 200, 50, 20)
         fill(color(255, 0, 0))
-        if(ChoixJ4 == 0):
-            text("Humain", 275, 537)
-        if(ChoixJ4 == 1):
-            text("Dum-E", 275, 537)
-        if(ChoixJ4 == 2):
-            text("Num-P", 275, 537)
-    
+        if boolrecommencer: 
+            if(ChoixJ4 == 0):
+                text("Humain", 345, 520)
+            if(ChoixJ4 == 1):
+                text("Dum-E", 345, 520)
+            if(ChoixJ4 == 2):
+                text("Num-P", 345, 520)
+        else: 
+            if(ChoixJ4 == 0):
+                text("Humain", 275, 537)
+            if(ChoixJ4 == 1):
+                text("Dum-E", 275, 537)
+            if(ChoixJ4 == 2):
+                text("Num-P", 275, 537)
     if LPartie:
         fill(color(204))
     else:
         fill(color(255))
     rect(250,600, 200, 50, 20)
     fill(color(255, 0, 0))
-    text("Jouer", 300, 637)
-     
+    if boolrecommencer:
+        text("Jouer", 350, 620)
+    else : 
+        text("Jouer", 300, 637)
 def Jouer():
     image(imgMenue, 0, 0)
     update(mouseX, mouseY)
