@@ -148,6 +148,8 @@ def ChoixJoueur():
         text("Humain", 275, 237)
     if(ChoixJ1 == 1):
         text("Dum-E", 275, 237)
+    if(ChoixJ1 == 2):
+        text("Num-P", 275, 237)
         
     if ModifJ2:
         fill(color(204))
@@ -159,6 +161,8 @@ def ChoixJoueur():
         text("Humain", 275, 337)
     if(ChoixJ2 == 1):
         text("Dum-E", 275, 337)
+    if(ChoixJ2 == 2):
+        text("Num-P", 275, 337)
     
     if bool3Joueur or bool4Joueur:
         if ModifJ3:
@@ -171,6 +175,8 @@ def ChoixJoueur():
             text("Humain", 275, 437)
         if(ChoixJ3 == 1):
             text("Dum-E", 275, 437)
+        if(ChoixJ3 == 2):
+            text("Num-P", 275, 437)
         
     if bool4Joueur:
         if ModifJ4:
@@ -183,6 +189,8 @@ def ChoixJoueur():
             text("Humain", 275, 537)
         if(ChoixJ4 == 1):
             text("Dum-E", 275, 537)
+        if(ChoixJ4 == 2):
+            text("Num-P", 275, 537)
     
     if LPartie:
         fill(color(204))
@@ -1031,8 +1039,10 @@ def updatePause(x, y):
 def update(x, y):
     global jouerOver, regleOver, quitterOver, Joueur2Over, Joueur3Over, Joueur4Over, tuile1Over,retourOver,continuerOver,menuOver
     jouerOver = Joueur2Over = continuerOver = overRect(jouerX, jouerY, 200, 50)
-    if continuerOver and  (bool3Joueur or bool4Joueur ): 
+    if continuerOver and  (bool2Joueur or bool3Joueur or bool4Joueur ): 
         Joueur2Over = False
+        Joueur3Over = False
+        Joueur4Over = False
     regleOver = Joueur3Over = menuOver = overRect(regleX, regleY, 200, 50)
     quitterOver = Joueur4Over = overRect(quitterX, quitterY, 200, 50)
     if boolJouer:
@@ -1104,13 +1114,13 @@ def mousePressed():
         Mpressed = True
     if boolChoixJ:
         if ModifJ1:
-            ChoixJ1 = (ChoixJ1 + 1)%2
+            ChoixJ1 = (ChoixJ1 + 1)%3
         if ModifJ2:
-            ChoixJ2 = (ChoixJ2 + 1)%2
+            ChoixJ2 = (ChoixJ2 + 1)%3
         if ModifJ3:
-            ChoixJ3 = (ChoixJ3 + 1)%2
+            ChoixJ3 = (ChoixJ3 + 1)%3
         if ModifJ4:
-            ChoixJ4 = (ChoixJ4 + 1)%2
+            ChoixJ4 = (ChoixJ4 + 1)%3
         if LPartie:
             LPartie = False
             boolChoixJ = False
@@ -1118,10 +1128,10 @@ def mousePressed():
     if boolJouer :
         if Joueur2Over:
             currentColor = regleColor
-            boolChoixJ = True
-            boolJouer = False
-            Joueur2Over = False
             bool2Joueur = True
+            boolChoixJ = True
+            Joueur2Over = False
+            boolJouer = False
         elif Joueur3Over:
             currentColor = regleColor
             bool3Joueur = True
