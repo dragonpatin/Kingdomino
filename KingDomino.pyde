@@ -58,6 +58,43 @@ def Pause():
         text("Menu", 300, 342)
         text("Quitter", 280, 442)
     
+def AfficheGagnant():
+    global continuerOver
+    continuerOver = False
+    gagnant = None
+    pointgagnant = -1
+    for player in LJ :
+        if pointgagnant < player.nbpoint:
+            gagnant = player.nom
+            pointgagnant = player.nbpoint
+    #Couleur fin
+    updateFin(mouseX, mouseY)
+    fill(color(255))
+    strokeWeight(4)
+    stroke(0)
+    rect(224, 130, 417, 230, 20)
+    
+    if menuOver:
+        fill(color(204))
+    else:
+        fill(color(255))
+    rect(234, 300, 170, 50, 20)
+    if quitterOver:
+        fill(color(204))
+    else:
+        fill(color(255))
+    rect(461, 300, 170, 50, 20)
+    strokeWeight(1)
+    textSize(58)
+    fill(color(255, 0, 0))
+    text("Le joueur ", 410, 172)
+    text(gagnant, 600, 172)
+    text("est le gagnant", 435, 252)
+    textSize(40)
+    text("Rejouer", 320, 317)
+    text("Quitter", 550, 317)
+    textSize(40)
+    fill(255)
     
 def Regle():
     updateRegle(mouseX, mouseY)
@@ -261,7 +298,7 @@ def Jouer():
         text("3 Joueurs", 255, 344)
         text("4 Joueurs", 255, 444)
     image(croix, 335, 665)
-    
+  
 def affiche_tuile(List_Plateau):
     #position tuiles
     # [(70,70)(130,70)]  [(220,70)(280,70)]  [(370,70)(430,70)]  [(520,70)(580,70)]
@@ -896,7 +933,6 @@ def loadTuile(boolResize):
     foret1.resize(taillex1, taillex1)
 
 def DeroulementTour():
-    #background(255, 255, 255)
     global LJ, j
     if bool2Joueur:
         nb_generation = 4
@@ -909,17 +945,6 @@ def DeroulementTour():
     for i in range(1, nb_generation + 1):
         T = RTG.generate()
         inserer(T, List_Plateau)
-        #print("la tuile {a} est : {b} {c} {d} {e}".format(a=T.numero,b=T.tuile_1,c=T.couronne_1,d=T.tuile_2,e=T.couronne_2))
-    #if RTG.taille - 1 < 0 or nb_tour == 0:
-        #fill(color(255, 0, 0))
-        #textSize(20)
-        #textAlign(CENTER, CENTER)
-        #text("Fin du Game", 300, 300)
-        #fill(color(0, 0, 0))
-    #for player in LJ :
-        #print("Joueur {a}".format(a = player.nom))
-        #textAlign(CENTER, CENTER)
-        #text("Joueur {a}".format(a = player.nom), 350, 400 + player.nom * 30)
     return List_Plateau
 
 def resizeTuile(force):
@@ -1011,6 +1036,8 @@ def draw():
                     tourSuivant()
             updateJouer2_4(mouseX,mouseY)
             affichePlateau(L)
+            if TheEnd :
+                AfficheGagnant()
         elif bool3Joueur:
             if initialisation:
                 this.surface.setResizable(True)
@@ -1032,6 +1059,8 @@ def draw():
                     tourSuivant()
             updateJouer3(mouseX,mouseY)
             affichePlateau(L)
+            if TheEnd :
+                AfficheGagnant()
         elif bool4Joueur:
             if initialisation:
                 this.surface.setResizable(True)
@@ -1053,6 +1082,8 @@ def draw():
                     tourSuivant()
             updateJouer2_4(mouseX,mouseY)
             affichePlateau(L)
+            if TheEnd :
+                AfficheGagnant()
         else : 
             Jouer()
     if boolQuitter:
@@ -1098,6 +1129,11 @@ def updateJouer3(x, y):
     Tuile2 = overRect(width * 0.09 + 0.33 * 1 * width, 70, 2 * int(width*0.08), int(width*0.08))
     Tuile3 = overRect(width * 0.09 + 0.33 * 2 * width, 70, 2 * int(width*0.08), int(width*0.08))
   
+def updateFin(x,y):
+    global quitterOver, menuOver
+    menuOver = overRect(234, 300, 150, 50,)
+    quitterOver = overRect(481, 300, 150, 50)
+    
 def tourSuivant():
     global test,Tuile1NonUsed,Tuile2NonUsed,Tuile3NonUsed,Tuile4NonUsed,LJ,NextTurn,nb_tour,L
     Tuile1NonUsed = Tuile2NonUsed = Tuile3NonUsed = Tuile4NonUsed = True
@@ -1124,10 +1160,13 @@ def tourSuivant():
 def mousePressed():
     global currentColor, boolQuitter, boolRegle, boolJouer, boolMenu, bool2Joueur, bool3Joueur, bool4Joueur, reglePrecOver, regleSuivOver, regleMenuOver, regleInt,j,i,boolResize,Tuile1, Tuile2, Tuile3, Tuile4,test, boolPause,boolrecommencer
     global Tuile1NonUsed,Tuile2NonUsed,Tuile3NonUsed,Tuile4NonUsed,AjouterTileJ,boolPause, initialisation,AjouterTileJ, DeplacerPlateau,Tuile1NonUsed, Tuile2NonUsed, Tuile3NonUsed, Tuile4NonUsed,LJ,regleOver
-    global Mpressed,boolChoixJ,LPartie,Joueur2Over,Joueur3Over,Joueur4Over,ChoixJ1,ChoixJ2,ChoixJ3,ChoixJ4
+    global Mpressed,boolChoixJ,LPartie,Joueur2Over,Joueur3Over,Joueur4Over,ChoixJ1,ChoixJ2,ChoixJ3,ChoixJ4,boolChoixJ, ModifJ1, ModifJ2, ModifJ3, ModifJ4, LPartie,TheEnd
     ###Faire Fonction chaque if.
-    if boolPause:
+    if boolPause or TheEnd:
+        if TheEnd :
+            this.surface.setSize(700,700)
         if continuerOver:
+            print("trs")
             this.surface.setSize(int(displayWidth*0.6),int(displayHeight*0.6))
             boolPause = False
         elif menuOver:           
@@ -1139,68 +1178,72 @@ def mousePressed():
             LJ = None
             i = j = regleInt = nb_tour = 0
             boolrecommencer = True
+            ChoixJ1 = ChoixJ2 = ChoixJ3 = ChoixJ4 = 0
+            boolChoixJ = ModifJ1 = ModifJ2 = ModifJ3 = ModifJ4 = LPartie = TheEnd = False
         elif quitterOver :
+            print("trs")
             exit()
-    if boolJouer and (bool2Joueur or bool3Joueur or bool4Joueur):
-        Mpressed = True
-    if boolChoixJ:
-        if ModifJ1:
-            ChoixJ1 = (ChoixJ1 + 1)%3
-        if ModifJ2:
-            ChoixJ2 = (ChoixJ2 + 1)%3
-        if ModifJ3:
-            ChoixJ3 = (ChoixJ3 + 1)%3
-        if ModifJ4:
-            ChoixJ4 = (ChoixJ4 + 1)%3
-        if LPartie:
-            LPartie = False
-            boolChoixJ = False
-            boolJouer = True
-    if boolJouer :
-        if Joueur2Over:
-            currentColor = regleColor
-            bool2Joueur = True
-            boolChoixJ = True
-            Joueur2Over = False
-            boolJouer = False
-        elif Joueur3Over:
-            currentColor = regleColor
-            bool3Joueur = True
-            boolChoixJ = True
-            Joueur3Over = False
-            boolJouer = False
-        elif Joueur4Over:
-            currentColor = regleColor
-            bool4Joueur = True
-            boolChoixJ = True
-            Joueur4Over = False
-            boolJouer = False
-        elif retourOver:
-            boolJouer = False
-            boolMenu = True
-    if boolMenu:
-        if jouerOver:
-            currentColor = regleColor
-            boolJouer = True
-            boolMenu = False
-        if regleOver:
-            currentColor = regleColor
-            boolRegle = True
-            boolMenu = False
-        if quitterOver:
-            currentColor = regleColor
-            boolQuitter = True
-    if boolRegle:
-        if regleSuivOver:
-            if not(regleInt == 3):
-                regleInt += 1
-        if reglePrecOver:
-            if not(regleInt == 0):
-                regleInt -= 1
-        if regleMenuOver:
-            regleMenuOver = False
-            boolMenu = True
-            boolRegle = False
+    if not(TheEnd) :
+        if boolJouer and (bool2Joueur or bool3Joueur or bool4Joueur):
+            Mpressed = True
+        if boolChoixJ:
+            if ModifJ1:
+                ChoixJ1 = (ChoixJ1 + 1)%3
+            if ModifJ2:
+                ChoixJ2 = (ChoixJ2 + 1)%3
+            if ModifJ3:
+                ChoixJ3 = (ChoixJ3 + 1)%3
+            if ModifJ4:
+                ChoixJ4 = (ChoixJ4 + 1)%3
+            if LPartie:
+                LPartie = False
+                boolChoixJ = False
+                boolJouer = True
+        if boolJouer :
+            if Joueur2Over:
+                currentColor = regleColor
+                bool2Joueur = True
+                boolChoixJ = True
+                Joueur2Over = False
+                boolJouer = False
+            elif Joueur3Over:
+                currentColor = regleColor
+                bool3Joueur = True
+                boolChoixJ = True
+                Joueur3Over = False
+                boolJouer = False
+            elif Joueur4Over:
+                currentColor = regleColor
+                bool4Joueur = True
+                boolChoixJ = True
+                Joueur4Over = False
+                boolJouer = False
+            elif retourOver:
+                boolJouer = False
+                boolMenu = True
+        if boolMenu:
+            if jouerOver:
+                currentColor = regleColor
+                boolJouer = True
+                boolMenu = False
+            if regleOver:
+                currentColor = regleColor
+                boolRegle = True
+                boolMenu = False
+            if quitterOver:
+                currentColor = regleColor
+                boolQuitter = True
+        if boolRegle:
+            if regleSuivOver:
+                if not(regleInt == 3):
+                    regleInt += 1
+            if reglePrecOver:
+                if not(regleInt == 0):
+                    regleInt -= 1
+            if regleMenuOver:
+                regleMenuOver = False
+                boolMenu = True
+                boolRegle = False
             
 def keyPressed():
     global test,AjouterTileJ,LJ,DeplacerPlateau,j,boolPause,Kpressed,Key
