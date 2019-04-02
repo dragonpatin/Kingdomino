@@ -188,6 +188,8 @@ def ChoixJoueur():
             text("Dum-E", 345, 220)
         if(ChoixJ1 == 2):
             text("Num-P", 345, 220)
+        if(ChoixJ1 == 3):
+            text("Mum-C", 345, 220)
     else :
         if(ChoixJ1 == 0):
             text("Humain", 275, 237)
@@ -195,6 +197,8 @@ def ChoixJoueur():
             text("Dum-E", 275, 237)
         if(ChoixJ1 == 2):
             text("Num-P", 275, 237)
+        if(ChoixJ1 == 3):
+            text("Mum-C", 275, 237)
             
     if ModifJ2:
         fill(color(204))
@@ -209,6 +213,8 @@ def ChoixJoueur():
             text("Dum-E", 345, 320)
         if(ChoixJ2 == 2):
             text("Num-P", 345, 320)
+        if(ChoixJ2 == 3):
+            text("Mum-C", 345, 320)
     else:
         if(ChoixJ2 == 0):
             text("Humain", 275, 337)
@@ -216,6 +222,8 @@ def ChoixJoueur():
             text("Dum-E", 275, 337)
         if(ChoixJ2 == 2):
             text("Num-P", 275, 337)
+        if(ChoixJ2 == 3):
+            text("Mum-C", 275, 337)
     if bool3Joueur or bool4Joueur:
         if ModifJ3:
             fill(color(204))
@@ -230,6 +238,8 @@ def ChoixJoueur():
                 text("Dum-E", 345, 420)
             if(ChoixJ3 == 2):
                 text("Num-P", 345, 420)
+            if(ChoixJ3 == 3):
+                text("Mum-C", 345, 420)
         else:
             if(ChoixJ3 == 0):
                 text("Humain", 275, 437)
@@ -237,6 +247,8 @@ def ChoixJoueur():
                 text("Dum-E", 275, 437)
             if(ChoixJ3 == 2):
                 text("Num-P", 275, 437)
+            if(ChoixJ3 == 3):
+                text("Mum-C", 275, 437)
     if bool4Joueur:
         if ModifJ4:
             fill(color(204))
@@ -251,6 +263,8 @@ def ChoixJoueur():
                 text("Dum-E", 345, 520)
             if(ChoixJ4 == 2):
                 text("Num-P", 345, 520)
+            if(ChoixJ4 == 3):
+                text("Mum-C", 345, 520)
         else: 
             if(ChoixJ4 == 0):
                 text("Humain", 275, 537)
@@ -258,6 +272,8 @@ def ChoixJoueur():
                 text("Dum-E", 275, 537)
             if(ChoixJ4 == 2):
                 text("Num-P", 275, 537)
+            if(ChoixJ4 == 3):
+                text("Mum-C", 275, 537)
     if LPartie:
         fill(color(204))
     else:
@@ -1197,62 +1213,62 @@ def mousePressed():
             Mpressed = True
         if boolChoixJ:
             if ModifJ1:
-                ChoixJ1 = (ChoixJ1 + 1)%3
+                ChoixJ1 = (ChoixJ1 + 1)%4
             if ModifJ2:
-                ChoixJ2 = (ChoixJ2 + 1)%3
+                ChoixJ2 = (ChoixJ2 + 1)%4
             if ModifJ3:
-                ChoixJ3 = (ChoixJ3 + 1)%3
+                ChoixJ3 = (ChoixJ3 + 1)%4
             if ModifJ4:
-                ChoixJ4 = (ChoixJ4 + 1)%3
+                ChoixJ4 = (ChoixJ4 + 1)%4
             if LPartie:
                 LPartie = False
                 boolChoixJ = False
                 boolJouer = True
-        if boolJouer :
-            if Joueur2Over:
-                currentColor = regleColor
-                bool2Joueur = True
-                boolChoixJ = True
-                Joueur2Over = False
-                boolJouer = False
-            elif Joueur3Over:
-                currentColor = regleColor
-                bool3Joueur = True
-                boolChoixJ = True
-                Joueur3Over = False
-                boolJouer = False
-            elif Joueur4Over:
-                currentColor = regleColor
-                bool4Joueur = True
-                boolChoixJ = True
-                Joueur4Over = False
-                boolJouer = False
-            elif retourOver:
-                boolJouer = False
-                boolMenu = True
-        if boolMenu:
-            if jouerOver:
-                currentColor = regleColor
-                boolJouer = True
-                boolMenu = False
-            if regleOver:
-                currentColor = regleColor
-                boolRegle = True
-                boolMenu = False
-            if quitterOver:
-                currentColor = regleColor
-                boolQuitter = True
-        if boolRegle:
-            if regleSuivOver:
-                if not(regleInt == 3):
-                    regleInt += 1
-            if reglePrecOver:
-                if not(regleInt == 0):
-                    regleInt -= 1
-            if regleMenuOver:
-                regleMenuOver = False
-                boolMenu = True
-                boolRegle = False
+    if boolJouer :
+        if Joueur2Over:
+            currentColor = regleColor
+            bool2Joueur = True
+            boolChoixJ = True
+            Joueur2Over = False
+            boolJouer = False
+        elif Joueur3Over:
+            currentColor = regleColor
+            bool3Joueur = True
+            boolChoixJ = True
+            Joueur3Over = False
+            boolJouer = False
+        elif Joueur4Over:
+            currentColor = regleColor
+            bool4Joueur = True
+            boolChoixJ = True
+            Joueur4Over = False
+            boolJouer = False
+        elif retourOver:
+            boolJouer = False
+            boolMenu = True
+    if boolMenu:
+        if jouerOver:
+            currentColor = regleColor
+            boolJouer = True
+            boolMenu = False
+        if regleOver:
+            currentColor = regleColor
+            boolRegle = True
+            boolMenu = False
+        if quitterOver:
+            currentColor = regleColor
+            boolQuitter = True
+    if boolRegle:
+        if regleSuivOver:
+            if not(regleInt == 3):
+                regleInt += 1
+        if reglePrecOver:
+            if not(regleInt == 0):
+                regleInt -= 1
+        if regleMenuOver:
+            regleMenuOver = False
+            boolMenu = True
+            boolRegle = False
             
 def keyPressed():
     global test,AjouterTileJ,LJ,DeplacerPlateau,j,boolPause,Kpressed,Key
