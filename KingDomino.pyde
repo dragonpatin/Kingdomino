@@ -1023,7 +1023,7 @@ def setup():
 
 def draw():
     #background(255, 255, 255)
-    global nb_tour, LJ,test,L,initialisation,LC,Mpressed,Tuile1NonUsed,Tuile2NonUsed,Tuile3NonUsed,Tuile4NonUsed,AjouterTileJ,Kpressed,j,Key,DeplacerPlateau,NextTurn,TheEnd
+    global nb_tour, LJ,test,L,initialisation,LC,Mpressed,Tuile1NonUsed,Tuile2NonUsed,Tuile3NonUsed,Tuile4NonUsed,AjouterTileJ,Kpressed,j,Key,DeplacerPlateau,NextTurn,TheEnd,player
     if boolRegle:
         Regle()
     if boolChoixJ :
@@ -1046,7 +1046,7 @@ def draw():
             else :
                 resizeTuile(False)
                 if not(TheEnd) :
-                    Mpressed,Tuile1NonUsed,Tuile2NonUsed,Tuile3NonUsed,Tuile4NonUsed,AjouterTileJ = LJ[j%2].choisir(Mpressed,Tuile1,Tuile2,Tuile3,Tuile4,Tuile1NonUsed,Tuile2NonUsed,Tuile3NonUsed,Tuile4NonUsed,AjouterTileJ,bool2Joueur,bool3Joueur,bool4Joueur,L)
+                    Mpressed,Tuile1NonUsed,Tuile2NonUsed,Tuile3NonUsed,Tuile4NonUsed,AjouterTileJ = LJ[j%2].choisir(Mpressed,Tuile1,Tuile2,Tuile3,Tuile4,Tuile1NonUsed,Tuile2NonUsed,Tuile3NonUsed,Tuile4NonUsed,AjouterTileJ,bool2Joueur,bool3Joueur,bool4Joueur,L,LJ)
                     Kpressed,Key,j,AjouterTileJ,DeplacerPlateau,NextTurn,TheEnd = LJ[j%2].deplacer(Kpressed,Key,bool2Joueur,bool3Joueur,bool4Joueur,j,AjouterTileJ,DeplacerPlateau,NextTurn,nb_tour,TheEnd)
                 if NextTurn :
                     tourSuivant()
@@ -1069,7 +1069,7 @@ def draw():
             else :
                 resizeTuile(False)
                 if not(TheEnd) :
-                    Mpressed,Tuile1NonUsed,Tuile2NonUsed,Tuile3NonUsed,Tuile4NonUsed,AjouterTileJ = LJ[j].choisir(Mpressed,Tuile1,Tuile2,Tuile3,Tuile4,Tuile1NonUsed,Tuile2NonUsed,Tuile3NonUsed,Tuile4NonUsed,AjouterTileJ,bool2Joueur,bool3Joueur,bool4Joueur,L)
+                    Mpressed,Tuile1NonUsed,Tuile2NonUsed,Tuile3NonUsed,Tuile4NonUsed,AjouterTileJ = LJ[j].choisir(Mpressed,Tuile1,Tuile2,Tuile3,Tuile4,Tuile1NonUsed,Tuile2NonUsed,Tuile3NonUsed,Tuile4NonUsed,AjouterTileJ,bool2Joueur,bool3Joueur,bool4Joueur,L,LJ)
                     Kpressed,Key,j,AjouterTileJ,DeplacerPlateau,NextTurn,TheEnd = LJ[j].deplacer(Kpressed,Key,bool2Joueur,bool3Joueur,bool4Joueur,j,AjouterTileJ,DeplacerPlateau,NextTurn,nb_tour,TheEnd)
                 if NextTurn :
                     tourSuivant()
@@ -1092,7 +1092,7 @@ def draw():
             else:
                 resizeTuile(False)
                 if not(TheEnd) :
-                    Mpressed,Tuile1NonUsed,Tuile2NonUsed,Tuile3NonUsed,Tuile4NonUsed,AjouterTileJ = LJ[j].choisir(Mpressed,Tuile1,Tuile2,Tuile3,Tuile4,Tuile1NonUsed,Tuile2NonUsed,Tuile3NonUsed,Tuile4NonUsed,AjouterTileJ,bool2Joueur,bool3Joueur,bool4Joueur,L)
+                    Mpressed,Tuile1NonUsed,Tuile2NonUsed,Tuile3NonUsed,Tuile4NonUsed,AjouterTileJ = LJ[j].choisir(Mpressed,Tuile1,Tuile2,Tuile3,Tuile4,Tuile1NonUsed,Tuile2NonUsed,Tuile3NonUsed,Tuile4NonUsed,AjouterTileJ,bool2Joueur,bool3Joueur,bool4Joueur,L,LJ)
                     Kpressed,Key,j,AjouterTileJ,DeplacerPlateau,NextTurn,TheEnd = LJ[j].deplacer(Kpressed,Key,bool2Joueur,bool3Joueur,bool4Joueur,j,AjouterTileJ,DeplacerPlateau,NextTurn,nb_tour,TheEnd)
                 if NextTurn :
                     tourSuivant()
