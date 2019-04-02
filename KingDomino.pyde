@@ -1160,7 +1160,7 @@ def tourSuivant():
 def mousePressed():
     global currentColor, boolQuitter, boolRegle, boolJouer, boolMenu, bool2Joueur, bool3Joueur, bool4Joueur, reglePrecOver, regleSuivOver, regleMenuOver, regleInt,j,i,boolResize,Tuile1, Tuile2, Tuile3, Tuile4,test, boolPause,boolrecommencer
     global Tuile1NonUsed,Tuile2NonUsed,Tuile3NonUsed,Tuile4NonUsed,AjouterTileJ,boolPause, initialisation,AjouterTileJ, DeplacerPlateau,Tuile1NonUsed, Tuile2NonUsed, Tuile3NonUsed, Tuile4NonUsed,LJ,regleOver
-    global Mpressed,boolChoixJ,LPartie,Joueur2Over,Joueur3Over,Joueur4Over,ChoixJ1,ChoixJ2,ChoixJ3,ChoixJ4,boolChoixJ, ModifJ1, ModifJ2, ModifJ3, ModifJ4, LPartie,TheEnd
+    global Mpressed,boolChoixJ,LPartie,Joueur2Over,Joueur3Over,Joueur4Over,ChoixJ1,ChoixJ2,ChoixJ3,ChoixJ4,boolChoixJ, ModifJ1, ModifJ2, ModifJ3, ModifJ4, LPartie,TheEnd,LT,LC,L,Mpressed, Kpressed, LT, RTG
     ###Faire Fonction chaque if.
     if boolPause or TheEnd:
         if TheEnd :
@@ -1175,11 +1175,20 @@ def mousePressed():
             Tuile1NonUsed = Tuile2NonUsed = Tuile3NonUsed = Tuile4NonUsed = True 
             boolMenu = initialisation = True
             boolResize = True
+            LC = ListCreator()
+           
+            LT = LC.createList()
+            RTG = RandomTileGenerator()
             LJ = None
-            i = j = regleInt = nb_tour = 0
+            LT = None
+            LC = None
+            L = list()
+            i = j = regleInt = nb_tour = Key = 0
             boolrecommencer = True
             ChoixJ1 = ChoixJ2 = ChoixJ3 = ChoixJ4 = 0
-            boolChoixJ = ModifJ1 = ModifJ2 = ModifJ3 = ModifJ4 = LPartie = TheEnd = False
+            boolChoixJ = ModifJ1 = ModifJ2 = ModifJ3 = ModifJ4 = LPartie = TheEnd =  Mpressed = Kpressed = False
+           
+            
         elif quitterOver :
             print("trs")
             exit()
