@@ -190,6 +190,8 @@ def ChoixJoueur():
             text("Num-P", 345, 220)
         if(ChoixJ1 == 3):
             text("Mum-C", 345, 220)
+        if(ChoixJ1 == 4):
+            text("Rum-L", 345, 220)
     else :
         if(ChoixJ1 == 0):
             text("Humain", 275, 237)
@@ -199,6 +201,8 @@ def ChoixJoueur():
             text("Num-P", 275, 237)
         if(ChoixJ1 == 3):
             text("Mum-C", 275, 237)
+        if(ChoixJ1 == 4):
+            text("Rum-L", 275, 237)
             
     if ModifJ2:
         fill(color(204))
@@ -215,6 +219,8 @@ def ChoixJoueur():
             text("Num-P", 345, 320)
         if(ChoixJ2 == 3):
             text("Mum-C", 345, 320)
+        if(ChoixJ2 == 4):
+            text("Rum-L", 345, 220)
     else:
         if(ChoixJ2 == 0):
             text("Humain", 275, 337)
@@ -224,6 +230,8 @@ def ChoixJoueur():
             text("Num-P", 275, 337)
         if(ChoixJ2 == 3):
             text("Mum-C", 275, 337)
+        if(ChoixJ2 == 4):
+            text("Rum-L", 275, 337)
     if bool3Joueur or bool4Joueur:
         if ModifJ3:
             fill(color(204))
@@ -240,6 +248,8 @@ def ChoixJoueur():
                 text("Num-P", 345, 420)
             if(ChoixJ3 == 3):
                 text("Mum-C", 345, 420)
+            if(ChoixJ3 == 4):
+                text("Rum-L", 345, 420)
         else:
             if(ChoixJ3 == 0):
                 text("Humain", 275, 437)
@@ -249,6 +259,8 @@ def ChoixJoueur():
                 text("Num-P", 275, 437)
             if(ChoixJ3 == 3):
                 text("Mum-C", 275, 437)
+            if(ChoixJ3 == 4):
+                text("Rum-L", 275, 437)
     if bool4Joueur:
         if ModifJ4:
             fill(color(204))
@@ -265,6 +277,8 @@ def ChoixJoueur():
                 text("Num-P", 345, 520)
             if(ChoixJ4 == 3):
                 text("Mum-C", 345, 520)
+            if(ChoixJ4 == 4):
+                text("Rum-L", 345, 520)
         else: 
             if(ChoixJ4 == 0):
                 text("Humain", 275, 537)
@@ -274,6 +288,8 @@ def ChoixJoueur():
                 text("Num-P", 275, 537)
             if(ChoixJ4 == 3):
                 text("Mum-C", 275, 537)
+            if(ChoixJ4 == 4):
+                text("Rum-L", 275, 537)
     if LPartie:
         fill(color(204))
     else:
@@ -1213,13 +1229,13 @@ def mousePressed():
             Mpressed = True
         if boolChoixJ:
             if ModifJ1:
-                ChoixJ1 = (ChoixJ1 + 1)%4
+                ChoixJ1 = (ChoixJ1 + 1)%5
             if ModifJ2:
-                ChoixJ2 = (ChoixJ2 + 1)%4
+                ChoixJ2 = (ChoixJ2 + 1)%5
             if ModifJ3:
-                ChoixJ3 = (ChoixJ3 + 1)%4
+                ChoixJ3 = (ChoixJ3 + 1)%5
             if ModifJ4:
-                ChoixJ4 = (ChoixJ4 + 1)%4
+                ChoixJ4 = (ChoixJ4 + 1)%5
             if LPartie:
                 LPartie = False
                 boolChoixJ = False

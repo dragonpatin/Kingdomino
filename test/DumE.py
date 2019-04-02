@@ -11,8 +11,95 @@ class DumE:
 		self.tabTile = None
 		self.nbTile = 0
 
+		self.list_tuile_tmp = list()
+		self.tmpTile = None
+		self.nbpoint_tmp = 0
+		self.tabPoint_tmp = None
+
 	def setLastTile(self,T):
 		self.lastTile = T
+
+	def setTmpTile(self, T):
+		self.tmpTile = T
+
+	def initListTileTmp(self):
+		self.list_tuile_tmp = list()
+		for T in self.list_tuile:
+			self.list_tuile_tmp.append(T)
+
+	def initTabPointTmp(self):
+		n = 5
+		m = 3
+		self.tabPoint_tmp = [[[0 for k in xrange(m)] for j in xrange(n)] for i in xrange(n)]
+		self.tabPoint_tmp[0][0][0] = 7
+
+	def resetTabPointTmp(self):
+		for i in range (0,5):
+			for j in range (0,5):
+				for k in range (0,3):
+					self.tabPoint_tmp[i][j][k] = 0
+
+	def setTabPointTmp(self):
+		for i in range(0,5):
+			for j in range(0,5):
+				for k in range(0,3):
+					self.tabPoint_tmp[i][j][k] = self.tabPoint[i][j][k]
+
+	def ajoutTileTabPointTmp(self):
+		self.tabPoint_tmp[self.tmpTile.position_y][self.tmpTile.position_x][0] = self.tmpTile.tuile_1
+		self.tabPoint_tmp[self.tmpTile.position_y][self.tmpTile.position_x][1] = self.tmpTile.couronne_1
+
+		self.tabPoint_tmp[self.tmpTile.getPos2y()][self.tmpTile.getPos2x()][0] = self.tmpTile.tuile_2
+		self.tabPoint_tmp[self.tmpTile.getPos2y()][self.tmpTile.getPos2x()][1] = self.tmpTile.couronne_2
+
+	def comptagePointTmp(self):
+		global nb_couronne_tmp
+		self.nbpoint_tmp = 0
+		for i in range(0,5):
+			for j in range(0,5):
+				if self.tabPoint_tmp[i][j][2] == 0:
+					if self.tabPoint_tmp[i][j][0] != 0 and self.tabPoint_tmp[i][j][0] != 7:
+						total_tmp = self.nbVoisins_tmp(i,j,self.tabPoint_tmp[i][j][1])
+						self.nbpoint_tmp = self.nbpoint_tmp + (total_tmp * nb_couronne_tmp)
+						nb_couronne_tmp = 0
+		for i in range (0,5):
+			for j in range (0,5):
+				self.tabPoint_tmp[i][j][2] = 0
+
+	def nbVoisins_tmp(self,y,x,c):
+		global nb_couronne_tmp, nb_voisins_tmp
+		nb_couronne_tmp = c
+		nb_voisins_tmp = 0
+		self.tabPoint_tmp[y][x][2] = 1
+		if y - 1 >= 0 and self.tabPoint_tmp[y - 1][x][2] == 0 and self.tabPoint_tmp[y - 1][x][0] == self.tabPoint_tmp[y][x][0]:
+			if self.tabPoint_tmp[y - 1][x][1] != 0:
+				nb_couronne_tmp = nb_couronne_tmp + self.tabPoint_tmp[y - 1][x][1]
+				nb_voisins_tmp = nb_voisins_tmp + self.nbVoisins_tmp(y-1,x,nb_couronne_tmp)
+			else:
+				nb_voisins_tmp = nb_voisins_tmp + self.nbVoisins_tmp(y-1,x,nb_couronne_tmp)
+		
+		if x + 1 <= 4 and self.tabPoint_tmp[y][x + 1][2] == 0 and self.tabPoint_tmp[y][x + 1][0] == self.tabPoint_tmp[y][x][0]:
+			if self.tabPoint_tmp[y][x + 1][1] != 0:
+				nb_couronne_tmp = nb_couronne_tmp + self.tabPoint_tmp[y][x + 1][1]
+				nb_voisins_tmp = nb_voisins_tmp + self.nbVoisins_tmp(y,x+1,nb_couronne_tmp)
+			else:
+				nb_voisins_tmp = nb_voisins_tmp + self.nbVoisins_tmp(y,x+1,nb_couronne_tmp)
+		
+		if y + 1 <= 4 and self.tabPoint_tmp[y + 1][x][2] == 0 and self.tabPoint_tmp[y + 1][x][0] == self.tabPoint_tmp[y][x][0]:
+			if self.tabPoint_tmp[y + 1][x][1] != 0:
+				nb_couronne_tmp = nb_couronne_tmp + self.tabPoint_tmp[y + 1][x][1]
+				nb_voisins_tmp = nb_voisins_tmp + self.nbVoisins_tmp(y+1,x,nb_couronne_tmp)
+			else:
+				nb_voisins_tmp = nb_voisins_tmp + self.nbVoisins_tmp(y+1,x,nb_couronne_tmp)
+				
+		if x - 1 >= 0 and self.tabPoint_tmp[y][x - 1][2] == 0 and self.tabPoint_tmp[y][x - 1][0] == self.tabPoint_tmp[y][x][0]:
+			if self.tabPoint_tmp[y][x - 1][1] != 0:
+				nb_couronne_tmp = nb_couronne_tmp + self.tabPoint_tmp[y][x - 1][1]
+				nb_voisins_tmp = nb_voisins_tmp + self.nbVoisins_tmp(y,x-1,nb_couronne_tmp)
+			else:
+				nb_voisins_tmp = nb_voisins_tmp + self.nbVoisins_tmp(y,x-1,nb_couronne_tmp)
+		return 1 + nb_voisins_tmp
+
 		
 	def setNextPos(self,pos):
 		self.nextPos = pos
@@ -100,88 +187,89 @@ class DumE:
 				self.constructionTabPoint(T)
 				self.comptagePoint()
 				
-	def testSuperpositionChateau(self):
-		if(self.lastTile.position_x == self.castle_x and self.lastTile.position_y == self.castle_y) :
+	def testSuperpositionChateau(self,T):
+		if(T.position_x == self.castle_x and T.position_y == self.castle_y) :
 			return True
-		if(self.lastTile.getPos2x() == self.castle_x and self.lastTile.getPos2y() == self.castle_y) :
-			return True
-		return False
-		
-	def testSuperpositionList(self):
-		for T in self.list_tuile :
-			if(self.lastTile.position_x == T.position_x and self.lastTile.position_y == T.position_y) :
-				return True
-			if(self.lastTile.getPos2x() == T.position_x and self.lastTile.getPos2y() == T.position_y) :
-				return True
-			if(self.lastTile.position_x == T.getPos2x() and self.lastTile.position_y == T.getPos2y()) :
-				return True
-			if(self.lastTile.getPos2x() == T.getPos2x() and self.lastTile.getPos2y() == T.getPos2y()) :
-				return True
-		return False
-		
-	def testSuperposition(self):
-		if(self.testSuperpositionChateau() or self.testSuperpositionList()):
+		if(T.getPos2x() == self.castle_x and T.getPos2y() == self.castle_y) :
 			return True
 		return False
 		
-	def isNotNextCastle(self) :
-		if(self.lastTile.position_x + 1 == self.castle_x and self.lastTile.position_y == self.castle_y) :
+	def testSuperpositionList(self,Tile,lt):
+		for T in lt :
+			if(Tile.position_x == T.position_x and Tile.position_y == T.position_y) :
+				return True
+			if(Tile.getPos2x() == T.position_x and Tile.getPos2y() == T.position_y) :
+				return True
+			if(Tile.position_x == T.getPos2x() and Tile.position_y == T.getPos2y()) :
+				return True
+			if(Tile.getPos2x() == T.getPos2x() and Tile.getPos2y() == T.getPos2y()) :
+				return True
+		return False
+		
+	def testSuperposition(self,T,lt):
+		if(self.testSuperpositionChateau(T) or self.testSuperpositionList(T,lt)):
+			return True
+		return False
+		
+	def isNotNextCastle(self, Tile) :
+		if(Tile.position_x + 1 == self.castle_x and Tile.position_y == self.castle_y) :
 			return False
-		if(self.lastTile.position_x - 1 == self.castle_x and self.lastTile.position_y == self.castle_y) :
+		if(Tile.position_x - 1 == self.castle_x and Tile.position_y == self.castle_y) :
 			return False
-		if(self.lastTile.position_x == self.castle_x and self.lastTile.position_y + 1 == self.castle_y) :
+		if(Tile.position_x == self.castle_x and Tile.position_y + 1 == self.castle_y) :
 			return False
-		if(self.lastTile.position_x == self.castle_x and self.lastTile.position_y - 1 == self.castle_y) :
+		if(Tile.position_x == self.castle_x and Tile.position_y - 1 == self.castle_y) :
 			return False
-		if(self.lastTile.getPos2x() + 1 == self.castle_x and self.lastTile.getPos2y() == self.castle_y) :
+		if(Tile.getPos2x() + 1 == self.castle_x and Tile.getPos2y() == self.castle_y) :
 			return False
-		if(self.lastTile.getPos2x() - 1 == self.castle_x and self.lastTile.getPos2y() == self.castle_y) :
+		if(Tile.getPos2x() - 1 == self.castle_x and Tile.getPos2y() == self.castle_y) :
 			return False
-		if(self.lastTile.getPos2x() == self.castle_x and self.lastTile.getPos2y() - 1 == self.castle_y) :
+		if(Tile.getPos2x() == self.castle_x and Tile.getPos2y() - 1 == self.castle_y) :
 			return False
-		if(self.lastTile.getPos2x() == self.castle_x and self.lastTile.getPos2y() + 1 == self.castle_y) :
+		if(Tile.getPos2x() == self.castle_x and Tile.getPos2y() + 1 == self.castle_y) :
 			return False
 		return True
 		
-	def isNextGoodTile(self):
-		for T in self.list_tuile :
-			if T.tuile_1 == self.lastTile.tuile_1 :
-				if(self.lastTile.position_x + 1 == T.position_x and self.lastTile.position_y == T.position_y) :
+	def isNextGoodTile(self, Tile, lt):
+		for T in lt :
+			if T.tuile_1 == Tile.tuile_1 :
+				if(Tile.position_x + 1 == T.position_x and Tile.position_y == T.position_y) :
 					return True
-				if(self.lastTile.position_x - 1 == T.position_x and self.lastTile.position_y == T.position_y) :
+				if(Tile.position_x - 1 == T.position_x and Tile.position_y == T.position_y) :
 					return True
-				if(self.lastTile.position_x == T.position_x and self.lastTile.position_y + 1 == T.position_y) :
+				if(Tile.position_x == T.position_x and Tile.position_y + 1 == T.position_y) :
 					return True
-				if(self.lastTile.position_x == T.position_x and self.lastTile.position_y - 1 == T.position_y) :
+				if(Tile.position_x == T.position_x and Tile.position_y - 1 == T.position_y) :
 					return True
-			if T.tuile_1 == self.lastTile.tuile_2 :
-				if(self.lastTile.getPos2x() + 1 == T.position_x and self.lastTile.getPos2y() == T.position_y) :
+			if T.tuile_1 == Tile.tuile_2 :
+				if(Tile.getPos2x() + 1 == T.position_x and Tile.getPos2y() == T.position_y) :
 					return True
-				if(self.lastTile.getPos2x() - 1 == T.position_x and self.lastTile.getPos2y() == T.position_y) :
+				if(Tile.getPos2x() - 1 == T.position_x and Tile.getPos2y() == T.position_y) :
 					return True
-				if(self.lastTile.getPos2x() == T.position_x and self.lastTile.getPos2y() - 1 == T.position_y) :
+				if(Tile.getPos2x() == T.position_x and Tile.getPos2y() - 1 == T.position_y) :
 					return True
-				if(self.lastTile.getPos2x() == T.position_x and self.lastTile.getPos2y() + 1 == T.position_y) :
+				if(Tile.getPos2x() == T.position_x and Tile.getPos2y() + 1 == T.position_y) :
 					return True
-			if T.tuile_2 == self.lastTile.tuile_1 :
-				if(self.lastTile.position_x + 1 == T.getPos2x() and self.lastTile.position_y == T.getPos2y()) :
+			if T.tuile_2 == Tile.tuile_1 :
+				if(Tile.position_x + 1 == T.getPos2x() and Tile.position_y == T.getPos2y()) :
 					return True
-				if(self.lastTile.position_x - 1 == T.getPos2x() and self.lastTile.position_y == T.getPos2y()) :
+				if(Tile.position_x - 1 == T.getPos2x() and Tile.position_y == T.getPos2y()) :
 					return True
-				if(self.lastTile.position_x == T.getPos2x() and self.lastTile.position_y + 1 == T.getPos2y()) :
+				if(Tile.position_x == T.getPos2x() and Tile.position_y + 1 == T.getPos2y()) :
 					return True
-				if(self.lastTile.position_x == T.getPos2x() and self.lastTile.position_y - 1 == T.getPos2y()) :
+				if(Tile.position_x == T.getPos2x() and Tile.position_y - 1 == T.getPos2y()) :
 					return True
-			if T.tuile_2 == self.lastTile.tuile_2 :
-				if(self.lastTile.getPos2x() + 1 == T.getPos2x() and self.lastTile.getPos2y() == T.getPos2y()) :
+			if T.tuile_2 == Tile.tuile_2 :
+				if(Tile.getPos2x() + 1 == T.getPos2x() and Tile.getPos2y() == T.getPos2y()) :
 					return True
-				if(self.lastTile.getPos2x() - 1 == T.getPos2x() and self.lastTile.getPos2y() == T.getPos2y()) :
+				if(Tile.getPos2x() - 1 == T.getPos2x() and Tile.getPos2y() == T.getPos2y()) :
 					return True
-				if(self.lastTile.getPos2x() == T.getPos2x() and self.lastTile.getPos2y() - 1 == T.getPos2y()) :
+				if(Tile.getPos2x() == T.getPos2x() and Tile.getPos2y() - 1 == T.getPos2y()) :
 					return True
-				if(self.lastTile.getPos2x() == T.getPos2x() and self.lastTile.getPos2y() + 1 == T.getPos2y()) :
+				if(Tile.getPos2x() == T.getPos2x() and Tile.getPos2y() + 1 == T.getPos2y()) :
 					return True
 		return False
+	
 	
 	def autorisationSauveguarde(self):
 		if self.testSuperposition() :
@@ -364,22 +452,22 @@ class DumE:
 		self.tabTile[self.lastTile.tuile_1 - 1] =+1
 		self.tabTile[self.lastTile.tuile_2 - 1] =+1
 		
-	def recherchePos(self,type):
+	def recherchePos(self,type,lt):
 		l = list()
 		x = None
-		for x in self.list_tuile :
+		for x in lt :
 			if(x.tuile_1 == type): l.append([x.position_x,x.position_y])
 			if(x.tuile_2 == type): l.append([x.getPos2x(),x.getPos2y()])
 		return l
 		
-	def isNotCrossing(self) :
-		if(self.lastTile.position_x < 0 or self.lastTile.position_x > 4): 
+	def isNotCrossing(self,Tile) :
+		if(Tile.position_x < 0 or Tile.position_x > 4): 
 			return False
-		if(self.lastTile.position_y < 0 or self.lastTile.position_y > 4): 
+		if(Tile.position_y < 0 or Tile.position_y > 4): 
 			return False
-		if(self.lastTile.getPos2x() < 0 or self.lastTile.getPos2x() > 4): 
+		if(Tile.getPos2x() < 0 or Tile.getPos2x() > 4): 
 			return False
-		if(self.lastTile.getPos2y() < 0 or self.lastTile.getPos2y() > 4): 
+		if(Tile.getPos2y() < 0 or Tile.getPos2y() > 4): 
 			return False
 		return True 
 			
@@ -407,7 +495,7 @@ class DumE:
 			return False,0,j,AjouterTileJ,DeplacerPlateau,NextTurn,TheEnd
 		else :
 			if(self.tabTile[self.lastTile.tuile_1 - 1] > self.tabTile[self.lastTile.tuile_2 -1 ]):
-				l = self.recherchePos(self.lastTile.tuile_1)
+				l = self.recherchePos(self.lastTile.tuile_1, self.list_tuile)
 				for x in l :
 					for y in range(0,4) :
 						if(y == 0):
@@ -427,7 +515,7 @@ class DumE:
 								self.lastTile.setOrientation(2)
 							if(z == 3):
 								self.lastTile.setOrientation(3)
-							if not(self.testSuperposition()) and self.isNextGoodTile() and self.isNotCrossing():
+							if not(self.testSuperposition(self.lastTile, self.list_tuile)) and self.isNextGoodTile(self.lastTile,self.list_tuile) and self.isNotCrossing(self.lastTile):
 								self.updateTabTile()
 								self.list_tuile.append(self.lastTile)
 								self.ajoutTileTabPoint()
@@ -461,7 +549,7 @@ class DumE:
 							self.lastTile.setOrientation(2)
 						if(z == 3):
 							self.lastTile.setOrientation(3)
-						if not(self.testSuperposition()) and not(self.isNotNextCastle()) and self.isNotCrossing():
+						if not(self.testSuperposition(self.lastTile, self.list_tuile)) and not(self.isNotNextCastle(self.lastTile)) and self.isNotCrossing(self.lastTile):
 							self.updateTabTile()
 							self.list_tuile.append(self.lastTile)
 							self.ajoutTileTabPoint()
@@ -478,7 +566,7 @@ class DumE:
 							self.nbTile += 1
 							return False,0,j,AjouterTileJ,DeplacerPlateau,NextTurn,TheEnd
 			else :
-				l = self.recherchePos(self.lastTile.tuile_2)
+				l = self.recherchePos(self.lastTile.tuile_2,self.list_tuile)
 				if(l == []) :
 					for y in range(0,4) :
 						if(y == 0):
@@ -498,7 +586,7 @@ class DumE:
 								self.lastTile.setOrientation(2)
 							if(z == 3):
 								self.lastTile.setOrientation(3)
-							if not(self.testSuperposition()) and not(self.isNotNextCastle()) and self.isNotCrossing():
+							if not(self.testSuperposition(self.lastTile, self.list_tuile)) and not(self.isNotNextCastle(self.lastTile)) and self.isNotCrossing(self.lastTile):
 								self.updateTabTile()
 								self.list_tuile.append(self.lastTile)
 								self.ajoutTileTabPoint()
@@ -541,7 +629,7 @@ class DumE:
 							if(y == 7):
 								self.lastTile.setPosistion(x[0]-1,x[1]-1)
 								self.lastTile.setOrientation(1)
-							if not(self.testSuperposition()) and self.isNextGoodTile() and self.isNotCrossing():
+							if not(self.testSuperposition(self.lastTile, self.list_tuile)) and self.isNextGoodTile(self.lastTile,self.list_tuile) and self.isNotCrossing(self.lastTile):
 								self.updateTabTile()
 								self.list_tuile.append(self.lastTile)
 								self.ajoutTileTabPoint()
@@ -575,7 +663,7 @@ class DumE:
 								self.lastTile.setOrientation(2)
 							if(z == 3):
 								self.lastTile.setOrientation(3)
-							if not(self.testSuperposition()) and not(self.isNotNextCastle()) and self.isNotCrossing():
+							if not(self.testSuperposition(self.lastTile, self.list_tuile)) and not(self.isNotNextCastle(self.lastTile)) and self.isNotCrossing(self.lastTile):
 								self.updateTabTile()
 								self.list_tuile.append(self.lastTile)
 								self.ajoutTileTabPoint()
@@ -601,4 +689,145 @@ class DumE:
 		if j == 0 and nb_tour == 0:
 			TheEnd = True 
 		return False,0,j,AjouterTileJ,DeplacerPlateau,NextTurn,TheEnd
+
+	def test_deplacer(self):
+		x = y = z = None
+		if (self.tabTile[self.tmpTile.tuile_1 - 1] > self.tabTile[self.tmpTile.tuile_2 -1 ]):
+			l = self.recherchePos(self.tmpTile.tuile_1,self.list_tuile_tmp)
+			if (l != []):
+				for x in l :
+					for y in range(0,4) :
+						if(y == 0):
+							self.tmpTile.setPosistion(x[0]+1,x[1])
+						if(y == 1):
+							self.tmpTile.setPosistion(x[0]-1,x[1])
+						if(y == 2):
+							self.tmpTile.setPosistion(x[0],x[1]+1)
+						if(y == 3):
+							self.tmpTile.setPosistion(x[0],x[1]-1)
+						for z in range(0,4) :
+							if(z == 0):
+								self.tmpTile.setOrientation(0)
+							if(z == 1):
+								self.tmpTile.setOrientation(1)
+							if(z == 2):
+								self.tmpTile.setOrientation(2)
+							if(z == 3):
+								self.tmpTile.setOrientation(3)
+							if not(self.testSuperposition(self.tmpTile, self.list_tuile_tmp)) and self.isNextGoodTile(self.tmpTile,self.list_tuile_tmp) and self.isNotCrossing(self.tmpTile):
+								self.list_tuile_tmp.append(self.tmpTile)
+								self.ajoutTileTabPointTmp()
+								self.comptagePointTmp()
+								self.tmpTile = None
+								return 0
+				for y in range(0,4) :
+					if(y == 0):
+						self.tmpTile.setPosistion(self.castle_x+1,self.castle_y)
+					if(y == 1):
+						self.tmpTile.setPosistion(self.castle_x-1,self.castle_y)
+					if(y == 2):
+						self.tmpTile.setPosistion(self.castle_x,self.castle_y+1)
+					if(y == 3):
+						self.tmpTile.setPosistion(self.castle_x,self.castle_y-1)
+					for z in range(0,4) :
+						if(z == 0):
+							self.tmpTile.setOrientation(0)
+						if(z == 1):
+							self.tmpTile.setOrientation(1)
+						if(z == 2):
+							self.tmpTile.setOrientation(2)
+						if(z == 3):
+							self.tmpTile.setOrientation(3)
+						if not(self.testSuperposition(self.tmpTile, self.list_tuile_tmp)) and not(self.isNotNextCastle(self.tmpTile)) and self.isNotCrossing(self.tmpTile):
+							self.list_tuile_tmp.append(self.tmpTile)
+							self.ajoutTileTabPointTmp()
+							self.comptagePointTmp()
+							self.tmpTile = None
+							return 1
+		else:
+			l = self.recherchePos(self.tmpTile.tuile_2,self.list_tuile_tmp)
+			if(l == []) :
+				for y in range(0,4) :
+					if(y == 0):
+						self.tmpTile.setPosistion(self.castle_x+1,self.castle_y)
+					if(y == 1):
+						self.tmpTile.setPosistion(self.castle_x-1,self.castle_y)
+					if(y == 2):
+						self.tmpTile.setPosistion(self.castle_x,self.castle_y+1)
+					if(y == 3):
+						self.tmpTile.setPosistion(self.castle_x,self.castle_y-1)
+					for z in range(0,4) :
+						if(z == 0):
+							self.tmpTile.setOrientation(0)
+						if(z == 1):
+							self.tmpTile.setOrientation(1)
+						if(z == 2):
+							self.tmpTile.setOrientation(2)
+						if(z == 3):
+							self.tmpTile.setOrientation(3)
+						if not(self.testSuperposition(self.tmpTile, self.list_tuile_tmp)) and not(self.isNotNextCastle(self.tmpTile)) and self.isNotCrossing(self.tmpTile):
+							self.list_tuile_tmp.append(self.tmpTile)
+							self.ajoutTileTabPointTmp()
+							self.comptagePointTmp()
+							self.tmpTile = None
+							return 0
+			else :
+				for x in l :
+					for y in range(0,8) :
+						if(y == 0):
+							self.tmpTile.setPosistion(x[0]+1,x[1]+1)
+							self.tmpTile.setOrientation(3)
+						if(y == 1):
+							self.tmpTile.setPosistion(x[0]+1,x[1]+1)
+							self.tmpTile.setOrientation(2)
+						if(y == 2):
+							self.tmpTile.setPosistion(x[0]-1,x[1]+1)
+							self.tmpTile.setOrientation(3)
+						if(y == 3):
+							self.tmpTile.setPosistion(x[0]-1,x[1]+1)
+							self.tmpTile.setOrientation(0)
+						if(y == 4):
+							self.tmpTile.setPosistion(x[0]+1,x[1]-1)
+							self.tmpTile.setOrientation(1)
+						if(y == 5):
+							self.tmpTile.setPosistion(x[0]+1,x[1]-1)
+							self.tmpTile.setOrientation(2)
+						if(y == 6):
+							self.tmpTile.setPosistion(x[0]-1,x[1]-1)
+							self.tmpTile.setOrientation(0)
+						if(y == 7):
+							self.tmpTile.setPosistion(x[0]-1,x[1]-1)
+							self.tmpTile.setOrientation(1)
+						if not(self.testSuperposition(self.tmpTile, self.list_tuile_tmp)) and self.isNextGoodTile(self.tmpTile,self.list_tuile_tmp) and self.isNotCrossing(self.tmpTile):
+							self.list_tuile_tmp.append(self.tmpTile)
+							self.ajoutTileTabPointTmp()
+							self.comptagePointTmp()
+							self.tmpTile = None
+							return 0
+				for y in range(0,4) :
+					if(y == 0):
+						self.tmpTile.setPosistion(self.castle_x+1,self.castle_y)
+					if(y == 1):
+						self.tmpTile.setPosistion(self.castle_x-1,self.castle_y)
+					if(y == 2):
+						self.tmpTile.setPosistion(self.castle_x,self.castle_y+1)
+					if(y == 3):
+						self.tmpTile.setPosistion(self.castle_x,self.castle_y-1)
+					for z in range(0,4) :
+						if(z == 0):
+							self.tmpTile.setOrientation(0)
+						if(z == 1):
+							self.tmpTile.setOrientation(1)
+						if(z == 2):
+							self.tmpTile.setOrientation(2)
+						if(z == 3):
+							self.tmpTile.setOrientation(3)
+						if not(self.testSuperposition(self.tmpTile, self.list_tuile_tmp)) and not(self.isNotNextCastle(self.tmpTile)) and self.isNotCrossing(self.tmpTile):
+							self.list_tuile_tmp.append(self.tmpTile)
+							self.ajoutTileTabPointTmp()
+							self.comptagePointTmp()
+							self.tmpTile = None
+							return 0
+		self.tmpTile = None
+		return 0
                 

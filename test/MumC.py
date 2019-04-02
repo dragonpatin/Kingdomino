@@ -373,8 +373,9 @@ class MumC:
 			S = S4
 		return Choix
 	
-	def choisir(self,Mpressed,Tuile1,Tuile2,Tuile3,Tuile4,Tuile1NonUsed,Tuile2NonUsed,Tuile3NonUsed,Tuile4NonUsed,AjouterTileJ,bool2joueur,bool3joueur,bool4joueur,L):
+	def choisir(self,Mpressed,Tuile1,Tuile2,Tuile3,Tuile4,Tuile1NonUsed,Tuile2NonUsed,Tuile3NonUsed,Tuile4NonUsed,AjouterTileJ,bool2joueur,bool3joueur,bool4joueur,L,LJ):
 		scoreT1 = scoreT2 = scoreT3 = scoreT4 = 0
+		print("nouveau test")
 		if(self.nbTile == 0):
 			self.tabTile = [0,0,0,0,0,0];
 			
@@ -409,6 +410,7 @@ class MumC:
 				self.setTabPointTmp()
 				self.nbpoint_tmp = 0
 				self.test_deplacer()
+				print("point {a}".format(a=self.nbpoint_tmp))
 				scoreT1 += self.nbpoint_tmp
 			else :
 				scoreT1 = -1
@@ -423,6 +425,7 @@ class MumC:
 				self.setTabPointTmp()
 				self.nbpoint_tmp = 0
 				self.test_deplacer()
+				print("point {a}".format(a=self.nbpoint_tmp))
 				scoreT2 += self.nbpoint_tmp
 			else :
 				scoreT2 = -1
@@ -437,6 +440,7 @@ class MumC:
 				self.setTabPointTmp()
 				self.nbpoint_tmp = 0
 				self.test_deplacer()
+				print("point {a}".format(a=self.nbpoint_tmp))
 				scoreT3 += self.nbpoint_tmp
 			else :
 				scoreT3 = -1
@@ -451,6 +455,7 @@ class MumC:
 				self.setTabPointTmp()
 				self.nbpoint_tmp = 0
 				self.test_deplacer()
+				print("point {a}".format(a=self.nbpoint_tmp))
 				scoreT4 += self.nbpoint_tmp
 			else :
 				scoreT4 = -1
