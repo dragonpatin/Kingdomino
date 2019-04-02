@@ -288,7 +288,7 @@ class NumP:
 			S = S4
 		return Choix
 	
-	def choisir(self,Mpressed,Tuile1,Tuile2,Tuile3,Tuile4,Tuile1NonUsed,Tuile2NonUsed,Tuile3NonUsed,Tuile4NonUsed,AjouterTileJ,bool2joueur,bool3joueur,bool4joueur,L):
+	def choisir(self,Mpressed,Tuile1,Tuile2,Tuile3,Tuile4,Tuile1NonUsed,Tuile2NonUsed,Tuile3NonUsed,Tuile4NonUsed,AjouterTileJ,bool2joueur,bool3joueur,bool4joueur,L,LJ):
 		scoreT1 = scoreT2 = scoreT3 = scoreT4 = 0
 		if(self.nbTile == 0):
 			self.tabTile = [0,0,0,0,0,0];

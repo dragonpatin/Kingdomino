@@ -1,4 +1,5 @@
-class DumE:
+class RumL:
+	"""docstring for RumL"""
 	def __init__(self, nom):
 		self.nom = nom
 		self.nbpoint = 0
@@ -270,8 +271,8 @@ class DumE:
                 for i in range (0,5):
                         for j in range (0,5):
                                 self.tabPoint[i][j][2] = 0
-	
-	def ordreChoix(self,S1,S2,S3,S4):
+
+def ordreChoix(self,S1,S2,S3,S4):
 		Choix = 0
 		S = -1
 		if S1 > S :
@@ -288,16 +289,13 @@ class DumE:
 			S = S4
 		return Choix
 	
+
 	def choisir(self,Mpressed,Tuile1,Tuile2,Tuile3,Tuile4,Tuile1NonUsed,Tuile2NonUsed,Tuile3NonUsed,Tuile4NonUsed,AjouterTileJ,bool2joueur,bool3joueur,bool4joueur,L,LJ):
 		scoreT1 = scoreT2 = scoreT3 = scoreT4 = 0
-		for i in range(len(LJ)):
-					if (LJ[i].nom != self.nom):
-						LJ[i].comptagePoint()
-
 		if(self.nbTile == 0):
 			self.tabTile = [0,0,0,0,0,0];
+			
 			if Tuile1NonUsed :
-				
 				scoreT1 = L[0].couronne_1 + L[0].couronne_2
 			else :
 				scoreT1 = -1
@@ -360,245 +358,3 @@ class DumE:
 				
 		return False,Tuile1NonUsed,Tuile2NonUsed,Tuile3NonUsed,Tuile4NonUsed,AjouterTileJ
 		
-	def updateTabTile(self):
-		self.tabTile[self.lastTile.tuile_1 - 1] =+1
-		self.tabTile[self.lastTile.tuile_2 - 1] =+1
-		
-	def recherchePos(self,type):
-		l = list()
-		x = None
-		for x in self.list_tuile :
-			if(x.tuile_1 == type): l.append([x.position_x,x.position_y])
-			if(x.tuile_2 == type): l.append([x.getPos2x(),x.getPos2y()])
-		return l
-		
-	def isNotCrossing(self) :
-		if(self.lastTile.position_x < 0 or self.lastTile.position_x > 4): 
-			return False
-		if(self.lastTile.position_y < 0 or self.lastTile.position_y > 4): 
-			return False
-		if(self.lastTile.getPos2x() < 0 or self.lastTile.getPos2x() > 4): 
-			return False
-		if(self.lastTile.getPos2y() < 0 or self.lastTile.getPos2y() > 4): 
-			return False
-		return True 
-			
-		
-	def deplacer(self,Kpressed,Key,bool2Joueur,bool3Joueur,bool4Joueur,j,AjouterTileJ,DeplacerPlateau,NextTurn,nb_tour,TheEnd):
-		x = y = z = None
-		if self.nbTile == 0 :
-			self.tileRight()
-			self.updateTabTile()
-			self.list_tuile.append(self.lastTile)
-			self.ajoutTileTabPoint()
-			self.comptagePoint()
-			self.lastTile = None
-			self.plateauRight()
-			self.plateauRight()
-			self.plateauDown()
-			self.plateauDown()
-			if bool3Joueur :
-				j = (j+1) % 3
-			else : 
-				j = (j+1) % 4
-			if j == 0 and not (nb_tour == 0):
-				NextTurn = True
-			self.nbTile += 1
-			return False,0,j,AjouterTileJ,DeplacerPlateau,NextTurn,TheEnd
-		else :
-			if(self.tabTile[self.lastTile.tuile_1 - 1] > self.tabTile[self.lastTile.tuile_2 -1 ]):
-				l = self.recherchePos(self.lastTile.tuile_1)
-				for x in l :
-					for y in range(0,4) :
-						if(y == 0):
-							self.lastTile.setPosistion(x[0]+1,x[1])
-						if(y == 1):
-							self.lastTile.setPosistion(x[0]-1,x[1])
-						if(y == 2):
-							self.lastTile.setPosistion(x[0],x[1]+1)
-						if(y == 3):
-							self.lastTile.setPosistion(x[0],x[1]-1)
-						for z in range(0,4) :
-							if(z == 0):
-								self.lastTile.setOrientation(0)
-							if(z == 1):
-								self.lastTile.setOrientation(1)
-							if(z == 2):
-								self.lastTile.setOrientation(2)
-							if(z == 3):
-								self.lastTile.setOrientation(3)
-							if not(self.testSuperposition()) and self.isNextGoodTile() and self.isNotCrossing():
-								self.updateTabTile()
-								self.list_tuile.append(self.lastTile)
-								self.ajoutTileTabPoint()
-								self.comptagePoint()
-								self.lastTile = None
-								if bool3Joueur :
-									j = (j+1) % 3
-								else : 
-									j = (j+1) % 4
-								if j == 0 and not (nb_tour == 0):
-									NextTurn = True
-								if j == 0 and nb_tour == 0:
-									TheEnd = True
-								self.nbTile += 1
-								return False,0,j,AjouterTileJ,DeplacerPlateau,NextTurn,TheEnd
-				for y in range(0,4) :
-					if(y == 0):
-						self.lastTile.setPosistion(self.castle_x+1,self.castle_y)
-					if(y == 1):
-						self.lastTile.setPosistion(self.castle_x-1,self.castle_y)
-					if(y == 2):
-						self.lastTile.setPosistion(self.castle_x,self.castle_y+1)
-					if(y == 3):
-						self.lastTile.setPosistion(self.castle_x,self.castle_y-1)
-					for z in range(0,4) :
-						if(z == 0):
-							self.lastTile.setOrientation(0)
-						if(z == 1):
-							self.lastTile.setOrientation(1)
-						if(z == 2):
-							self.lastTile.setOrientation(2)
-						if(z == 3):
-							self.lastTile.setOrientation(3)
-						if not(self.testSuperposition()) and not(self.isNotNextCastle()) and self.isNotCrossing():
-							self.updateTabTile()
-							self.list_tuile.append(self.lastTile)
-							self.ajoutTileTabPoint()
-							self.comptagePoint()
-							self.lastTile = None
-							if bool3Joueur :
-								j = (j+1) % 3
-							else : 
-								j = (j+1) % 4
-							if j == 0 and not (nb_tour == 0):
-								NextTurn = True
-							if j == 0 and nb_tour == 0:
-								TheEnd = True
-							self.nbTile += 1
-							return False,0,j,AjouterTileJ,DeplacerPlateau,NextTurn,TheEnd
-			else :
-				l = self.recherchePos(self.lastTile.tuile_2)
-				if(l == []) :
-					for y in range(0,4) :
-						if(y == 0):
-							self.lastTile.setPosistion(self.castle_x+1,self.castle_y)
-						if(y == 1):
-							self.lastTile.setPosistion(self.castle_x-1,self.castle_y)
-						if(y == 2):
-							self.lastTile.setPosistion(self.castle_x,self.castle_y+1)
-						if(y == 3):
-							self.lastTile.setPosistion(self.castle_x,self.castle_y-1)
-						for z in range(0,4) :
-							if(z == 0):
-								self.lastTile.setOrientation(0)
-							if(z == 1):
-								self.lastTile.setOrientation(1)
-							if(z == 2):
-								self.lastTile.setOrientation(2)
-							if(z == 3):
-								self.lastTile.setOrientation(3)
-							if not(self.testSuperposition()) and not(self.isNotNextCastle()) and self.isNotCrossing():
-								self.updateTabTile()
-								self.list_tuile.append(self.lastTile)
-								self.ajoutTileTabPoint()
-								self.comptagePoint()
-								self.lastTile = None
-								if bool3Joueur :
-									j = (j+1) % 3
-								else : 
-									j = (j+1) % 4
-								if j == 0 and not (nb_tour == 0):
-									NextTurn = True
-								if j == 0 and nb_tour == 0:
-									TheEnd = True
-								self.nbTile += 1
-								return False,0,j,AjouterTileJ,DeplacerPlateau,NextTurn,TheEnd
-				else :
-					for x in l :
-						for y in range(0,8) :
-							if(y == 0):
-								self.lastTile.setPosistion(x[0]+1,x[1]+1)
-								self.lastTile.setOrientation(3)
-							if(y == 1):
-								self.lastTile.setPosistion(x[0]+1,x[1]+1)
-								self.lastTile.setOrientation(2)
-							if(y == 2):
-								self.lastTile.setPosistion(x[0]-1,x[1]+1)
-								self.lastTile.setOrientation(3)
-							if(y == 3):
-								self.lastTile.setPosistion(x[0]-1,x[1]+1)
-								self.lastTile.setOrientation(0)
-							if(y == 4):
-								self.lastTile.setPosistion(x[0]+1,x[1]-1)
-								self.lastTile.setOrientation(1)
-							if(y == 5):
-								self.lastTile.setPosistion(x[0]+1,x[1]-1)
-								self.lastTile.setOrientation(2)
-							if(y == 6):
-								self.lastTile.setPosistion(x[0]-1,x[1]-1)
-								self.lastTile.setOrientation(0)
-							if(y == 7):
-								self.lastTile.setPosistion(x[0]-1,x[1]-1)
-								self.lastTile.setOrientation(1)
-							if not(self.testSuperposition()) and self.isNextGoodTile() and self.isNotCrossing():
-								self.updateTabTile()
-								self.list_tuile.append(self.lastTile)
-								self.ajoutTileTabPoint()
-								self.comptagePoint()
-								self.lastTile = None
-								if bool3Joueur :
-									j = (j+1) % 3
-								else : 
-									j = (j+1) % 4
-								if j == 0 and not (nb_tour == 0):
-									NextTurn = True
-								if j == 0 and nb_tour == 0:
-									TheEnd = True
-								self.nbTile += 1
-								return False,0,j,AjouterTileJ,DeplacerPlateau,NextTurn,TheEnd
-					for y in range(0,4) :
-						if(y == 0):
-							self.lastTile.setPosistion(self.castle_x+1,self.castle_y)
-						if(y == 1):
-							self.lastTile.setPosistion(self.castle_x-1,self.castle_y)
-						if(y == 2):
-							self.lastTile.setPosistion(self.castle_x,self.castle_y+1)
-						if(y == 3):
-							self.lastTile.setPosistion(self.castle_x,self.castle_y-1)
-						for z in range(0,4) :
-							if(z == 0):
-								self.lastTile.setOrientation(0)
-							if(z == 1):
-								self.lastTile.setOrientation(1)
-							if(z == 2):
-								self.lastTile.setOrientation(2)
-							if(z == 3):
-								self.lastTile.setOrientation(3)
-							if not(self.testSuperposition()) and not(self.isNotNextCastle()) and self.isNotCrossing():
-								self.updateTabTile()
-								self.list_tuile.append(self.lastTile)
-								self.ajoutTileTabPoint()
-								self.comptagePoint()
-								self.lastTile = None
-								if bool3Joueur :
-									j = (j+1) % 3
-								else : 
-									j = (j+1) % 4
-								if j == 0 and not (nb_tour == 0):
-									NextTurn = True
-								if j == 0 and nb_tour == 0:
-									TheEnd = True
-								self.nbTile += 1
-								return False,0,j,AjouterTileJ,DeplacerPlateau,NextTurn,TheEnd
-		self.lastTile = None
-		if bool3Joueur :
-			j = (j+1) % 3
-		else : 
-			j = (j+1) % 4
-		if j == 0 and not (nb_tour == 0):
-			NextTurn = True
-		if j == 0 and nb_tour == 0:
-			TheEnd = True 
-		return False,0,j,AjouterTileJ,DeplacerPlateau,NextTurn,TheEnd
-                

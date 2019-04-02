@@ -267,7 +267,7 @@ class Player:
                         for j in range (0,5):
                                 self.tabPoint[i][j][2] = 0
 								
-	def choisir(self,Mpressed,Tuile1,Tuile2,Tuile3,Tuile4,Tuile1NonUsed,Tuile2NonUsed,Tuile3NonUsed,Tuile4NonUsed,AjouterTileJ,bool2joueur,bool3joueur,bool4joueur,L):
+	def choisir(self,Mpressed,Tuile1,Tuile2,Tuile3,Tuile4,Tuile1NonUsed,Tuile2NonUsed,Tuile3NonUsed,Tuile4NonUsed,AjouterTileJ,bool2joueur,bool3joueur,bool4joueur,L,LJ):
 		if Mpressed and not(AjouterTileJ):
 			if bool2joueur :
 				if Tuile1 and Tuile1NonUsed:
