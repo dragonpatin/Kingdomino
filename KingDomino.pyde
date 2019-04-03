@@ -220,7 +220,7 @@ def ChoixJoueur():
         if(ChoixJ2 == 3):
             text("Mum-C", 345, 320)
         if(ChoixJ2 == 4):
-            text("Rum-L", 345, 220)
+            text("Rum-L", 345, 320)
     else:
         if(ChoixJ2 == 0):
             text("Humain", 275, 337)
