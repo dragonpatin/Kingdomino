@@ -287,77 +287,76 @@ class DumE:
                 m = 3
                 self.tabPoint = [[[0 for k in xrange(m)] for j in xrange(n)] for i in xrange(n)]
                 self.tabPoint[0][0][0] = 7
-                
-        def resetTabPoint(self):
-                for i in range (0,5):
-                        for j in range (0,5):
-                                for k in range (0,3):
-                                        self.tabPoint[i][j][k] = 0
-
-        def ajoutTileTabPoint(self):
-                self.tabPoint[self.lastTile.position_y][self.lastTile.position_x][0] = self.lastTile.tuile_1
-                self.tabPoint[self.lastTile.position_y][self.lastTile.position_x][1] = self.lastTile.couronne_1
-                
-                self.tabPoint[self.lastTile.getPos2y()][self.lastTile.getPos2x()][0] = self.lastTile.tuile_2
-                self.tabPoint[self.lastTile.getPos2y()][self.lastTile.getPos2x()][1] = self.lastTile.couronne_2
-
-        def constructionTabPoint(self,T):
-                self.tabPoint[T.position_y][T.position_x][0] = T.tuile_1
-                self.tabPoint[T.position_y][T.position_x][1] = T.couronne_1
-                
-                self.tabPoint[T.getPos2y()][T.getPos2x()][0] = T.tuile_2
-                self.tabPoint[T.getPos2y()][T.getPos2x()][1] = T.couronne_2
-
-                self.tabPoint[self.castle_y][self.castle_x][0] = 7 
-
-        def nbVoisins(self,y,x,c):
-                global nb_couronne, nb_voisins
-                nb_couronne = c
-                nb_voisins = 0
-                self.tabPoint[y][x][2] = 1
-                if y - 1 >= 0 and self.tabPoint[y - 1][x][2] == 0 and self.tabPoint[y - 1][x][0] == self.tabPoint[y][x][0]:
-                        if self.tabPoint[y - 1][x][1] != 0:
-                                nb_couronne = nb_couronne + self.tabPoint[y - 1][x][1]
-                                nb_voisins = nb_voisins + self.nbVoisins(y-1,x,nb_couronne)
-                        else:
-                                nb_voisins = nb_voisins + self.nbVoisins(y-1,x,nb_couronne)
-                                
-                if x + 1 <= 4 and self.tabPoint[y][x + 1][2] == 0 and self.tabPoint[y][x + 1][0] == self.tabPoint[y][x][0]:
-                        if self.tabPoint[y][x + 1][1] != 0:
-                                nb_couronne = nb_couronne + self.tabPoint[y][x + 1][1]
-                                nb_voisins = nb_voisins + self.nbVoisins(y,x+1,nb_couronne)
-                        else:
-                                nb_voisins = nb_voisins + self.nbVoisins(y,x+1,nb_couronne)
-                                
-                if y + 1 <= 4 and self.tabPoint[y + 1][x][2] == 0 and self.tabPoint[y + 1][x][0] == self.tabPoint[y][x][0]:
-                        if self.tabPoint[y + 1][x][1] != 0:
-                                nb_couronne = nb_couronne + self.tabPoint[y + 1][x][1]
-                                nb_voisins = nb_voisins + self.nbVoisins(y+1,x,nb_couronne)
-                        else:
-                                nb_voisins = nb_voisins + self.nbVoisins(y+1,x,nb_couronne)
-                        
-                if x - 1 >= 0 and self.tabPoint[y][x - 1][2] == 0 and self.tabPoint[y][x - 1][0] == self.tabPoint[y][x][0]:
-                        if self.tabPoint[y][x - 1][1] != 0:
-                                nb_couronne = nb_couronne + self.tabPoint[y][x - 1][1]
-                                nb_voisins = nb_voisins + self.nbVoisins(y,x-1,nb_couronne)
-                        else:
-                                nb_voisins = nb_voisins + self.nbVoisins(y,x-1,nb_couronne)
-                        
-                return 1 + nb_voisins
-                
-        def comptagePoint(self):
-                global nb_couronne
-                self.nbpoint = 0
-                for i in range(0,5):
-                        for j in range(0,5):
-                                if self.tabPoint[i][j][2] == 0:
-                                        if self.tabPoint[i][j][0] != 0 and self.tabPoint[i][j][0] != 7:
-                                                total = self.nbVoisins(i,j,self.tabPoint[i][j][1])
-                                                self.nbpoint = self.nbpoint + (total * nb_couronne)
-                                                nb_couronne = 0
-                for i in range (0,5):
-                        for j in range (0,5):
-                                self.tabPoint[i][j][2] = 0
+				
+	def resetTabPoint(self):
+		for i in range (0,5):
+			for j in range (0,5):
+				for k in range (0,3):
+					self.tabPoint[i][j][k] = 0
+					
+	def ajoutTileTabPoint(self):
+		self.tabPoint[self.lastTile.position_y][self.lastTile.position_x][0] = self.lastTile.tuile_1
+		self.tabPoint[self.lastTile.position_y][self.lastTile.position_x][1] = self.lastTile.couronne_1
+		
+		self.tabPoint[self.lastTile.getPos2y()][self.lastTile.getPos2x()][0] = self.lastTile.tuile_2
+		self.tabPoint[self.lastTile.getPos2y()][self.lastTile.getPos2x()][1] = self.lastTile.couronne_2
+		
+	def constructionTabPoint(self,T):
+		self.tabPoint[T.position_y][T.position_x][0] = T.tuile_1
+		self.tabPoint[T.position_y][T.position_x][1] = T.couronne_1
+		
+		self.tabPoint[T.getPos2y()][T.getPos2x()][0] = T.tuile_2
+		self.tabPoint[T.getPos2y()][T.getPos2x()][1] = T.couronne_2
+		
+		self.tabPoint[self.castle_y][self.castle_x][0] = 7 
+		
+	def nbVoisins(self,y,x,c):
+		global nb_couronne, nb_voisins
+		nb_couronne = c
+		nb_voisins = 0
+		self.tabPoint[y][x][2] = 1
+		if y - 1 >= 0 and self.tabPoint[y - 1][x][2] == 0 and self.tabPoint[y - 1][x][0] == self.tabPoint[y][x][0]:
+			if self.tabPoint[y - 1][x][1] != 0:
+				nb_couronne = nb_couronne + self.tabPoint[y - 1][x][1]
+				nb_voisins = nb_voisins + self.nbVoisins(y-1,x,nb_couronne)
+			else:
+				nb_voisins = nb_voisins + self.nbVoisins(y-1,x,nb_couronne)
+				
+		if x + 1 <= 4 and self.tabPoint[y][x + 1][2] == 0 and self.tabPoint[y][x + 1][0] == self.tabPoint[y][x][0]:
+			if self.tabPoint[y][x + 1][1] != 0:
+				nb_couronne = nb_couronne + self.tabPoint[y][x + 1][1]
+				nb_voisins = nb_voisins + self.nbVoisins(y,x+1,nb_couronne)
+			else:
+				nb_voisins = nb_voisins + self.nbVoisins(y,x+1,nb_couronne)
+				
+		if y + 1 <= 4 and self.tabPoint[y + 1][x][2] == 0 and self.tabPoint[y + 1][x][0] == self.tabPoint[y][x][0]:
+			if self.tabPoint[y + 1][x][1] != 0:
+				nb_couronne = nb_couronne + self.tabPoint[y + 1][x][1]
+				nb_voisins = nb_voisins + self.nbVoisins(y+1,x,nb_couronne)
+			else:
+				nb_voisins = nb_voisins + self.nbVoisins(y+1,x,nb_couronne)
+				
+		if x - 1 >= 0 and self.tabPoint[y][x - 1][2] == 0 and self.tabPoint[y][x - 1][0] == self.tabPoint[y][x][0]:
+			if self.tabPoint[y][x - 1][1] != 0:
+				nb_couronne = nb_couronne + self.tabPoint[y][x - 1][1]
+				nb_voisins = nb_voisins + self.nbVoisins(y,x-1,nb_couronne)
+			else:
+				nb_voisins = nb_voisins + self.nbVoisins(y,x-1,nb_couronne)
+		return 1 + nb_voisins
+		
+	def comptagePoint(self):
+		global nb_couronne
+		self.nbpoint = 0
+		for i in range(0,5):
+			for j in range(0,5):
+				if self.tabPoint[i][j][2] == 0:
+					if self.tabPoint[i][j][0] != 0 and self.tabPoint[i][j][0] != 7:
+						total = self.nbVoisins(i,j,self.tabPoint[i][j][1])
+						self.nbpoint = self.nbpoint + (total * nb_couronne)
+						nb_couronne = 0
+		for i in range (0,5):
+			for j in range (0,5):
+				self.tabPoint[i][j][2] = 0
 	
 	def ordreChoix(self,S1,S2,S3,S4):
 		Choix = 0
