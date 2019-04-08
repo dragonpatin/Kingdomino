@@ -411,10 +411,19 @@ class LumI:
 					point = LJ[i].nbpoint
 					numero = i
 
-			print(LJ[0])
 			if Tuile1NonUsed :
 				for i in range(0,len(LJ)):
-					if(LJ[i].numero != self.numero):
+					if (LJ[i].nom == "Humain"):
+						self.setTmpTile(L[0])
+						self.initListTileTmp()
+						self.initTabPointTmp()
+						self.resetTabPointTmp()
+						self.setTabPointTmp()
+						self.nbpoint_tmp = 0
+						self.test_deplacer()
+						if(self.nbpoint_tmp > scoreT1):
+							scoreT1 = self.nbpoint_tmp
+					elif((LJ[i].numero != self.numero)):
 						LJ[i].setTmpTile(L[0])
 						LJ[i].initListTileTmp()
 						LJ[i].initTabPointTmp()
@@ -440,7 +449,17 @@ class LumI:
 				
 			if Tuile2NonUsed :
 				for i in range(0,len(LJ)):
-					if(LJ[i].numero != self.numero or LJ[i] != "Humain"):
+					if (LJ[i].nom == "Humain"):
+						self.setTmpTile(L[1])
+						self.initListTileTmp()
+						self.initTabPointTmp()
+						self.resetTabPointTmp()
+						self.setTabPointTmp()
+						self.nbpoint_tmp = 0
+						self.test_deplacer()
+						if(self.nbpoint_tmp > scoreT2):
+							scoreT2 = self.nbpoint_tmp
+					elif(LJ[i].numero != self.numero ):
 						LJ[i].setTmpTile(L[1])
 						LJ[i].initListTileTmp()
 						LJ[i].initTabPointTmp()
@@ -466,7 +485,17 @@ class LumI:
 				
 			if Tuile3NonUsed :
 				for i in range(0,len(LJ)):
-					if(LJ[i].numero != self.numero or LJ[i] != "Humain"):
+					if (LJ[i].nom == "Humain"):
+						self.setTmpTile(L[2])
+						self.initListTileTmp()
+						self.initTabPointTmp()
+						self.resetTabPointTmp()
+						self.setTabPointTmp()
+						self.nbpoint_tmp = 0
+						self.test_deplacer()
+						if(self.nbpoint_tmp > scoreT3):
+							scoreT3 = self.nbpoint_tmp
+					elif(LJ[i].numero != self.numero):
 						LJ[i].setTmpTile(L[2])
 						LJ[i].initListTileTmp()
 						LJ[i].initTabPointTmp()
@@ -492,7 +521,17 @@ class LumI:
 			
 			if Tuile4NonUsed and (bool3joueur == False) :
 				for i in range(0,len(LJ)):
-					if(LJ[i].numero != self.numero or LJ[i] != "Humain"):
+					if (LJ[i].nom == "Humain"):
+						self.setTmpTile(L[3])
+						self.initListTileTmp()
+						self.initTabPointTmp()
+						self.resetTabPointTmp()
+						self.setTabPointTmp()
+						self.nbpoint_tmp = 0
+						self.test_deplacer()
+						if(self.nbpoint_tmp > scoreT4):
+							scoreT4 = self.nbpoint_tmp
+					elif(LJ[i].numero != self.numero):
 						LJ[i].setTmpTile(L[3])
 						LJ[i].initListTileTmp()
 						LJ[i].initTabPointTmp()

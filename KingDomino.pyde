@@ -65,7 +65,7 @@ def AfficheGagnant():
     pointgagnant = -1
     for player in LJ :
         if pointgagnant < player.nbpoint:
-            gagnant = player.nom
+            gagnant = player.numero
             pointgagnant = player.nbpoint
     #Couleur fin
     updateFin(mouseX, mouseY)
@@ -806,47 +806,47 @@ def affiche_Limite():
 def affiche_joueur():
     textSize(width*0.02)
     if bool2Joueur :
-        text("Joueur {a}".format(a=LJ[j%2].nom), int(width /2), 25)
+        text("Joueur {a}".format(a=LJ[j%2].numero), int(width /2), 25)
     else : 
-        text("Joueur {a}".format(a=LJ[j].nom), int(width /2), 25)
+        text("Joueur {a}".format(a=LJ[j].numero), int(width /2), 25)
     for player in LJ :
-        i = player.nom - 1
+        i = player.numero - 1
         affiche_chateau(player,i)
         affiche_list_tile(player,i)
         affiche_last_tile(player,i)
         if(i == 0) :
             textAlign(CENTER, CENTER)
             if bool2Joueur : 
-                text("Joueur {a}".format(a = player.nom), width*0.25, width*0.08 + 70 + height*0.05 )
+                text("Joueur {a}".format(a = player.numero), width*0.25, width*0.08 + 70 + height*0.05 )
                 text("Points : {a}".format(a = player.nbpoint), width*0.30, width*0.08 + 70 + height*0.05+ 6*40)
             elif bool3Joueur:
-                text("Joueur {a}".format(a = player.nom), width*0.165, width*0.08 + 70 + height*0.05)
+                text("Joueur {a}".format(a = player.numero), width*0.165, width*0.08 + 70 + height*0.05)
                 text("Points : {a}".format(a = player.nbpoint), width*0.215, width*0.08 + 70 + height*0.05+ 6*40)
             else :
-                text("Joueur {a}".format(a = player.nom), width*0.125, width*0.08 + 70 + height*0.05)
+                text("Joueur {a}".format(a = player.numero), width*0.125, width*0.08 + 70 + height*0.05)
                 text("Points : {a}".format(a = player.nbpoint), width*0.175, width*0.08 + 70 + height*0.05+ 6*40)
         elif(i == 1) :
             textAlign(CENTER, CENTER)
             if bool2Joueur : 
-                text("Joueur {a}".format(a = player.nom), width*0.75, width*0.08 + 70 + height*0.05)
+                text("Joueur {a}".format(a = player.numero), width*0.75, width*0.08 + 70 + height*0.05)
                 text("Points : {a}".format(a = player.nbpoint), width*0.80, width*0.08 + 70 + height*0.05+ 6*40)
             elif bool3Joueur:
-                text("Joueur {a}".format(a = player.nom), width*0.165 + i * 0.33 * width, width*0.08 + 70 + height*0.05)
+                text("Joueur {a}".format(a = player.numero), width*0.165 + i * 0.33 * width, width*0.08 + 70 + height*0.05)
                 text("Points : {a}".format(a = player.nbpoint), width*0.215 + i * 0.33 * width, width*0.08 + 70 + height*0.05+ 6*40)
             else :
-                text("Joueur {a}".format(a = player.nom), width*0.125 + i * 0.25 * width, width*0.08 + 70 + height*0.05)
+                text("Joueur {a}".format(a = player.numero), width*0.125 + i * 0.25 * width, width*0.08 + 70 + height*0.05)
                 text("Points : {a}".format(a = player.nbpoint), width*0.175 + i * 0.25 * width, width*0.08 + 70 + height*0.05+ 6*40)
         elif(i == 2) :
             textAlign(CENTER, CENTER)
             if bool3Joueur:
-                text("Joueur {a}".format(a = player.nom), width*0.165 + i * 0.33 * width, width*0.08 + 70 + height*0.05)
+                text("Joueur {a}".format(a = player.numero), width*0.165 + i * 0.33 * width, width*0.08 + 70 + height*0.05)
                 text("Points : {a}".format(a = player.nbpoint), width*0.215 + i * 0.33 * width, width*0.08 + 70 + height*0.05+ 6*40)
             else :
-                text("Joueur {a}".format(a = player.nom), width*0.125 + i * 0.25 * width, width*0.08 + 70 + height*0.05)
+                text("Joueur {a}".format(a = player.numero), width*0.125 + i * 0.25 * width, width*0.08 + 70 + height*0.05)
                 text("Points : {a}".format(a = player.nbpoint), width*0.175 + i * 0.25 * width, width*0.08 + 70 + height*0.05+ 6*40)
         elif(i == 3):
             textAlign(CENTER, CENTER)
-            text("Joueur {a}".format(a = player.nom), width*0.125 + i * 0.25 * width, width*0.08 + 70 + height*0.05)
+            text("Joueur {a}".format(a = player.numero), width*0.125 + i * 0.25 * width, width*0.08 + 70 + height*0.05)
             text("Points : {a}".format(a = player.nbpoint), width*0.175 + i * 0.25 * width, width*0.08 + 70 + height*0.05+ 6*40)
         i += 1
         
@@ -1212,7 +1212,7 @@ def tourSuivant():
     NextTurn = False
     LJ = nl
     # for a in nl :
-    #     print(a.nom)
+    #     print(a.numero)
     # for i in range(0,LC.nbjoueurs):
     #     LJ.append(nl[i])
     if RTG.taille > 0 and nb_tour != 0:

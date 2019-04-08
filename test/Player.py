@@ -1,6 +1,6 @@
 class Player:
 	def __init__(self, numero):
-		self.nom = "Humain"
+		self.nom = 'Humain'
 		self.numero = numero
 		self.nbpoint = 0
 		self.list_tuile = list()
