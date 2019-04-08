@@ -1,12 +1,13 @@
 class DumE:
-	def __init__(self, nom):
-		self.nom = nom
+	def __init__(self, numero):
+		self.nom = "DumE"
+		self.numero = numero
 		self.nbpoint = 0
 		self.list_tuile = list()
 		self.castle_x = 0
 		self.castle_y = 0
 		self.lastTile = None
-		self.nextPos = nom
+		self.nextPos = numero
 		self.tabPoint = None
 		self.tabTile = None
 		self.nbTile = 0
@@ -379,7 +380,7 @@ class DumE:
 	def choisir(self,Mpressed,Tuile1,Tuile2,Tuile3,Tuile4,Tuile1NonUsed,Tuile2NonUsed,Tuile3NonUsed,Tuile4NonUsed,AjouterTileJ,bool2joueur,bool3joueur,bool4joueur,L,LJ):
 		scoreT1 = scoreT2 = scoreT3 = scoreT4 = 0
 		for i in range(len(LJ)):
-					if (LJ[i].nom != self.nom):
+					if (LJ[i].numero != self.numero):
 						LJ[i].comptagePoint()
 
 		if(self.nbTile == 0):

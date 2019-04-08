@@ -1,12 +1,13 @@
 class NumP:
-	def __init__(self, nom):
-		self.nom = nom
+	def __init__(self, numero):
+		self.nom = "NumP"
+		self.numero = numero
 		self.nbpoint = 0
 		self.list_tuile = list()
 		self.castle_x = 0
 		self.castle_y = 0
 		self.lastTile = None
-		self.nextPos = nom
+		self.nextPos = numero
 		self.tabPoint = None
 		self.tabTile = None
 		self.nbTile = 0

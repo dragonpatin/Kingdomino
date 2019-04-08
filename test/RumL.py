@@ -1,12 +1,13 @@
 class RumL:
-	def __init__(self, nom):
-		self.nom = nom
+	def __init__(self, numero):
+		self.nom = "RumL"
+		self.numero = numero
 		self.nbpoint = 0
 		self.list_tuile = list()
 		self.castle_x = 0
 		self.castle_y = 0
 		self.lastTile = None
-		self.nextPos = nom
+		self.nextPos = numero
 		self.tabPoint = None
 		self.tabTile = None
 		self.nbTile = 0
@@ -390,7 +391,7 @@ class RumL:
 			S = S4
 		if (Choix == S1):
 			for i in range(0,len(LJ)):
-				if (LJ[i].nom != self.nom):
+				if (LJ[i].numero != self.numero):
 					worth = 0
 					pointancien = 0
 					LJ[i].setTmpTile(L[Choix-1])
@@ -421,7 +422,7 @@ class RumL:
 
 		if (Choix == S2):
 			for i in range(0,len(LJ)):
-				if (LJ[i].nom != self.nom):
+				if (LJ[i].numero != self.numero):
 					worth = 0
 					pointancien = 0
 					LJ[i].setTmpTile(L[Choix-1])
@@ -452,7 +453,7 @@ class RumL:
 
 		if (Choix == S3):
 			for i in range(0,len(LJ)):
-				if (LJ[i].nom != self.nom):
+				if (LJ[i].numero != self.numero):
 					worth = 0
 					pointancien = 0
 					LJ[i].setTmpTile(L[Choix-1])
@@ -483,7 +484,7 @@ class RumL:
 
 		if (Choix == S4):
 			for i in range(0,len(LJ)):
-				if (LJ[i].nom != self.nom):
+				if (LJ[i].numero != self.numero):
 					worth = 0
 					pointancien = 0
 					LJ[i].setTmpTile(L[Choix-1])

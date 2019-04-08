@@ -1,12 +1,13 @@
 class DumA:
-	def __init__(self, nom):
-		self.nom = nom
+	def __init__(self, numero):
+		self.nom = "DumA"
+		self.numero = numero
 		self.nbpoint = 0
 		self.list_tuile = list()
 		self.castle_x = 0
 		self.castle_y = 0
 		self.lastTile = None
-		self.nextPos = nom
+		self.nextPos = numero
 		self.tabPoint = None
 		self.tabTile = None
 		self.nbTile = 0
@@ -402,7 +403,7 @@ class DumA:
 		else :
 			if Tuile1NonUsed :
 				for i in range(0,len(LJ)):
-					if(LJ[i] != self.nom or LJ[i] != "Humain"):
+					if(LJ[i].numero != self.numero or LJ[i] != "Humain"):
 						LJ[i].setTmpTile(L[0])
 						LJ[i].initListTileTmp()
 						LJ[i].initTabPointTmp()
@@ -428,7 +429,7 @@ class DumA:
 				
 			if Tuile2NonUsed :
 				for i in range(0,len(LJ)):
-					if(LJ[i] != self.nom or LJ[i] != "Humain"):
+					if(LJ[i].numero != self.numero or LJ[i] != "Humain"):
 						LJ[i].setTmpTile(L[1])
 						LJ[i].initListTileTmp()
 						LJ[i].initTabPointTmp()
@@ -454,7 +455,7 @@ class DumA:
 				
 			if Tuile3NonUsed :
 				for i in range(0,len(LJ)):
-					if(LJ[i] != self.nom or LJ[i] != "Humain"):
+					if(LJ[i].numero != self.numero or LJ[i] != "Humain"):
 						LJ[i].setTmpTile(L[2])
 						LJ[i].initListTileTmp()
 						LJ[i].initTabPointTmp()
@@ -480,7 +481,7 @@ class DumA:
 			
 			if Tuile4NonUsed and (bool3joueur == False) :
 				for i in range(0,len(LJ)):
-					if(LJ[i] != self.nom or LJ[i] != "Humain"):
+					if(LJ[i].numero != self.numero or LJ[i] != "Humain"):
 						LJ[i].setTmpTile(L[3])
 						LJ[i].initListTileTmp()
 						LJ[i].initTabPointTmp()
