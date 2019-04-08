@@ -3,6 +3,7 @@ from DumE import *
 from NumP import *
 from MumC import *
 from RumL import *
+from DumA import *
 from RandomTileGenerator import *
 
 class Game : 
@@ -21,6 +22,9 @@ class Game :
 			lj.append(MumC(1))
 		if ChoixJ1 == 4:
 			lj.append(RumL(1))
+		if ChoixJ1 == 6:
+			lj.append(DumA(1))
+        
 		if ChoixJ2 == 0:
 			lj.append(Player(2))
 		if ChoixJ2 == 1:
@@ -31,6 +35,9 @@ class Game :
 			lj.append(MumC(2))
 		if ChoixJ2 == 4:
 			lj.append(RumL(2))
+		if ChoixJ2 == 6:
+			lj.append(DumA(2))
+        
 		if ChoixJ3 == 0:
 			lj.append(Player(3))
 		if ChoixJ3 == 1:
@@ -41,6 +48,9 @@ class Game :
 			lj.append(MumC(3))
 		if ChoixJ3 == 4:
 			lj.append(RumL(3))
+		if ChoixJ3 == 6:
+			lj.append(DumA(3))
+
 		if ChoixJ4 == 0:
 			lj.append(Player(4))
 		if ChoixJ4 == 1:
@@ -51,4 +61,7 @@ class Game :
 			lj.append(MumC(4))
 		if ChoixJ4 == 4:
 			lj.append(RumL(4))
+		if ChoixJ4 == 6:
+			lj.append(DumA(4))
+
 		return lj
