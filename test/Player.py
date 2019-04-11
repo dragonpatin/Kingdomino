@@ -9,7 +9,8 @@ class Player:
 		self.lastTile = None
 		self.nextPos = numero
 		self.tabPoint = None
-
+		self.jouer = False
+		self.tourJouer2Joueur = 0
 	def setLastTile(self,T):
 		self.lastTile = T
 		
@@ -269,6 +270,13 @@ class Player:
                                 self.tabPoint[i][j][2] = 0
 								
 	def choisir(self,Mpressed,Tuile1,Tuile2,Tuile3,Tuile4,Tuile1NonUsed,Tuile2NonUsed,Tuile3NonUsed,Tuile4NonUsed,AjouterTileJ,bool2joueur,bool3joueur,bool4joueur,L,LJ):
+		if(not bool2joueur):
+			self.joueur = True
+		else:
+			self.tourJouer2Joueur = self.tourJouer2Joueur + 1
+			if (self.tourJouer2Joueur == 2):
+				self.joueur = True
+				self.tourJouer2Joueur = 0
 		if Mpressed and not(AjouterTileJ):
 			if bool2joueur :
 				if Tuile1 and Tuile1NonUsed:

@@ -1207,6 +1207,7 @@ def tourSuivant():
     for i in range(0,LC.nbjoueurs):
         for j in range(0,LC.nbjoueurs):
             if LJ[j].getNextPos() == i+1 :
+                LJ[j].jouer = 0
                 t = LJ[j]
                 nl.append(t)
     NextTurn = False

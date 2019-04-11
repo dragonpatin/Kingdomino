@@ -11,7 +11,8 @@ class RumL:
 		self.tabPoint = None
 		self.tabTile = None
 		self.nbTile = 0
-
+		self.jouer = False
+		self.tourJouer2Joueur = 0
 		self.list_tuile_tmp = list()
 		self.tmpTile = None
 		self.nbpoint_tmp = 0
@@ -516,6 +517,13 @@ class RumL:
 	
 	def choisir(self,Mpressed,Tuile1,Tuile2,Tuile3,Tuile4,Tuile1NonUsed,Tuile2NonUsed,Tuile3NonUsed,Tuile4NonUsed,AjouterTileJ,bool2joueur,bool3joueur,bool4joueur,L,LJ):
 		scoreT1 = scoreT2 = scoreT3 = scoreT4 = 0
+		if(not bool2joueur):
+			self.joueur = True
+		else:
+			self.tourJouer2Joueur = self.tourJouer2Joueur + 1
+			if (self.tourJouer2Joueur == 2):
+				self.joueur = True
+				self.tourJouer2Joueur = 0
 		if(self.nbTile == 0):
 			self.tabTile = [0,0,0,0,0,0];
 			
