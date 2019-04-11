@@ -484,15 +484,9 @@ class LumI:
 				if Tuile1NonUsed :
 					for i in range(0,len(LJ)):
 						if (LJ[i].nom == "Humain"):
-							self.setTmpTile(L[0])
-							self.initListTileTmp()
-							self.initTabPointTmp()
-							self.resetTabPointTmp()
-							self.setTabPointTmp()
-							self.nbpoint_tmp = 0
-							self.test_deplacer()
-							if(self.nbpoint_tmp > scoreT1Autre):
-								scoreT1Autre = self.nbpoint_tmp
+							c = LJ[i].penseChoisir(Mpressed,Tuile1,Tuile2,Tuile3,Tuile4,Tuile1NonUsed,Tuile2NonUsed,Tuile3NonUsed,Tuile4NonUsed,AjouterTileJ,bool2joueur,bool3joueur,bool4joueur,L,LJ)
+							if(c > scoreT1Autre):
+								scoreT1Autre = c
 						elif((LJ[i].numero != self.numero and LJ[i].numero == numero and not LJ[i].jouer)):
 							LJ[i].setTmpTile(L[0])
 							LJ[i].initListTileTmp()
@@ -510,15 +504,9 @@ class LumI:
 				if Tuile2NonUsed :
 					for i in range(0,len(LJ)):
 						if (LJ[i].nom == "Humain"):
-							self.setTmpTile(L[1])
-							self.initListTileTmp()
-							self.initTabPointTmp()
-							self.resetTabPointTmp()
-							self.setTabPointTmp()
-							self.nbpoint_tmp = 0
-							self.test_deplacer()
-							if(self.nbpoint_tmp > scoreT2Autre):
-								scoreT2Autre = self.nbpoint_tmp
+							c = LJ[i].penseChoisir(Mpressed,Tuile1,Tuile2,Tuile3,Tuile4,Tuile1NonUsed,Tuile2NonUsed,Tuile3NonUsed,Tuile4NonUsed,AjouterTileJ,bool2joueur,bool3joueur,bool4joueur,L,LJ)
+							if(c > scoreT2Autre):
+								scoreT2Autre = c
 						elif(LJ[i].numero != self.numero and LJ[i].numero == numero and not LJ[i].jouer):
 							LJ[i].setTmpTile(L[1])
 							LJ[i].initListTileTmp()
@@ -536,15 +524,9 @@ class LumI:
 				if Tuile3NonUsed :
 					for i in range(0,len(LJ)):
 						if (LJ[i].nom == "Humain"):
-							self.setTmpTile(L[2])
-							self.initListTileTmp()
-							self.initTabPointTmp()
-							self.resetTabPointTmp()
-							self.setTabPointTmp()
-							self.nbpoint_tmp = 0
-							self.test_deplacer()
-							if(self.nbpoint_tmp > scoreT3Autre):
-								scoreT3Autre = self.nbpoint_tmp
+							c = LJ[i].penseChoisir(Mpressed,Tuile1,Tuile2,Tuile3,Tuile4,Tuile1NonUsed,Tuile2NonUsed,Tuile3NonUsed,Tuile4NonUsed,AjouterTileJ,bool2joueur,bool3joueur,bool4joueur,L,LJ)
+							if(c > scoreT3Autre):
+								scoreT3Autre = c
 						elif(LJ[i].numero != self.numero and LJ[i].numero == numero and not LJ[i].jouer):
 							LJ[i].setTmpTile(L[2])
 							LJ[i].initListTileTmp()
@@ -562,15 +544,9 @@ class LumI:
 				if Tuile4NonUsed and (bool3joueur == False) :
 					for i in range(0,len(LJ)):
 						if (LJ[i].nom == "Humain"):
-							self.setTmpTile(L[3])
-							self.initListTileTmp()
-							self.initTabPointTmp()
-							self.resetTabPointTmp()
-							self.setTabPointTmp()
-							self.nbpoint_tmp = 0
-							self.test_deplacer()
-							if(self.nbpoint_tmp > scoreT4Autre):
-								scoreT4Autre = self.nbpoint_tmp
+							c = LJ[i].penseChoisir(Mpressed,Tuile1,Tuile2,Tuile3,Tuile4,Tuile1NonUsed,Tuile2NonUsed,Tuile3NonUsed,Tuile4NonUsed,AjouterTileJ,bool2joueur,bool3joueur,bool4joueur,L,LJ)
+							if(c > scoreT4Autre):
+								scoreT4Autre = c
 						elif(LJ[i].numero != self.numero and LJ[i].numero == numero and not LJ[i].jouer):
 							LJ[i].setTmpTile(L[3])
 							LJ[i].initListTileTmp()
