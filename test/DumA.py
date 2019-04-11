@@ -1,6 +1,6 @@
-class NumP:
+class DumA:
 	def __init__(self, numero):
-		self.nom = "NumP"
+		self.nom = "DumA"
 		self.numero = numero
 		self.nbpoint = 0
 		self.list_tuile = list()
@@ -273,14 +273,14 @@ class NumP:
 				nb_voisins = nb_voisins + self.nbVoisins(y-1,x,nb_couronne)
 			else:
 				nb_voisins = nb_voisins + self.nbVoisins(y-1,x,nb_couronne)
-				
+		
 		if x + 1 <= 4 and self.tabPoint[y][x + 1][2] == 0 and self.tabPoint[y][x + 1][0] == self.tabPoint[y][x][0]:
 			if self.tabPoint[y][x + 1][1] != 0:
 				nb_couronne = nb_couronne + self.tabPoint[y][x + 1][1]
 				nb_voisins = nb_voisins + self.nbVoisins(y,x+1,nb_couronne)
 			else:
 				nb_voisins = nb_voisins + self.nbVoisins(y,x+1,nb_couronne)
-				
+		
 		if y + 1 <= 4 and self.tabPoint[y + 1][x][2] == 0 and self.tabPoint[y + 1][x][0] == self.tabPoint[y][x][0]:
 			if self.tabPoint[y + 1][x][1] != 0:
 				nb_couronne = nb_couronne + self.tabPoint[y + 1][x][1]
@@ -358,7 +358,7 @@ class NumP:
 			for j in range (0,5):
 				self.tabPoint_tmp[i][j][2] = 0
 	
-	def ordreChoix(self,S1,S2,S3,S4):
+	def ordreChoix(self,S1,S2,S3,S4,LJ,L):
 		Choix = 0
 		S = -1
 		if S1 > S :
@@ -409,31 +409,150 @@ class NumP:
 				
 		else :
 			if Tuile1NonUsed :
-				scoreT1 = self.tabTile[L[0].tuile_1 - 1] + self.tabTile[L[0].tuile_2 - 1]
-				scoreT1 += L[0].couronne_1 + L[0].couronne_2
+				for i in range(0,len(LJ)):
+					if (LJ[i].nom == "Humain"):
+						self.setTmpTile(L[0])
+						self.initListTileTmp()
+						self.initTabPointTmp()
+						self.resetTabPointTmp()
+						self.setTabPointTmp()
+						self.nbpoint_tmp = 0
+						self.test_deplacer()
+						if(self.nbpoint_tmp > scoreT1):
+							scoreT1 = self.nbpoint_tmp
+					elif((LJ[i].numero != self.numero)):
+						LJ[i].setTmpTile(L[0])
+						LJ[i].initListTileTmp()
+						LJ[i].initTabPointTmp()
+						LJ[i].resetTabPointTmp()
+						LJ[i].setTabPointTmp()
+						LJ[i].nbpoint_tmp = 0
+						LJ[i].test_deplacer()
+						LJ[i].nbpoint_tmp
+						if(LJ[i].nbpoint_tmp > scoreT1):
+							scoreT1 = LJ[i].nbpoint_tmp
+					else :
+						self.setTmpTile(L[0])
+						self.initListTileTmp()
+						self.initTabPointTmp()
+						self.resetTabPointTmp()
+						self.setTabPointTmp()
+						self.nbpoint_tmp = 0
+						self.test_deplacer()
+						if(self.nbpoint_tmp > scoreT1):
+							scoreT1 = self.nbpoint_tmp
 			else :
 				scoreT1 = -1
 				
 			if Tuile2NonUsed :
-				scoreT2 = self.tabTile[L[1].tuile_1 - 1] + self.tabTile[L[1].tuile_2 - 1]
-				scoreT2 += L[1].couronne_1 + L[1].couronne_2
+				for i in range(0,len(LJ)):
+					if (LJ[i].nom == "Humain"):
+						self.setTmpTile(L[1])
+						self.initListTileTmp()
+						self.initTabPointTmp()
+						self.resetTabPointTmp()
+						self.setTabPointTmp()
+						self.nbpoint_tmp = 0
+						self.test_deplacer()
+						if(self.nbpoint_tmp > scoreT2):
+							scoreT2 = self.nbpoint_tmp
+					elif(LJ[i].numero != self.numero ):
+						LJ[i].setTmpTile(L[1])
+						LJ[i].initListTileTmp()
+						LJ[i].initTabPointTmp()
+						LJ[i].resetTabPointTmp()
+						LJ[i].setTabPointTmp()
+						LJ[i].nbpoint_tmp = 0
+						LJ[i].test_deplacer()
+						LJ[i].nbpoint_tmp
+						if(LJ[i].nbpoint_tmp > scoreT2):
+							scoreT2 = LJ[i].nbpoint_tmp
+					else :
+						self.setTmpTile(L[1])
+						self.initListTileTmp()
+						self.initTabPointTmp()
+						self.resetTabPointTmp()
+						self.setTabPointTmp()
+						self.nbpoint_tmp = 0
+						self.test_deplacer()
+						if(self.nbpoint_tmp > scoreT2):
+							scoreT2 = self.nbpoint_tmp
 			else :
 				scoreT2 = -1
 				
 			if Tuile3NonUsed :
-				scoreT3 = self.tabTile[L[2].tuile_1 - 1] + self.tabTile[L[2].tuile_2 - 1]
-				scoreT3 += L[2].couronne_1 + L[2].couronne_2
+				for i in range(0,len(LJ)):
+					if (LJ[i].nom == "Humain"):
+						self.setTmpTile(L[2])
+						self.initListTileTmp()
+						self.initTabPointTmp()
+						self.resetTabPointTmp()
+						self.setTabPointTmp()
+						self.nbpoint_tmp = 0
+						self.test_deplacer()
+						if(self.nbpoint_tmp > scoreT3):
+							scoreT3 = self.nbpoint_tmp
+					elif(LJ[i].numero != self.numero):
+						LJ[i].setTmpTile(L[2])
+						LJ[i].initListTileTmp()
+						LJ[i].initTabPointTmp()
+						LJ[i].resetTabPointTmp()
+						LJ[i].setTabPointTmp()
+						LJ[i].nbpoint_tmp = 0
+						LJ[i].test_deplacer()
+						LJ[i].nbpoint_tmp
+						if(LJ[i].nbpoint_tmp > scoreT3):
+							scoreT3 = LJ[i].nbpoint_tmp
+					else :
+						self.setTmpTile(L[2])
+						self.initListTileTmp()
+						self.initTabPointTmp()
+						self.resetTabPointTmp()
+						self.setTabPointTmp()
+						self.nbpoint_tmp = 0
+						self.test_deplacer()
+						if(self.nbpoint_tmp > scoreT3):
+							scoreT3 = self.nbpoint_tmp
 			else :
 				scoreT3 = -1
 			
 			if Tuile4NonUsed and (bool3joueur == False) :
-				scoreT4 = self.tabTile[L[3].tuile_1 - 1] + self.tabTile[L[3].tuile_2 - 1]
-				scoreT4 += L[3].couronne_1 + L[3].couronne_2
+				for i in range(0,len(LJ)):
+					if (LJ[i].nom == "Humain"):
+						self.setTmpTile(L[3])
+						self.initListTileTmp()
+						self.initTabPointTmp()
+						self.resetTabPointTmp()
+						self.setTabPointTmp()
+						self.nbpoint_tmp = 0
+						self.test_deplacer()
+						if(self.nbpoint_tmp > scoreT4):
+							scoreT4 = self.nbpoint_tmp
+					elif(LJ[i].numero != self.numero):
+						LJ[i].setTmpTile(L[3])
+						LJ[i].initListTileTmp()
+						LJ[i].initTabPointTmp()
+						LJ[i].resetTabPointTmp()
+						LJ[i].setTabPointTmp()
+						LJ[i].nbpoint_tmp = 0
+						LJ[i].test_deplacer()
+						LJ[i].nbpoint_tmp
+						if(LJ[i].nbpoint_tmp > scoreT4):
+							scoreT4 = LJ[i].nbpoint_tmp
+					else :
+						self.setTmpTile(L[3])
+						self.initListTileTmp()
+						self.initTabPointTmp()
+						self.resetTabPointTmp()
+						self.setTabPointTmp()
+						self.nbpoint_tmp = 0
+						self.test_deplacer()
+						if(self.nbpoint_tmp > scoreT4):
+							scoreT4 = self.nbpoint_tmp
 			else :
 				scoreT4 = -1
-				
-		
-		Choix = self.ordreChoix(scoreT1,scoreT2,scoreT3,scoreT4)
+
+		Choix = self.ordreChoix(scoreT1,scoreT2,scoreT3,scoreT4,LJ,L)
 			
 		if Choix == 1:
 			Tuile1NonUsed = False

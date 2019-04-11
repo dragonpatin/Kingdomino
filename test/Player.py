@@ -1,14 +1,17 @@
 class Player:
-	def __init__(self, nom):
-		self.nom = nom
+	def __init__(self, numero):
+		self.nom = 'Humain'
+		self.numero = numero
 		self.nbpoint = 0
 		self.list_tuile = list()
 		self.castle_x = 0
 		self.castle_y = 0
 		self.lastTile = None
-		self.nextPos = nom
+		self.nbTile = 0
+		self.nextPos = numero
 		self.tabPoint = None
-
+		self.jouer = False
+		self.tourJouer2Joueur = 0
 	def setLastTile(self,T):
 		self.lastTile = T
 		
@@ -265,8 +268,15 @@ class Player:
 		for i in range (0,5):
 			for j in range (0,5):
 				self.tabPoint[i][j][2] = 0
-								
+							
 	def choisir(self,Mpressed,Tuile1,Tuile2,Tuile3,Tuile4,Tuile1NonUsed,Tuile2NonUsed,Tuile3NonUsed,Tuile4NonUsed,AjouterTileJ,bool2joueur,bool3joueur,bool4joueur,L,LJ):
+		if(not bool2joueur):
+			self.joueur = True
+		else:
+			self.tourJouer2Joueur = self.tourJouer2Joueur + 1
+			if (self.tourJouer2Joueur == 2):
+				self.joueur = True
+				self.tourJouer2Joueur = 0
 		if Mpressed and not(AjouterTileJ):
 			if bool2joueur :
 				if Tuile1 and Tuile1NonUsed:
@@ -385,4 +395,80 @@ class Player:
 							TheEnd = True
 	
 		return False,0,j,AjouterTileJ,DeplacerPlateau,NextTurn,TheEnd
-                
+	#Pour les IA
+	def ordreChoix(self,S1,S2,S3,S4):
+		Choix = 0
+		S = -1
+		if S1 > S :
+			Choix = 1
+			S = S1
+		if S2 > S :
+			Choix = 2
+			S = S2
+		if S3 > S :
+			Choix = 3
+			S = S3
+		if S4 > S :
+			Choix = 4
+			S = S4
+		return Choix
+
+	def penseChoisir(self,Mpressed,Tuile1,Tuile2,Tuile3,Tuile4,Tuile1NonUsed,Tuile2NonUsed,Tuile3NonUsed,Tuile4NonUsed,AjouterTileJ,bool2joueur,bool3joueur,bool4joueur,L,LJ):
+		if(self.nbTile == 0):
+			self.tabTile = [0,0,0,0,0,0];
+			
+			if Tuile1NonUsed :
+				scoreT1 = L[0].couronne_1 + L[0].couronne_2
+			else :
+				scoreT1 = -1
+				
+			if Tuile2NonUsed :
+				scoreT2 = L[1].couronne_1 + L[1].couronne_2
+			else :
+				scoreT2 = -1
+				
+			if Tuile3NonUsed :
+				scoreT3 = L[2].couronne_1 + L[2].couronne_2
+			else :
+				scoreT3 = -1
+			
+			if Tuile4NonUsed and (bool3joueur == False) :
+				scoreT4 = L[3].couronne_1 + L[3].couronne_2
+			else :
+				scoreT4 = -1
+				
+		else :
+			if Tuile1NonUsed :
+				scoreT1 = self.tabTile[L[0].tuile_1 - 1] + self.tabTile[L[0].tuile_2 - 1]
+				scoreT1 += L[0].couronne_1 + L[0].couronne_2
+			else :
+				scoreT1 = -1
+				
+			if Tuile2NonUsed :
+				scoreT2 = self.tabTile[L[1].tuile_1 - 1] + self.tabTile[L[1].tuile_2 - 1]
+				scoreT2 += L[1].couronne_1 + L[1].couronne_2
+			else :
+				scoreT2 = -1
+				
+			if Tuile3NonUsed :
+				scoreT3 = self.tabTile[L[2].tuile_1 - 1] + self.tabTile[L[2].tuile_2 - 1]
+				scoreT3 += L[2].couronne_1 + L[2].couronne_2
+			else :
+				scoreT3 = -1
+			
+			if Tuile4NonUsed and (bool3joueur == False) :
+				scoreT4 = self.tabTile[L[3].tuile_1 - 1] + self.tabTile[L[3].tuile_2 - 1]
+				scoreT4 += L[3].couronne_1 + L[3].couronne_2
+			else :
+				scoreT4 = -1
+				
+		
+		Choix = self.ordreChoix(scoreT1,scoreT2,scoreT3,scoreT4)
+		if(Choix == 1):
+			return scoreT1
+		elif(Choix == 2):
+			return scoreT2
+		elif (Choix == 3):
+			return scoreT3
+		elif (Choix == 4):
+			return scoreT4

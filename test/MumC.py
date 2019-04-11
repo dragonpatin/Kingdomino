@@ -1,16 +1,18 @@
 class MumC:
-	def __init__(self, nom):
-		self.nom = nom
+	def __init__(self, numero):
+		self.nom = "MumC"
+		self.numero = numero
 		self.nbpoint = 0
 		self.list_tuile = list()
 		self.castle_x = 0
 		self.castle_y = 0
 		self.lastTile = None
-		self.nextPos = nom
+		self.nextPos = numero
 		self.tabPoint = None
 		self.tabTile = None
 		self.nbTile = 0
-
+		self.jouer = False
+		self.tourJouer2Joueur = 0
 		self.list_tuile_tmp = list()
 		self.tmpTile = None
 		self.nbpoint_tmp = 0
@@ -375,7 +377,13 @@ class MumC:
 	
 	def choisir(self,Mpressed,Tuile1,Tuile2,Tuile3,Tuile4,Tuile1NonUsed,Tuile2NonUsed,Tuile3NonUsed,Tuile4NonUsed,AjouterTileJ,bool2joueur,bool3joueur,bool4joueur,L,LJ):
 		scoreT1 = scoreT2 = scoreT3 = scoreT4 = 0
-		print("nouveau test")
+		if(not bool2joueur):
+			self.joueur = True
+		else:
+			self.tourJouer2Joueur = self.tourJouer2Joueur + 1
+			if (self.tourJouer2Joueur == 2):
+				self.joueur = True
+				self.tourJouer2Joueur = 0
 		if(self.nbTile == 0):
 			self.tabTile = [0,0,0,0,0,0];
 			

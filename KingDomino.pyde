@@ -65,7 +65,7 @@ def AfficheGagnant():
     pointgagnant = -1
     for player in LJ :
         if pointgagnant < player.nbpoint:
-            gagnant = player.nom
+            gagnant = player.numero
             pointgagnant = player.nbpoint
     #Couleur fin
     updateFin(mouseX, mouseY)
@@ -192,6 +192,10 @@ def ChoixJoueur():
             text("Mum-C", 345, 220)
         if(ChoixJ1 == 4):
             text("Rum-L", 345, 220)
+        if(ChoixJ1 == 5):
+            text("Lum-I", 345, 220)
+        if(ChoixJ1 == 6):
+            text("Dum-A", 345, 220)
     else :
         if(ChoixJ1 == 0):
             text("Humain", 275, 237)
@@ -203,7 +207,10 @@ def ChoixJoueur():
             text("Mum-C", 275, 237)
         if(ChoixJ1 == 4):
             text("Rum-L", 275, 237)
-            
+        if(ChoixJ1 == 5):
+            text("Lum-I", 275, 237)
+        if(ChoixJ1 == 6):
+            text("Dum-A", 275, 237)
     if ModifJ2:
         fill(color(204))
     else:
@@ -221,6 +228,10 @@ def ChoixJoueur():
             text("Mum-C", 345, 320)
         if(ChoixJ2 == 4):
             text("Rum-L", 345, 320)
+        if(ChoixJ2 == 5):
+            text("Lum-I", 345, 320)
+        if(ChoixJ2 == 6):
+            text("Dum-A", 345, 320)
     else:
         if(ChoixJ2 == 0):
             text("Humain", 275, 337)
@@ -232,6 +243,10 @@ def ChoixJoueur():
             text("Mum-C", 275, 337)
         if(ChoixJ2 == 4):
             text("Rum-L", 275, 337)
+        if(ChoixJ2 == 5):
+            text("Lum-I", 275, 337)
+        if(ChoixJ2 == 6):
+            text("Dum-A", 275, 337)
     if bool3Joueur or bool4Joueur:
         if ModifJ3:
             fill(color(204))
@@ -250,6 +265,10 @@ def ChoixJoueur():
                 text("Mum-C", 345, 420)
             if(ChoixJ3 == 4):
                 text("Rum-L", 345, 420)
+            if(ChoixJ3 == 5):
+                text("Lum-I", 345, 420)
+            if(ChoixJ3 == 6):
+                text("Dum-A", 345, 420)
         else:
             if(ChoixJ3 == 0):
                 text("Humain", 275, 437)
@@ -261,6 +280,10 @@ def ChoixJoueur():
                 text("Mum-C", 275, 437)
             if(ChoixJ3 == 4):
                 text("Rum-L", 275, 437)
+            if(ChoixJ3 == 5):
+                text("Lum-I", 275, 437)
+            if(ChoixJ3 == 6):
+                text("Dum-A", 275, 437)
     if bool4Joueur:
         if ModifJ4:
             fill(color(204))
@@ -279,6 +302,10 @@ def ChoixJoueur():
                 text("Mum-C", 345, 520)
             if(ChoixJ4 == 4):
                 text("Rum-L", 345, 520)
+            if(ChoixJ4 == 5):
+                text("Lum-I", 345, 520)
+            if(ChoixJ4 == 6):
+                text("Dum-A", 345, 520)
         else: 
             if(ChoixJ4 == 0):
                 text("Humain", 275, 537)
@@ -290,6 +317,10 @@ def ChoixJoueur():
                 text("Mum-C", 275, 537)
             if(ChoixJ4 == 4):
                 text("Rum-L", 275, 537)
+            if(ChoixJ4 == 5):
+                text("Lum-I", 275, 537)
+            if(ChoixJ4 == 6):
+                text("Dum-A", 275, 537)
     if LPartie:
         fill(color(204))
     else:
@@ -775,47 +806,47 @@ def affiche_Limite():
 def affiche_joueur():
     textSize(width*0.02)
     if bool2Joueur :
-        text("Joueur {a}".format(a=LJ[j%2].nom), int(width /2), 25)
+        text("Joueur {a}".format(a=LJ[j%2].numero), int(width /2), 25)
     else : 
-        text("Joueur {a}".format(a=LJ[j].nom), int(width /2), 25)
+        text("Joueur {a}".format(a=LJ[j].numero), int(width /2), 25)
     for player in LJ :
-        i = player.nom - 1
+        i = player.numero - 1
         affiche_chateau(player,i)
         affiche_list_tile(player,i)
         affiche_last_tile(player,i)
         if(i == 0) :
             textAlign(CENTER, CENTER)
             if bool2Joueur : 
-                text("Joueur {a}".format(a = player.nom), width*0.25, width*0.08 + 70 + height*0.05 )
+                text("Joueur {a}".format(a = player.numero), width*0.25, width*0.08 + 70 + height*0.05 )
                 text("Points : {a}".format(a = player.nbpoint), width*0.30, width*0.08 + 70 + height*0.05+ 6*40)
             elif bool3Joueur:
-                text("Joueur {a}".format(a = player.nom), width*0.165, width*0.08 + 70 + height*0.05)
+                text("Joueur {a}".format(a = player.numero), width*0.165, width*0.08 + 70 + height*0.05)
                 text("Points : {a}".format(a = player.nbpoint), width*0.215, width*0.08 + 70 + height*0.05+ 6*40)
             else :
-                text("Joueur {a}".format(a = player.nom), width*0.125, width*0.08 + 70 + height*0.05)
+                text("Joueur {a}".format(a = player.numero), width*0.125, width*0.08 + 70 + height*0.05)
                 text("Points : {a}".format(a = player.nbpoint), width*0.175, width*0.08 + 70 + height*0.05+ 6*40)
         elif(i == 1) :
             textAlign(CENTER, CENTER)
             if bool2Joueur : 
-                text("Joueur {a}".format(a = player.nom), width*0.75, width*0.08 + 70 + height*0.05)
+                text("Joueur {a}".format(a = player.numero), width*0.75, width*0.08 + 70 + height*0.05)
                 text("Points : {a}".format(a = player.nbpoint), width*0.80, width*0.08 + 70 + height*0.05+ 6*40)
             elif bool3Joueur:
-                text("Joueur {a}".format(a = player.nom), width*0.165 + i * 0.33 * width, width*0.08 + 70 + height*0.05)
+                text("Joueur {a}".format(a = player.numero), width*0.165 + i * 0.33 * width, width*0.08 + 70 + height*0.05)
                 text("Points : {a}".format(a = player.nbpoint), width*0.215 + i * 0.33 * width, width*0.08 + 70 + height*0.05+ 6*40)
             else :
-                text("Joueur {a}".format(a = player.nom), width*0.125 + i * 0.25 * width, width*0.08 + 70 + height*0.05)
+                text("Joueur {a}".format(a = player.numero), width*0.125 + i * 0.25 * width, width*0.08 + 70 + height*0.05)
                 text("Points : {a}".format(a = player.nbpoint), width*0.175 + i * 0.25 * width, width*0.08 + 70 + height*0.05+ 6*40)
         elif(i == 2) :
             textAlign(CENTER, CENTER)
             if bool3Joueur:
-                text("Joueur {a}".format(a = player.nom), width*0.165 + i * 0.33 * width, width*0.08 + 70 + height*0.05)
+                text("Joueur {a}".format(a = player.numero), width*0.165 + i * 0.33 * width, width*0.08 + 70 + height*0.05)
                 text("Points : {a}".format(a = player.nbpoint), width*0.215 + i * 0.33 * width, width*0.08 + 70 + height*0.05+ 6*40)
             else :
-                text("Joueur {a}".format(a = player.nom), width*0.125 + i * 0.25 * width, width*0.08 + 70 + height*0.05)
+                text("Joueur {a}".format(a = player.numero), width*0.125 + i * 0.25 * width, width*0.08 + 70 + height*0.05)
                 text("Points : {a}".format(a = player.nbpoint), width*0.175 + i * 0.25 * width, width*0.08 + 70 + height*0.05+ 6*40)
         elif(i == 3):
             textAlign(CENTER, CENTER)
-            text("Joueur {a}".format(a = player.nom), width*0.125 + i * 0.25 * width, width*0.08 + 70 + height*0.05)
+            text("Joueur {a}".format(a = player.numero), width*0.125 + i * 0.25 * width, width*0.08 + 70 + height*0.05)
             text("Points : {a}".format(a = player.nbpoint), width*0.175 + i * 0.25 * width, width*0.08 + 70 + height*0.05+ 6*40)
         i += 1
         
@@ -1176,12 +1207,13 @@ def tourSuivant():
     for i in range(0,LC.nbjoueurs):
         for j in range(0,LC.nbjoueurs):
             if LJ[j].getNextPos() == i+1 :
+                LJ[j].jouer = 0
                 t = LJ[j]
                 nl.append(t)
     NextTurn = False
     LJ = nl
     # for a in nl :
-    #     print(a.nom)
+    #     print(a.numero)
     # for i in range(0,LC.nbjoueurs):
     #     LJ.append(nl[i])
     if RTG.taille > 0 and nb_tour != 0:
@@ -1229,13 +1261,13 @@ def mousePressed():
             Mpressed = True
         if boolChoixJ:
             if ModifJ1:
-                ChoixJ1 = (ChoixJ1 + 1)%5
+                ChoixJ1 = (ChoixJ1 + 1)%7
             if ModifJ2:
-                ChoixJ2 = (ChoixJ2 + 1)%5
+                ChoixJ2 = (ChoixJ2 + 1)%7
             if ModifJ3:
-                ChoixJ3 = (ChoixJ3 + 1)%5
+                ChoixJ3 = (ChoixJ3 + 1)%7
             if ModifJ4:
-                ChoixJ4 = (ChoixJ4 + 1)%5
+                ChoixJ4 = (ChoixJ4 + 1)%7
             if LPartie:
                 LPartie = False
                 boolChoixJ = False
