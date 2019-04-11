@@ -467,7 +467,7 @@ class LumI:
 					scoreT3 = self.nbpoint_tmp
 			else :
 				scoreT3 = -1
-			if Tuile4NonUsed :
+			if Tuile4NonUsed and (bool3joueur == False):
 				self.setTmpTile(L[3])
 				self.initListTileTmp()
 				self.initTabPointTmp()
@@ -566,7 +566,7 @@ class LumI:
 					scoreT2 = scoreT2Autre
 				if scoreT3Autre > scoreT3 :
 					scoreT3 = scoreT3Autre
-				if scoreT4Autre > scoreT4 :
+				if scoreT4Autre > scoreT4 and (bool3joueur == False):
 					scoreT4 = scoreT4Autre
 
 		Choix = self.ordreChoix(scoreT1,scoreT2,scoreT3,scoreT4,LJ,L)
