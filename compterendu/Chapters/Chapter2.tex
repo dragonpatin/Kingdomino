@@ -5,35 +5,84 @@
 \label{Chapter2} % For referencing the chapter elsewhere, use \ref{Chapter1} 
 
 
-\section{Welcome and Thank You}
-Welcome to this \LaTeX{} Thesis Template, a beautiful and easy to use template for writing a thesis using the \LaTeX{} typesetting system.
+\section{Le jeu de société}
+Le jeu Kingdomino est un jeu de société de prise de territoire utilisant des tuiles de terrains différentes.
 
-If you are writing a thesis (or will be in the future) and its subject is technical or mathematical (though it doesn't have to be), then creating it in \LaTeX{} is highly recommended as a way to make sure you can just get down to the essential writing without having to worry over formatting or wasting time arguing with your word processor.
+\begin{wrapfigure}
+  \centering
+  \includegraphics[scale=0.5]{Figures/jeuking}
+  \caption{Kingdomino}
+\end{wrapfigure}
 
-\LaTeX{} is easily able to professionally typeset documents that run to hundreds or thousands of pages long. With simple mark-up commands, it automatically sets out the table of contents, margins, page headers and footers and keeps the formatting consistent and beautiful. One of its main strengths is the way it can easily typeset mathematics, even \emph{heavy} mathematics. Even if those equations are the most horribly twisted and most difficult mathematical problems that can only be solved on a super-computer, you can at least count on \LaTeX{} to make them look stunning.
+Le principe du jeu est de créer un terrain avec différentes tuiles au tour de son chateau et ainsi marquer le plus de points possible.
 
 %----------------------------------------------------------------------------------------
 
-\section{Learning \LaTeX{}}
+\section{Les règles}
 
-\LaTeX{} is not a \textsc{wysiwyg} (What You See is What You Get) program, unlike word processors such as Microsoft Word or Apple's Pages. Instead, a document written for \LaTeX{} is actually a simple, plain text file that contains \emph{no formatting}. You tell \LaTeX{} how you want the formatting in the finished document by writing in simple commands amongst the text, for example, if I want to use \emph{italic text for emphasis}, I write the \verb|\emph{text}| command and put the text I want in italics in between the curly braces. This means that \LaTeX{} is a \enquote{mark-up} language, very much like HTML.
+Les règles du jeu ne sont pas très compliqué mais soyez attentif :
 
-\subsection{A (not so short) Introduction to \LaTeX{}}
+\subsection{Le commencement}
+L'ordre du tour de jeu est déterminé par de l'aléatoire, c'est un choix de notre part. Devant eu il y a un pioche de tuiles, 4 par tour, ranger par ordre croissant de numéro de tuile.\\
+\\
+\begin{wrapfigure}
+  \centering
+  \includegraphics[scale=0.5]{Figures/tuiledistrib.png}
+  \caption{tuile1}
+\end{wrapfigure}
+\\ \\
+Imaginons que le premier tour se passe comme cela :\\ \\
 
-If you are new to \LaTeX{}, there is a very good eBook -- freely available online as a PDF file -- called, \enquote{The Not So Short Introduction to \LaTeX{}}. The book's title is typically shortened to just \emph{lshort}. You can download the latest version (as it is occasionally updated) from here:
-\url{http://www.ctan.org/tex-archive/info/lshort/english/lshort.pdf}
+\begin{wrapfigure}
+  \centering
+  \includegraphics[scale=0.5]{Figures/tuileroi.png}
+  \caption{tuile2}
+\end{wrapfigure}
+\\ \\
+Alors le roi  \includegraphics[scale=0.3]{Figures/roirouge.png} sera le premier a jouer au tour suivant puisqu'il a choisi la tuile avec le numéro le plus petit entre les 4.
+Logiquement, en deuxième c'est le roi \includegraphics[scale=0.3]{Figures/roivert.png} ensuite le roi \includegraphics[scale=0.3]{Figures/roibleu.png} et le dernier c'est le roi \includegraphics[scale=0.3]{Figures/roinoir.png}.\\
+\\
+Ainsi de suite jusqu'a la fin du jeu.
 
-It is also available in several other languages. Find yours from the list on this page: \url{http://www.ctan.org/tex-archive/info/lshort/}
+\subsection{La connexion des tuiles}
 
-It is recommended to take a little time out to learn how to use \LaTeX{} by creating several, small `test' documents, or having a close look at several templates on:\\ 
-\url{http://www.LaTeXTemplates.com}\\ 
-Making the effort now means you're not stuck learning the system when what you \emph{really} need to be doing is writing your thesis.
+Les joueurs doivent construire un royaume de $5 \times 5$ cases (un domino est constitué de 2 cases).\\
+Pour pouvoir poser son domino, le joueur doit :
+\begin{itemize}
+    \item Soit le connecter à son chateau de départ, il est considéré comme un tuile neutre.
+\end{itemize}
+\begin{wrapfigure}
+  \centering
+  \includegraphics[scale=0.5]{Figures/tuilechateau.png}
+  \caption{tuile3}
+\end{wrapfigure}
+\begin{itemize}
+    \item Soit le connecter à un autre domino en faisant correspondre au minimum 1 paysage (horizontalement ou verticalement uniquement).
+\end{itemize}
+\begin{wrapfigure}
+  \centering
+  \includegraphics[scale=0.5]{Figures/2tuiles.png}
+  \caption{tuile4}
+\end{wrapfigure}
+\\ \\
+Dans le cas où il est impossible de venir ajouter un domino à son royaume en respectant les règles ci-dessus, le domino est défaussé et ne vous rapportera aucun point.\\
+tous vos domino doivent tenir dans un espace de $ 5 \times 5$ cases.\\
+En cas de mauvaise anticipation, un à plusieurs dominos pourraient ne plus être exploitables et seront défaussés. Ils ne vous rapporteront alors aucun point.
 
-\subsection{A Short Math Guide for \LaTeX{}}
+\subsection{Le fin du jeu}
 
-If you are writing a technical or mathematical thesis, then you may want to read the document by the AMS (American Mathematical Society) called, \enquote{A Short Math Guide for \LaTeX{}}. It can be found online here:
-\url{http://www.ams.org/tex/amslatex.html}
-under the \enquote{Additional Documentation} section towards the bottom of the page.
+Lorsque les derniers dominos sont placés en ligne, les joueurs jouent un dernier tour normalement.\\
+Chaque joueur devrait avoir devant lui un royaume de $5 \times 5$ cases. (Certains royaume peuvent être incomplets si le joueur a été obligé de défausser des dominos.)\\
+Chacun va calculer les points de prestige de son royaume de la façon suivante :
+\begin{itemize}
+    \item Un royaume est constitué de différents \textbf{DOMAINES} (groupe de cases connectées horizontalement ou verticalement du même type de paysage).
+    \item Chaque domaine rapporte autant de points de prestige que son \textbf{NOMBRE DE CASES} multiplié par le \textbf{NOMBRE DE COURONNES} présentes sur le domaine.
+    \item Il peut y avoir plusieurs domaine du même type de paysage dans un même royaume.
+    \item Un domaine sans couronne ne rapport rien.
+    \item Chaque joueur additionne les points rapportés par chacun de ses domaines, le résultat de cette addition lui donne son score final.
+    \item Le joueur qui a le plus haut score gagne la partie.
+    \item En cas d'égalité, le joueur qui a construit le domaine le plus étendus, remporte la partie. Et si cela ne suffit, c'est celui qui a le plus de couronne et si cela ne suffit toujours pas alors ils ont gagné tous les deux.
+\end{itemize}
 
 \subsection{Common \LaTeX{} Math Symbols}
 There are a multitude of mathematical symbols available for \LaTeX{} and it would take a great effort to learn the commands for them all. The most common ones you are likely to use are shown on this page:
