@@ -25,7 +25,10 @@ i = 0
 j = 0 
 L = list()
 ChoixJ1 = ChoixJ2 = ChoixJ3 = ChoixJ4 = 0
+ChoixV1 = ChoixV2 = ChoixV3 = ChoixV4 = 0
 boolChoixJ = ModifJ1 = ModifJ2 = ModifJ3 = ModifJ4 = LPartie = TheEnd = False
+ModifV1 = ModifV2 = ModifV3 = ModifV4 = False
+ModuloV1 = ModuloV2 = ModuloV3 = ModuloV4 = 1;
 
 def Pause():
     image(imgMenue, 0, 0)
@@ -165,13 +168,19 @@ def Acceuil():
         
 def update_ChoixJoueur(x,y):
     global ModifJ1,ModifJ2,ModifJ3,ModifJ4,LPartie
+    global ModifV1,ModifV2,ModifV3,ModifV4
     ModifJ1 = overRect(250, 200, 200, 50)
     ModifJ2 = overRect(250, 300, 200, 50)
     ModifJ3 = overRect(250, 400, 200, 50)
     ModifJ4 = overRect(250, 500, 200, 50)
+    ModifV1 = overRect(470, 200, 100, 50)
+    ModifV2 = overRect(470, 300, 100, 50)
+    ModifV3 = overRect(470, 400, 100, 50)
+    ModifV4 = overRect(470, 500, 100, 50)
     LPartie = overRect(250, 600, 200, 50)
 
 def ChoixJoueur():
+    global ModuloV1,ModuloV2,ModuloV3,ModuloV4
     image(imgMenue, 0, 0)
     update_ChoixJoueur(mouseX,mouseY)
     stroke(0)
@@ -186,6 +195,19 @@ def ChoixJoueur():
             text("Humain", 345, 220)
         if(ChoixJ1 == 1):
             text("Dum-E", 345, 220)
+            ModuloV1 = 3
+            if ModifV1:
+                fill(color(204))
+            else:
+                fill(color(255))
+            rect(470, 200, 100, 50, 20)
+            fill(color(255,0,0))
+            if(ChoixV1 == 0):
+                text("V1", 520, 220)
+            if(ChoixV1 == 1):
+                text("V2", 520, 220)
+            if(ChoixV1 == 2):
+                text("V3", 520, 220)
         if(ChoixJ1 == 2):
             text("Num-P", 345, 220)
         if(ChoixJ1 == 3):
@@ -201,6 +223,19 @@ def ChoixJoueur():
             text("Humain", 275, 237)
         if(ChoixJ1 == 1):
             text("Dum-E", 275, 237)
+            ModuloV1 = 3
+            if ModifV1:
+                fill(color(204))
+            else:
+                fill(color(255))
+            rect(470, 200, 100, 50, 20)
+            fill(color(255,0,0))
+            if(ChoixV1 == 0):
+                text("V1", 495, 237)
+            if(ChoixV1 == 1):
+                text("V2", 495, 237)
+            if(ChoixV1 == 2):
+                text("V3", 495, 237)
         if(ChoixJ1 == 2):
             text("Num-P", 275, 237)
         if(ChoixJ1 == 3):
@@ -222,6 +257,19 @@ def ChoixJoueur():
             text("Humain", 345, 320)
         if(ChoixJ2 == 1):
             text("Dum-E", 345, 320)
+            ModuloV2 = 3
+            if ModifV2:
+                fill(color(204))
+            else:
+                fill(color(255))
+            rect(470, 300, 100, 50, 20)
+            fill(color(255,0,0))
+            if(ChoixV2 == 0):
+                text("V1", 520, 320)
+            if(ChoixV2 == 1):
+                text("V2", 520, 320)
+            if(ChoixV2 == 2):
+                text("V3", 520, 320)
         if(ChoixJ2 == 2):
             text("Num-P", 345, 320)
         if(ChoixJ2 == 3):
@@ -237,6 +285,19 @@ def ChoixJoueur():
             text("Humain", 275, 337)
         if(ChoixJ2 == 1):
             text("Dum-E", 275, 337)
+            ModuloV2 = 3
+            if ModifV2:
+                fill(color(204))
+            else:
+                fill(color(255))
+            rect(470, 300, 100, 50, 20)
+            fill(color(255,0,0))
+            if(ChoixV2 == 0):
+                text("V1", 495, 337)
+            if(ChoixV2 == 1):
+                text("V2", 495, 337)
+            if(ChoixV2 == 2):
+                text("V3", 495, 337)
         if(ChoixJ2 == 2):
             text("Num-P", 275, 337)
         if(ChoixJ2 == 3):
@@ -259,6 +320,19 @@ def ChoixJoueur():
                 text("Humain", 345, 420)
             if(ChoixJ3 == 1):
                 text("Dum-E", 345, 420)
+                ModuloV3 = 3
+                if ModifV3:
+                    fill(color(204))
+                else:
+                    fill(color(255))
+                rect(470, 400, 100, 50, 20)
+                fill(color(255,0,0))
+                if(ChoixV3 == 0):
+                    text("V1", 520, 420)
+                if(ChoixV3 == 1):
+                    text("V2", 520, 420)
+                if(ChoixV3 == 2):
+                    text("V3", 520, 420)
             if(ChoixJ3 == 2):
                 text("Num-P", 345, 420)
             if(ChoixJ3 == 3):
@@ -274,6 +348,19 @@ def ChoixJoueur():
                 text("Humain", 275, 437)
             if(ChoixJ3 == 1):
                 text("Dum-E", 275, 437)
+                ModuloV3 = 3
+                if ModifV3:
+                    fill(color(204))
+                else:
+                    fill(color(255))
+                rect(470, 400, 100, 50, 20)
+                fill(color(255,0,0))
+                if(ChoixV3 == 0):
+                    text("V1", 495, 437)
+                if(ChoixV3 == 1):
+                    text("V2", 495, 437)
+                if(ChoixV3 == 2):
+                    text("V3", 495, 437)
             if(ChoixJ3 == 2):
                 text("Num-P", 275, 437)
             if(ChoixJ3 == 3):
@@ -296,6 +383,19 @@ def ChoixJoueur():
                 text("Humain", 345, 520)
             if(ChoixJ4 == 1):
                 text("Dum-E", 345, 520)
+                ModuloV4 = 3
+                if ModifV4:
+                    fill(color(204))
+                else:
+                    fill(color(255))
+                rect(470, 500, 100, 50, 20)
+                fill(color(255,0,0))
+                if(ChoixV4 == 0):
+                    text("V1", 520, 520)
+                if(ChoixV4 == 1):
+                    text("V2", 520, 520)
+                if(ChoixV4 == 2):
+                    text("V3", 520, 520)
             if(ChoixJ4 == 2):
                 text("Num-P", 345, 520)
             if(ChoixJ4 == 3):
@@ -311,6 +411,19 @@ def ChoixJoueur():
                 text("Humain", 275, 537)
             if(ChoixJ4 == 1):
                 text("Dum-E", 275, 537)
+                ModuloV4 = 3
+                if ModifV4:
+                    fill(color(204))
+                else:
+                    fill(color(255))
+                rect(470, 500, 100, 50, 20)
+                fill(color(255,0,0))
+                if(ChoixV4 == 0):
+                    text("V1", 495, 537)
+                if(ChoixV4 == 1):
+                    text("V2", 495, 537)
+                if(ChoixV4 == 2):
+                    text("V3", 495, 537)
             if(ChoixJ4 == 2):
                 text("Num-P", 275, 537)
             if(ChoixJ4 == 3):
@@ -1083,7 +1196,7 @@ def draw():
                 this.surface.setResizable(True)
                 nb_tour = 5
                 LC = Game(2)
-                LJ = LC.createListJoueurs(ChoixJ1,ChoixJ2)
+                LJ = LC.createListJoueurs(ChoixJ1,ChoixV1,ChoixJ2,ChoixV2)
                 for player in LJ:
                     player.initTabPoint ()
                 L = DeroulementTour()
@@ -1106,7 +1219,7 @@ def draw():
                 this.surface.setResizable(True)
                 nb_tour = 11
                 LC = Game(3)
-                LJ = LC.createListJoueurs(ChoixJ1,ChoixJ2,ChoixJ3)
+                LJ = LC.createListJoueurs(ChoixJ1,ChoixV1,ChoixJ2,ChoixV2,ChoixJ3,ChoixV3)
                 for player in LJ:
                     player.initTabPoint ()
                 L = DeroulementTour()
@@ -1129,7 +1242,7 @@ def draw():
                 this.surface.setResizable(True)
                 nb_tour = 11
                 LC = Game(4)
-                LJ = LC.createListJoueurs(ChoixJ1,ChoixJ2,ChoixJ3,ChoixJ4)
+                LJ = LC.createListJoueurs(ChoixJ1,ChoixV1,ChoixJ2,ChoixV2,ChoixJ3,ChoixV3,ChoixJ4,ChoixV4)
                 for player in LJ:
                     player.initTabPoint ()
                 L = DeroulementTour()
@@ -1225,6 +1338,7 @@ def mousePressed():
     global currentColor, boolQuitter, boolRegle, boolJouer, boolMenu, bool2Joueur, bool3Joueur, bool4Joueur, reglePrecOver, regleSuivOver, regleMenuOver, regleInt,j,i,boolResize,Tuile1, Tuile2, Tuile3, Tuile4,test, boolPause,boolrecommencer
     global Tuile1NonUsed,Tuile2NonUsed,Tuile3NonUsed,Tuile4NonUsed,AjouterTileJ,boolPause, initialisation,AjouterTileJ, DeplacerPlateau,Tuile1NonUsed, Tuile2NonUsed, Tuile3NonUsed, Tuile4NonUsed,LJ,regleOver
     global Mpressed,boolChoixJ,LPartie,Joueur2Over,Joueur3Over,Joueur4Over,ChoixJ1,ChoixJ2,ChoixJ3,ChoixJ4,boolChoixJ, ModifJ1, ModifJ2, ModifJ3, ModifJ4, LPartie,TheEnd,LT,LC,L,Mpressed, Kpressed, LT, RTG
+    global ChoixV1,ChoixV2,ChoixV3,ChoixV4, ModifV1, ModifV2, ModifV3, ModifV4
     ###Faire Fonction chaque if.
     if boolPause or TheEnd:
         if TheEnd :
@@ -1268,6 +1382,14 @@ def mousePressed():
                 ChoixJ3 = (ChoixJ3 + 1)%7
             if ModifJ4:
                 ChoixJ4 = (ChoixJ4 + 1)%7
+            if ModifV1:
+                ChoixV1 = (ChoixV1 + 1)%ModuloV1
+            if ModifV2:
+                ChoixV2 = (ChoixV2 + 1)%ModuloV2
+            if ModifV3:
+                ChoixV3 = (ChoixV3 + 1)%ModuloV3
+            if ModifV4:
+                ChoixV4 = (ChoixV4 + 1)%ModuloV4
             if LPartie:
                 LPartie = False
                 boolChoixJ = False
