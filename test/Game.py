@@ -74,7 +74,7 @@ class Game :
 				lj.append(LumI(2))
 			if(ChoixV2 == 1):
 				lj.append(LumIV2(2))
-			if(ChoixV1 == 2):
+			if(ChoixV2 == 2):
 				lj.append(LumIV3(2))
 		if ChoixJ2 == 6:
 			lj.append(DumA(2))
