@@ -9,6 +9,8 @@ from MumC import *
 from RumL import *
 from DumA import *
 from LumI import *
+from LumIV2 import *
+from LumIV3 import *
 from RandomTileGenerator import *
 
 class Game : 
@@ -38,7 +40,12 @@ class Game :
 		if ChoixJ1 == 4:
 			lj.append(RumL(1))
 		if ChoixJ1 == 5:
-			lj.append(LumI(1))
+			if(ChoixV1 == 0):
+				lj.append(LumI(1))
+			if(ChoixV1 == 1):
+				lj.append(LumIV2(1))
+			if(ChoixV1 == 2):
+				lj.append(LumIV3(1))
 		if ChoixJ1 == 6:
 			lj.append(DumA(1))
         
@@ -63,7 +70,12 @@ class Game :
 		if ChoixJ2 == 4:
 			lj.append(RumL(2))
 		if ChoixJ2 == 5:
-			lj.append(LumI(2))
+			if(ChoixV2 == 0):
+				lj.append(LumI(2))
+			if(ChoixV2 == 1):
+				lj.append(LumIV2(2))
+			if(ChoixV1 == 2):
+				lj.append(LumIV3(2))
 		if ChoixJ2 == 6:
 			lj.append(DumA(2))
         
@@ -88,7 +100,12 @@ class Game :
 		if ChoixJ3 == 4:
 			lj.append(RumL(3))
 		if ChoixJ3 == 5:
-			lj.append(LumI(3))
+			if(ChoixV3 == 0):
+				lj.append(LumI(3))
+			if(ChoixV3 == 1):
+				lj.append(LumIV2(3))
+			if(ChoixV3 == 2):
+				lj.append(LumIV3(3))
 		if ChoixJ3 == 6:
 			lj.append(DumA(3))
 
@@ -113,7 +130,12 @@ class Game :
 		if ChoixJ4 == 4:
 			lj.append(RumL(4))
 		if ChoixJ4 == 5:
-			lj.append(LumI(4))
+			if(ChoixV4 == 0):
+				lj.append(LumI(4))
+			if(ChoixV4 == 1):
+				lj.append(LumIV2(4))
+			if(ChoixV4 == 2):
+				lj.append(LumIV3(4))
 		if ChoixJ4 == 6:
 			lj.append(DumA(4))
 

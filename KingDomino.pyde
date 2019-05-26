@@ -367,6 +367,19 @@ def ChoixJoueur():
             text("Rum-L", 345, 220)
         if(ChoixJ1 == 5):
             text("Lum-I", 345, 220)
+            ModuloV1 = 3
+            if ModifV1:
+                fill(color(204))
+            else:
+                fill(color(255))
+            rect(470, 200, 100, 50, 20)
+            fill(color(255,0,0))
+            if(ChoixV1 == 0):
+                text("V1", 520, 220)
+            if(ChoixV1 == 1):
+                text("V2", 520, 220)
+            if(ChoixV1 == 2):
+                text("V3", 520, 220)
         if(ChoixJ1 == 6):
             text("Dum-A", 345, 220)
     else :
@@ -408,6 +421,19 @@ def ChoixJoueur():
             text("Rum-L", 275, 237)
         if(ChoixJ1 == 5):
             text("Lum-I", 275, 237)
+            ModuloV1 = 3
+            if ModifV1:
+                fill(color(204))
+            else:
+                fill(color(255))
+            rect(470, 200, 100, 50, 20)
+            fill(color(255,0,0))
+            if(ChoixV1 == 0):
+                text("V1", 495, 237)
+            if(ChoixV1 == 1):
+                text("V2", 495, 237)
+            if(ChoixV1 == 2):
+                text("V3", 495, 237)
         if(ChoixJ1 == 6):
             text("Dum-A", 275, 237)
     if ModifJ2:
@@ -455,6 +481,19 @@ def ChoixJoueur():
             text("Rum-L", 345, 320)
         if(ChoixJ2 == 5):
             text("Lum-I", 345, 320)
+            ModuloV2 = 3
+            if ModifV2:
+                fill(color(204))
+            else:
+                fill(color(255))
+            rect(470, 300, 100, 50, 20)
+            fill(color(255,0,0))
+            if(ChoixV2 == 0):
+                text("V1", 520, 320)
+            if(ChoixV2 == 1):
+                text("V2", 520, 320)
+            if(ChoixV2 == 2):
+                text("V3", 520, 320)
         if(ChoixJ2 == 6):
             text("Dum-A", 345, 320)
     else:
@@ -496,6 +535,19 @@ def ChoixJoueur():
             text("Rum-L", 275, 337)
         if(ChoixJ2 == 5):
             text("Lum-I", 275, 337)
+            ModuloV2 = 3
+            if ModifV2:
+                fill(color(204))
+            else:
+                fill(color(255))
+            rect(470, 300, 100, 50, 20)
+            fill(color(255,0,0))
+            if(ChoixV2 == 0):
+                text("V1", 495, 337)
+            if(ChoixV2 == 1):
+                text("V2", 495, 337)
+            if(ChoixV2 == 2):
+                text("V3", 495, 337)
         if(ChoixJ2 == 6):
             text("Dum-A", 275, 337)
     if bool3Joueur or bool4Joueur:
@@ -544,6 +596,19 @@ def ChoixJoueur():
                 text("Rum-L", 345, 420)
             if(ChoixJ3 == 5):
                 text("Lum-I", 345, 420)
+                ModuloV3 = 3
+                if ModifV3:
+                    fill(color(204))
+                else:
+                    fill(color(255))
+                rect(470, 400, 100, 50, 20)
+                fill(color(255,0,0))
+                if(ChoixV3 == 0):
+                    text("V1", 520, 420)
+                if(ChoixV3 == 1):
+                    text("V2", 520, 420)
+                if(ChoixV3 == 2):
+                    text("V3", 520, 420)
             if(ChoixJ3 == 6):
                 text("Dum-A", 345, 420)
         else:
@@ -585,6 +650,19 @@ def ChoixJoueur():
                 text("Rum-L", 275, 437)
             if(ChoixJ3 == 5):
                 text("Lum-I", 275, 437)
+                ModuloV3 = 3
+                if ModifV3:
+                    fill(color(204))
+                else:
+                    fill(color(255))
+                rect(470, 400, 100, 50, 20)
+                fill(color(255,0,0))
+                if(ChoixV3 == 0):
+                    text("V1", 495, 437)
+                if(ChoixV3 == 1):
+                    text("V2", 495, 437)
+                if(ChoixV3 == 2):
+                    text("V3", 495, 437)
             if(ChoixJ3 == 6):
                 text("Dum-A", 275, 437)
     if bool4Joueur:
@@ -633,6 +711,19 @@ def ChoixJoueur():
                 text("Rum-L", 345, 520)
             if(ChoixJ4 == 5):
                 text("Lum-I", 345, 520)
+                ModuloV4 = 3
+                if ModifV4:
+                    fill(color(204))
+                else:
+                    fill(color(255))
+                rect(470, 500, 100, 50, 20)
+                fill(color(255,0,0))
+                if(ChoixV4 == 0):
+                    text("V1", 520, 320)
+                if(ChoixV4 == 1):
+                    text("V2", 520, 320)
+                if(ChoixV4 == 2):
+                    text("V3", 520, 320)
             if(ChoixJ4 == 6):
                 text("Dum-A", 345, 520)
         else: 
@@ -674,6 +765,19 @@ def ChoixJoueur():
                 text("Rum-L", 275, 537)
             if(ChoixJ4 == 5):
                 text("Lum-I", 275, 537)
+                ModuloV4 = 3
+                if ModifV4:
+                    fill(color(204))
+                else:
+                    fill(color(255))
+                rect(470, 500, 100, 50, 20)
+                fill(color(255,0,0))
+                if(ChoixV4 == 0):
+                    text("V1", 495, 537)
+                if(ChoixV4 == 1):
+                    text("V2", 495, 537)
+                if(ChoixV4 == 2):
+                    text("V3", 495, 537)
             if(ChoixJ4 == 6):
                 text("Dum-A", 275, 537)
     if LPartie:
