@@ -3,6 +3,8 @@ from DumE import *
 from DumEV2 import *
 from DumEV3 import *
 from NumP import *
+from NumPV2 import *
+from NumPV3 import *
 from MumC import *
 from RumL import *
 from DumA import *
@@ -25,7 +27,12 @@ class Game :
 			if(ChoixV1 == 2):
 				lj.append(DumEV3(1))
 		if ChoixJ1 == 2:
-			lj.append(NumP(1))
+			if(ChoixV1 == 0):
+				lj.append(NumP(1))
+			if(ChoixV1 == 1):
+				lj.append(NumPV2(1))
+			if(ChoixV1 == 2):
+				lj.append(NumPV3(1))
 		if ChoixJ1 == 3:
 			lj.append(MumC(1))
 		if ChoixJ1 == 4:
@@ -45,7 +52,12 @@ class Game :
 			if(ChoixV2 == 2):
 				lj.append(DumEV3(2))
 		if ChoixJ2 == 2:
-			lj.append(NumP(2))
+			if(ChoixV2 == 0):
+				lj.append(NumP(2))
+			if(ChoixV2 == 1):
+				lj.append(NumPV2(2))
+			if(ChoixV2 == 2):
+				lj.append(NumPV3(2))
 		if ChoixJ2 == 3:
 			lj.append(MumC(2))
 		if ChoixJ2 == 4:
@@ -65,7 +77,12 @@ class Game :
 			if(ChoixV3 == 2):
 				lj.append(DumEV3(3))
 		if ChoixJ3 == 2:
-			lj.append(NumP(3))
+			if(ChoixV3 == 0):
+				lj.append(NumP(3))
+			if(ChoixV3 == 1):
+				lj.append(NumPV2(3))
+			if(ChoixV3 == 2):
+				lj.append(NumPV3(3))
 		if ChoixJ3 == 3:
 			lj.append(MumC(3))
 		if ChoixJ3 == 4:
@@ -78,14 +95,19 @@ class Game :
 		if ChoixJ4 == 0:
 			lj.append(Player(4))
 		if ChoixJ4 == 1:
-			if(ChoixV1 == 0):
+			if(ChoixV4 == 0):
 				lj.append(DumE(4))
-			if(ChoixV1 == 1):
+			if(ChoixV4 == 1):
 				lj.append(DumEV2(4))
-			if(ChoixV1 == 2):
+			if(ChoixV4 == 2):
 				lj.append(DumEV3(4))
 		if ChoixJ4 == 2:
-			lj.append(NumP(4))
+			if(ChoixV4 == 0):
+				lj.append(NumP(4))
+			if(ChoixV4 == 1):
+				lj.append(NumPV2(4))
+			if(ChoixV4 == 2):
+				lj.append(NumPV3(4))
 		if ChoixJ4 == 3:
 			lj.append(MumC(4))
 		if ChoixJ4 == 4:

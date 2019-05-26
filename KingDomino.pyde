@@ -348,6 +348,19 @@ def ChoixJoueur():
                 text("V3", 520, 220)
         if(ChoixJ1 == 2):
             text("Num-P", 345, 220)
+            ModuloV1 = 3
+            if ModifV1:
+                fill(color(204))
+            else:
+                fill(color(255))
+            rect(470, 200, 100, 50, 20)
+            fill(color(255,0,0))
+            if(ChoixV1 == 0):
+                text("V1", 520, 220)
+            if(ChoixV1 == 1):
+                text("V2", 520, 220)
+            if(ChoixV1 == 2):
+                text("V3", 520, 220)
         if(ChoixJ1 == 3):
             text("Mum-C", 345, 220)
         if(ChoixJ1 == 4):
@@ -376,6 +389,19 @@ def ChoixJoueur():
                 text("V3", 495, 237)
         if(ChoixJ1 == 2):
             text("Num-P", 275, 237)
+            ModuloV1 = 3
+            if ModifV1:
+                fill(color(204))
+            else:
+                fill(color(255))
+            rect(470, 200, 100, 50, 20)
+            fill(color(255,0,0))
+            if(ChoixV1 == 0):
+                text("V1", 495, 237)
+            if(ChoixV1 == 1):
+                text("V2", 495, 237)
+            if(ChoixV1 == 2):
+                text("V3", 495, 237)
         if(ChoixJ1 == 3):
             text("Mum-C", 275, 237)
         if(ChoixJ1 == 4):
@@ -410,6 +436,19 @@ def ChoixJoueur():
                 text("V3", 520, 320)
         if(ChoixJ2 == 2):
             text("Num-P", 345, 320)
+            ModuloV2 = 3
+            if ModifV2:
+                fill(color(204))
+            else:
+                fill(color(255))
+            rect(470, 300, 100, 50, 20)
+            fill(color(255,0,0))
+            if(ChoixV2 == 0):
+                text("V1", 520, 320)
+            if(ChoixV2 == 1):
+                text("V2", 520, 320)
+            if(ChoixV2 == 2):
+                text("V3", 520, 320)
         if(ChoixJ2 == 3):
             text("Mum-C", 345, 320)
         if(ChoixJ2 == 4):
@@ -438,6 +477,19 @@ def ChoixJoueur():
                 text("V3", 495, 337)
         if(ChoixJ2 == 2):
             text("Num-P", 275, 337)
+            ModuloV2 = 3
+            if ModifV2:
+                fill(color(204))
+            else:
+                fill(color(255))
+            rect(470, 300, 100, 50, 20)
+            fill(color(255,0,0))
+            if(ChoixV2 == 0):
+                text("V1", 495, 337)
+            if(ChoixV2 == 1):
+                text("V2", 495, 337)
+            if(ChoixV2 == 2):
+                text("V3", 495, 337)
         if(ChoixJ2 == 3):
             text("Mum-C", 275, 337)
         if(ChoixJ2 == 4):
@@ -473,6 +525,19 @@ def ChoixJoueur():
                     text("V3", 520, 420)
             if(ChoixJ3 == 2):
                 text("Num-P", 345, 420)
+                ModuloV3 = 3
+                if ModifV3:
+                    fill(color(204))
+                else:
+                    fill(color(255))
+                rect(470, 400, 100, 50, 20)
+                fill(color(255,0,0))
+                if(ChoixV3 == 0):
+                    text("V1", 520, 420)
+                if(ChoixV3 == 1):
+                    text("V2", 520, 420)
+                if(ChoixV3 == 2):
+                    text("V3", 520, 420)
             if(ChoixJ3 == 3):
                 text("Mum-C", 345, 420)
             if(ChoixJ3 == 4):
@@ -501,6 +566,19 @@ def ChoixJoueur():
                     text("V3", 495, 437)
             if(ChoixJ3 == 2):
                 text("Num-P", 275, 437)
+                ModuloV3 = 3
+                if ModifV3:
+                    fill(color(204))
+                else:
+                    fill(color(255))
+                rect(470, 400, 100, 50, 20)
+                fill(color(255,0,0))
+                if(ChoixV3 == 0):
+                    text("V1", 495, 437)
+                if(ChoixV3 == 1):
+                    text("V2", 495, 437)
+                if(ChoixV3 == 2):
+                    text("V3", 495, 437)
             if(ChoixJ3 == 3):
                 text("Mum-C", 275, 437)
             if(ChoixJ3 == 4):
@@ -536,6 +614,19 @@ def ChoixJoueur():
                     text("V3", 520, 520)
             if(ChoixJ4 == 2):
                 text("Num-P", 345, 520)
+                ModuloV4 = 3
+                if ModifV4:
+                    fill(color(204))
+                else:
+                    fill(color(255))
+                rect(470, 500, 100, 50, 20)
+                fill(color(255,0,0))
+                if(ChoixV4 == 0):
+                    text("V1", 520, 520)
+                if(ChoixV4 == 1):
+                    text("V2", 520, 520)
+                if(ChoixV4 == 2):
+                    text("V3", 520, 520)
             if(ChoixJ4 == 3):
                 text("Mum-C", 345, 520)
             if(ChoixJ4 == 4):
@@ -564,6 +655,19 @@ def ChoixJoueur():
                     text("V3", 495, 537)
             if(ChoixJ4 == 2):
                 text("Num-P", 275, 537)
+                ModuloV4 = 3
+                if ModifV4:
+                    fill(color(204))
+                else:
+                    fill(color(255))
+                rect(470, 500, 100, 50, 20)
+                fill(color(255,0,0))
+                if(ChoixV4 == 0):
+                    text("V1", 495, 537)
+                if(ChoixV4 == 1):
+                    text("V2", 495, 537)
+                if(ChoixV4 == 2):
+                    text("V3", 495, 537)
             if(ChoixJ4 == 3):
                 text("Mum-C", 275, 537)
             if(ChoixJ4 == 4):
@@ -1536,6 +1640,12 @@ def mousePressed():
                 if( nbpartie == 1000) :
                      nbpartie = 1
                 elif( nbpartie == 1 ):
+                    nbpartie = 10
+                elif( nbpartie == 10 ):
+                    nbpartie = 20
+                elif( nbpartie == 20 ):
+                    nbpartie = 50
+                elif( nbpartie == 50 ):
                     nbpartie = 100
                 elif( nbpartie == 100 ):
                     nbpartie = 200
