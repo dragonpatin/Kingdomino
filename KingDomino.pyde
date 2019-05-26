@@ -21,6 +21,7 @@ NextTurn = False
 LT = None
 LJ = None
 LC = None
+RTG = None
 i = 0
 j = 0 
 L = list()
@@ -28,7 +29,11 @@ ChoixJ1 = ChoixJ2 = ChoixJ3 = ChoixJ4 = 0
 ChoixV1 = ChoixV2 = ChoixV3 = ChoixV4 = 0
 boolChoixJ = ModifJ1 = ModifJ2 = ModifJ3 = ModifJ4 = LPartie = TheEnd = False
 ModifV1 = ModifV2 = ModifV3 = ModifV4 = False
-ModuloV1 = ModuloV2 = ModuloV3 = ModuloV4 = 1;
+ModuloV1 = ModuloV2 = ModuloV3 = ModuloV4 = 1
+nbpartie = 20
+nbpartiebis = 0
+PtJ1=PtJ2=PtJ3=PtJ4=0
+vict1 = vict2 = vict3 = vict4 = 0
 
 def Pause():
     image(imgMenue, 0, 0)
@@ -60,9 +65,16 @@ def Pause():
         text("Continuer", 255, 242)
         text("Menu", 300, 342)
         text("Quitter", 280, 442)
-    
+  
+def updateFin2(x,y):
+    global quitterOver, menuOver
+    menuOver = overRect(234, 300, 150, 50,)
+    quitterOver = overRect(481, 300, 150, 50)    
+
 def AfficheGagnant():
-    global continuerOver
+    global continuerOver,vict1,vict2,vict3,vict4,TheEnd,RTG
+    global Tuile1NonUsed,Tuile2NonUsed,Tuile3NonUsed,Tuile4NonUsed
+    global nb_tour,LJ,L,LC,nbpartie,nbpartiebis,PtJ1,PtJ2,PtJ3,PtJ4
     continuerOver = False
     gagnant = None
     pointgagnant = -1
@@ -71,33 +83,133 @@ def AfficheGagnant():
             gagnant = player.numero
             pointgagnant = player.nbpoint
     #Couleur fin
-    updateFin(mouseX, mouseY)
-    fill(color(255))
-    strokeWeight(4)
-    stroke(0)
-    rect(224, 130, 417, 230, 20)
-    
-    if menuOver:
-        fill(color(204))
-    else:
-        fill(color(255))
-    rect(234, 300, 170, 50, 20)
-    if quitterOver:
-        fill(color(204))
-    else:
-        fill(color(255))
-    rect(461, 300, 170, 50, 20)
-    strokeWeight(1)
-    textSize(58)
-    fill(color(255, 0, 0))
-    text("Le joueur ", 410, 172)
-    text(gagnant, 600, 172)
-    text("est le gagnant", 435, 252)
-    textSize(40)
-    text("Rejouer", 320, 317)
-    text("Quitter", 550, 317)
-    textSize(40)
-    fill(255)
+    if(nbpartie != 0):
+        RTG = RandomTileGenerator()
+        nbpartie = nbpartie -1
+        nbpartiebis = nbpartiebis +1
+        if(gagnant == 1) :
+            vict1 = vict1+1
+        if(gagnant == 2) :
+            vict2 = vict2+1
+        if(gagnant == 3) :
+            vict3 = vict3+1
+        if(gagnant == 4) :
+            vict4 = vict4+1
+        PtJ1 = PtJ1+ LJ[0].nbpoint
+        PtJ2 = PtJ2+ LJ[1].nbpoint
+        if bool3Joueur:
+            PtJ3 = PtJ3+ LJ[2].nbpoint
+        if bool4Joueur:
+            PtJ3 = PtJ3+ LJ[2].nbpoint
+            PtJ4 = PtJ4+ LJ[3].nbpoint
+    if(nbpartie == 0) :
+        if((vict1 + vict2 + vict3 + vict4) == 1):
+            updateFin(mouseX, mouseY)
+            fill(color(255))
+            strokeWeight(4)
+            stroke(0)
+            rect(224, 130, 417, 230, 20)
+            
+            if menuOver:
+                fill(color(204))
+            else:
+                fill(color(255))
+            rect(234, 300, 170, 50, 20)
+            if quitterOver:
+                fill(color(204))
+            else:
+                fill(color(255))
+            rect(461, 300, 170, 50, 20)
+            strokeWeight(1)
+            textSize(58)
+            fill(color(255, 0, 0))
+            text("Le joueur ", 410, 172)
+            text(gagnant, 600, 172)
+            text("est le gagnant", 435, 252)
+            textSize(40)
+            text("Rejouer", 320, 317)
+            text("Quitter", 550, 317)
+            textSize(40)
+            fill(255)
+        else :
+            updateFin(mouseX, mouseY)
+            fill(color(255))
+            strokeWeight(4)
+            stroke(0)
+            rect(224, 130, 417, 230, 20)
+            if menuOver:
+                fill(color(204))
+            else:
+                fill(color(255))
+            rect(234, 330, 170, 20, 20)
+            if quitterOver:
+                fill(color(204))
+            else:
+                fill(color(255))
+            rect(461, 330, 170, 20, 20)
+            strokeWeight(1)
+            fill(color(255, 0, 0))
+            text("Victoire Joueur 1 :", 300, 160)
+            text(vict1, 380, 160)
+            text("Point moyen J1:", 460, 160)
+            text(PtJ1/nbpartiebis, 540 , 160)
+            text("Victoire Joueur 2 :", 300, 200)
+            text(vict2, 380, 200)
+            text("Point moyen J2:", 460, 200)
+            text(PtJ2/nbpartiebis, 540 , 200)
+            if bool3Joueur:
+                text("Victoire Joueur 3 :", 300, 240)
+                text(vict3, 380, 240)
+                text("Point moyen J3:", 460, 240)
+                text(PtJ3, 520 , 240)
+            if bool4Joueur:
+                text("Victoire Joueur 3 :", 300, 240)
+                text(vict3, 380, 240)
+                text("Point moyen J3:", 460, 240)
+                text(PtJ3, 540 , 240)
+                text("Victoire Joueur 4 :", 300, 280)
+                text(vict4, 380, 280)
+                text("Point moyen J4:", 460, 280)
+                text(PtJ4, 540 , 280)
+            text("Nombre de partie :", 400, 310)
+            text(nbpartiebis,500,310)
+            fill(color(255, 0, 0))
+            text("Rejouer", 320, 337)
+            text("Quitter", 550, 337)
+            fill(255)
+    else :
+        TheEnd = False
+        Tuile1NonUsed = Tuile2NonUsed = Tuile3NonUsed = Tuile4NonUsed = True
+        if bool2Joueur:
+            # this.surface.setResizable(True)
+            nb_tour = 5
+            LC = Game(2)
+            LJ = LC.createListJoueurs(ChoixJ1,ChoixV1,ChoixJ2,ChoixV2)
+            for player in LJ:
+                player.initTabPoint ()
+            L = DeroulementTour()
+        elif bool3Joueur:
+            # this.surface.setResizable(True)
+            nb_tour = 11
+            LC = Game(3)
+            LJ = LC.createListJoueurs(ChoixJ1,ChoixV1,ChoixJ2,ChoixV2,ChoixJ3,ChoixV3)
+            for player in LJ:
+                player.initTabPoint ()
+            L = DeroulementTour()
+            # initialisation=False
+            # this.surface.setSize(int(displayWidth*0.6),int(displayHeight*0.6))
+            # resizeTuile(True)
+        elif bool4Joueur:
+            # this.surface.setResizable(True)
+            nb_tour = 11
+            LC = Game(4)
+            LJ = LC.createListJoueurs(ChoixJ1,ChoixV1,ChoixJ2,ChoixV2,ChoixJ3,ChoixV3,ChoixJ4,ChoixV4)
+            for player in LJ:
+                player.initTabPoint ()
+            L = DeroulementTour()
+            # initialisation=False
+            # this.surface.setSize(int(displayWidth*0.6),int(displayHeight*0.6))
+            # resizeTuile(True)
     
 def Regle():
     updateRegle(mouseX, mouseY)
@@ -1344,7 +1456,6 @@ def mousePressed():
         if TheEnd :
             this.surface.setSize(700,700)
         if continuerOver:
-            print("trs")
             this.surface.setSize(int(displayWidth*0.6),int(displayHeight*0.6))
             boolPause = False
         elif menuOver:           
