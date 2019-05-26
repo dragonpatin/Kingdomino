@@ -28,9 +28,9 @@ L = list()
 ChoixJ1 = ChoixJ2 = ChoixJ3 = ChoixJ4 = 0
 ChoixV1 = ChoixV2 = ChoixV3 = ChoixV4 = 0
 boolChoixJ = ModifJ1 = ModifJ2 = ModifJ3 = ModifJ4 = LPartie = TheEnd = False
-ModifV1 = ModifV2 = ModifV3 = ModifV4 = False
+ModifV1 = ModifV2 = ModifV3 = ModifV4 = ModifPartie = False
 ModuloV1 = ModuloV2 = ModuloV3 = ModuloV4 = 1
-nbpartie = 20
+nbpartie = 1
 nbpartiebis = 0
 PtJ1=PtJ2=PtJ3=PtJ4=0
 vict1 = vict2 = vict3 = vict4 = 0
@@ -79,6 +79,7 @@ def AfficheGagnant():
     gagnant = None
     pointgagnant = -1
     for player in LJ :
+        # print(player.numero)
         if pointgagnant < player.nbpoint:
             gagnant = player.numero
             pointgagnant = player.nbpoint
@@ -95,13 +96,15 @@ def AfficheGagnant():
             vict3 = vict3+1
         if(gagnant == 4) :
             vict4 = vict4+1
-        PtJ1 = PtJ1+ LJ[0].nbpoint
-        PtJ2 = PtJ2+ LJ[1].nbpoint
-        if bool3Joueur:
-            PtJ3 = PtJ3+ LJ[2].nbpoint
-        if bool4Joueur:
-            PtJ3 = PtJ3+ LJ[2].nbpoint
-            PtJ4 = PtJ4+ LJ[3].nbpoint
+        for player in LJ :
+            if(player.numero == 1) :
+                PtJ1 = PtJ1+ player.nbpoint
+            if(player.numero == 2) :
+                PtJ2 = PtJ2+ player.nbpoint
+            if(player.numero == 3) :
+                PtJ3 = PtJ3+ player.nbpoint
+            if(player.numero == 4) :
+                PtJ4 = PtJ4+ player.nbpoint
     if(nbpartie == 0) :
         if((vict1 + vict2 + vict3 + vict4) == 1):
             updateFin(mouseX, mouseY)
@@ -149,28 +152,31 @@ def AfficheGagnant():
             rect(461, 330, 170, 20, 20)
             strokeWeight(1)
             fill(color(255, 0, 0))
-            text("Victoire Joueur 1 :", 300, 160)
-            text(vict1, 380, 160)
-            text("Point moyen J1:", 460, 160)
-            text(PtJ1/nbpartiebis, 540 , 160)
-            text("Victoire Joueur 2 :", 300, 200)
-            text(vict2, 380, 200)
-            text("Point moyen J2:", 460, 200)
-            text(PtJ2/nbpartiebis, 540 , 200)
-            if bool3Joueur:
-                text("Victoire Joueur 3 :", 300, 240)
-                text(vict3, 380, 240)
-                text("Point moyen J3:", 460, 240)
-                text(PtJ3, 520 , 240)
-            if bool4Joueur:
-                text("Victoire Joueur 3 :", 300, 240)
-                text(vict3, 380, 240)
-                text("Point moyen J3:", 460, 240)
-                text(PtJ3, 540 , 240)
-                text("Victoire Joueur 4 :", 300, 280)
-                text(vict4, 380, 280)
-                text("Point moyen J4:", 460, 280)
-                text(PtJ4, 540 , 280)
+            for player in LJ :
+                if(player.numero == 1) :
+                    text(player.nom, 270, 160)
+                    text("victoire :",340,160)
+                    text(vict1, 380, 160)
+                    text("Point moyen J1:", 460, 160)
+                    text(PtJ1/nbpartiebis, 540 , 160)
+                if(player.numero == 2) :
+                    text(player.nom, 270, 200)
+                    text("victoire :",340,200)
+                    text(vict2, 380, 200)
+                    text("Point moyen J2:", 460, 200)
+                    text(PtJ2/nbpartiebis, 540 , 200)
+                if(player.numero == 3) :
+                    text(player.nom, 270, 240)
+                    text("victoire :",340,240)
+                    text(vict3, 380, 240)
+                    text("Point moyen J3:", 460, 240)
+                    text(PtJ3/nbpartiebis, 540 , 240)
+                if(player.numero == 4) :
+                    text(player.nom, 270, 280)
+                    text("victoire :",340,280)
+                    text(vict4, 380, 280)
+                    text("Point moyen J4:", 460, 280)
+                    text(PtJ4/nbpartiebis, 540 , 280)
             text("Nombre de partie :", 400, 310)
             text(nbpartiebis,500,310)
             fill(color(255, 0, 0))
@@ -280,7 +286,7 @@ def Acceuil():
         
 def update_ChoixJoueur(x,y):
     global ModifJ1,ModifJ2,ModifJ3,ModifJ4,LPartie
-    global ModifV1,ModifV2,ModifV3,ModifV4
+    global ModifV1,ModifV2,ModifV3,ModifV4,ModifPartie
     ModifJ1 = overRect(250, 200, 200, 50)
     ModifJ2 = overRect(250, 300, 200, 50)
     ModifJ3 = overRect(250, 400, 200, 50)
@@ -289,13 +295,33 @@ def update_ChoixJoueur(x,y):
     ModifV2 = overRect(470, 300, 100, 50)
     ModifV3 = overRect(470, 400, 100, 50)
     ModifV4 = overRect(470, 500, 100, 50)
+    ModifPartie = overRect(475,600,200,50)
     LPartie = overRect(250, 600, 200, 50)
 
 def ChoixJoueur():
-    global ModuloV1,ModuloV2,ModuloV3,ModuloV4
+    global ModuloV1,ModuloV2,ModuloV3,ModuloV4,nbpartie
+    if(nbpartie == 0) :
+        nbpartie = 1
     image(imgMenue, 0, 0)
     update_ChoixJoueur(mouseX,mouseY)
     stroke(0)
+     
+    if ModifPartie:
+        fill(color(204))
+    else:
+        fill(color(255))
+    rect(475, 600, 200, 50, 20)
+    fill(color(255, 0, 0))
+    if boolrecommencer: 
+        textSize(20)
+        text("NbPartie :",525,623)
+        textSize(40)
+        text(nbpartie,620,623)
+    else :
+        textSize(20)
+        text("NbPartie :",475,633)
+        textSize(40)
+        text(nbpartie,570,640)
     if ModifJ1:
         fill(color(204))
     else:
@@ -1450,7 +1476,10 @@ def mousePressed():
     global currentColor, boolQuitter, boolRegle, boolJouer, boolMenu, bool2Joueur, bool3Joueur, bool4Joueur, reglePrecOver, regleSuivOver, regleMenuOver, regleInt,j,i,boolResize,Tuile1, Tuile2, Tuile3, Tuile4,test, boolPause,boolrecommencer
     global Tuile1NonUsed,Tuile2NonUsed,Tuile3NonUsed,Tuile4NonUsed,AjouterTileJ,boolPause, initialisation,AjouterTileJ, DeplacerPlateau,Tuile1NonUsed, Tuile2NonUsed, Tuile3NonUsed, Tuile4NonUsed,LJ,regleOver
     global Mpressed,boolChoixJ,LPartie,Joueur2Over,Joueur3Over,Joueur4Over,ChoixJ1,ChoixJ2,ChoixJ3,ChoixJ4,boolChoixJ, ModifJ1, ModifJ2, ModifJ3, ModifJ4, LPartie,TheEnd,LT,LC,L,Mpressed, Kpressed, LT, RTG
-    global ChoixV1,ChoixV2,ChoixV3,ChoixV4, ModifV1, ModifV2, ModifV3, ModifV4
+    global ChoixV1,ChoixV2,ChoixV3,ChoixV4, ModifV1, ModifV2, ModifV3, ModifV4,nbpartie
+    global nbpartiebis
+    global PtJ1,PtJ2,PtJ3,PtJ4
+    global vict1,vict2, vict3, vict4
     ###Faire Fonction chaque if.
     if boolPause or TheEnd:
         if TheEnd :
@@ -1465,7 +1494,9 @@ def mousePressed():
             boolMenu = initialisation = True
             boolResize = True
             LC = ListCreator()
-           
+            nbpartiebis = 0
+            PtJ1=PtJ2=PtJ3=PtJ4=0
+            vict1 = vict2 = vict3 = vict4 = 0
             LT = LC.createList()
             RTG = RandomTileGenerator()
             LJ = None
@@ -1501,6 +1532,17 @@ def mousePressed():
                 ChoixV3 = (ChoixV3 + 1)%ModuloV3
             if ModifV4:
                 ChoixV4 = (ChoixV4 + 1)%ModuloV4
+            if ModifPartie :
+                if( nbpartie == 1000) :
+                     nbpartie = 1
+                elif( nbpartie == 1 ):
+                    nbpartie = 100
+                elif( nbpartie == 100 ):
+                    nbpartie = 200
+                elif( nbpartie == 200):
+                    nbpartie = 500
+                elif( nbpartie == 500 ):
+                    nbpartie = 1000
             if LPartie:
                 LPartie = False
                 boolChoixJ = False
