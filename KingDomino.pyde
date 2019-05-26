@@ -719,11 +719,11 @@ def ChoixJoueur():
                 rect(470, 500, 100, 50, 20)
                 fill(color(255,0,0))
                 if(ChoixV4 == 0):
-                    text("V1", 520, 320)
+                    text("V1", 520, 520)
                 if(ChoixV4 == 1):
-                    text("V2", 520, 320)
+                    text("V2", 520, 520)
                 if(ChoixV4 == 2):
-                    text("V3", 520, 320)
+                    text("V3", 520, 520)
             if(ChoixJ4 == 6):
                 text("Dum-A", 345, 520)
         else: 
