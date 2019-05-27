@@ -255,6 +255,8 @@ def Regle():
 
 def Acceuil():
     # Displays the image at its actual size at point (0,0)
+    global nbpartie
+    nbpartie = 1
     image(imgMenue, 0, 0)
     update(mouseX, mouseY)
     stroke(0)

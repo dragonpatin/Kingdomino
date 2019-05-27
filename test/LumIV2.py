@@ -385,7 +385,6 @@ class LumIV2:
 			if (self.tourJouer2Joueur == 2):
 				self.joueur = True
 				self.tourJouer2Joueur = 0
-		print("nouveau test")
 		if(self.nbTile == 0):
 			self.tabTile = [0,0,0,0,0,0]
 			
